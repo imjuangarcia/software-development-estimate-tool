@@ -7,6 +7,7 @@ class Tasks extends React.Component {
       <div className="inventory">
         <h2>Tasks</h2>
         <AddTaskForm addTask={this.props.addTask} />
+        <button onClick={this.props.loadSampleTasks}>Load Sample Tasks</button>
       </div>
     );
   }
