@@ -49,7 +49,7 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        <Estimate />
+        <Estimate tasks={this.state.tasks} estimate={this.state.estimate} />
         <Tasks addTask={this.addTask} loadSampleTasks={this.loadSampleTasks} />
       </div>
     );
