@@ -1,4 +1,5 @@
 import React from "react";
+import { slugify } from "../helpers";
 
 class EstimateCreator extends React.Component {
   myInput = React.createRef();
@@ -6,19 +7,19 @@ class EstimateCreator extends React.Component {
     // Stop the form from submitting
     event.preventDefault();
     // Get the text from the input
-    const estimate = this.myInput.current.value;
+    const estimate = slugify(this.myInput.current.value);
     // Change the page
     this.props.history.push(`/estimate/${estimate}`);
   };
   render() {
     return (
       <form action="" className="store-selector" onSubmit={this.goToEstimate}>
-        <h2>Please Enter a Number for the estimate</h2>
+        <h2>Please Enter the name of the project to estimate</h2>
         <input
           type="text"
           ref={this.myInput}
           required
-          placeholder="Enter the estimate number"
+          placeholder="Enter the project name"
         />
         <button type="submit">Go to the estimate</button>
       </form>
