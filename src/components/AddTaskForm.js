@@ -9,12 +9,20 @@ class AddTaskForm extends React.Component {
   createTask = event => {
     // Stop the form from submitting
     event.preventDefault();
+
+    // Do math to calculate the expected hours
+    const minHours = parseFloat(this.minHoursRef.current.value);
+    const avgHours = parseFloat(this.avgHoursRef.current.value);
+    const maxHours = parseFloat(this.maxHoursRef.current.value);
+    const expHours = parseFloat((maxHours + minHours + avgHours * 4) / 6);
+
+    // Create the task object
     const task = {
       taskName: this.taskRef.current.value,
-      minHours: parseFloat(this.minHoursRef.current.value),
-      avgHours: parseFloat(this.avgHoursRef.current.value),
-      avgHours: parseFloat(this.avgHoursRef.current.value),
-      maxHours: parseFloat(this.maxHoursRef.current.value)
+      minHours,
+      avgHours,
+      maxHours,
+      expectedHours: expHours
     };
     this.props.addTask(task);
     // Refresh the form
