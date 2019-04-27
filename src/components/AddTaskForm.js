@@ -2,6 +2,7 @@ import React from "react";
 
 class AddTaskForm extends React.Component {
   taskRef = React.createRef();
+  sectionRef = React.createRef();
   minHoursRef = React.createRef();
   avgHoursRef = React.createRef();
   maxHoursRef = React.createRef();
@@ -14,15 +15,16 @@ class AddTaskForm extends React.Component {
     const minHours = parseFloat(this.minHoursRef.current.value);
     const avgHours = parseFloat(this.avgHoursRef.current.value);
     const maxHours = parseFloat(this.maxHoursRef.current.value);
-    const expHours = parseFloat((maxHours + minHours + avgHours * 4) / 6);
+    const expectedHours = parseFloat((maxHours + minHours + avgHours * 4) / 6);
 
     // Create the task object
     const task = {
       taskName: this.taskRef.current.value,
+      sectionName: this.sectionRef.current.value,
       minHours,
       avgHours,
       maxHours,
-      expectedHours: expHours
+      expectedHours
     };
     this.props.addTask(task);
     // Refresh the form
@@ -32,6 +34,12 @@ class AddTaskForm extends React.Component {
     return (
       <form className="fish-edit" onSubmit={this.createTask}>
         <input name="task" ref={this.taskRef} type="text" placeholder="Task" />
+        <input
+          name="section"
+          ref={this.sectionRef}
+          type="text"
+          placeholder="Section"
+        />
         <input
           name="minhours"
           ref={this.minHoursRef}
