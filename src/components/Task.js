@@ -16,6 +16,9 @@ class Task extends React.Component {
         <p>{avgHours}</p>
         <p>{maxHours}</p>
         <p>{expectedHours}</p>
+        <button onClick={() => this.props.addToEstimate(this.props.index)}>
+          Add to Estimate
+        </button>
       </li>
     );
   }

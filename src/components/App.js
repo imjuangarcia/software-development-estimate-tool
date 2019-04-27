@@ -23,6 +23,16 @@ class App extends React.Component {
   loadSampleTasks = () => {
     this.setState({ tasks: sampleTasks });
   };
+
+  addToEstimate = key => {
+    // take a copy of state
+    const estimate = { ...this.state.estimate };
+    // add to the order or update the number
+    estimate[key] = estimate[key] + 1 || 1;
+    // Call setState to update our state
+    this.setState({ estimate });
+  };
+
   render() {
     return (
       <div className="catch-of-the-day">
@@ -30,7 +40,12 @@ class App extends React.Component {
           <Header tagline="Juan Martín García – Product Designer &amp; Frontend Developer" />
           <ul className="fishes">
             {Object.keys(this.state.tasks).map(key => (
-              <Task key={key} details={this.state.tasks[key]} />
+              <Task
+                key={key}
+                index={key}
+                details={this.state.tasks[key]}
+                addToEstimate={this.addToEstimate}
+              />
             ))}
           </ul>
         </div>
