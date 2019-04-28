@@ -117,6 +117,7 @@ class App extends React.Component {
           deleteTask={this.deleteTask}
           loadSampleTasks={this.loadSampleTasks}
           tasks={this.state.tasks}
+          estimateId={this.props.match.params.estimateId}
         />
       </div>
     );
