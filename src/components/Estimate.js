@@ -7,6 +7,9 @@ class Estimate extends React.Component {
     return (
       <li key={key}>
         {count} unidad {task.taskName}
+        <button onClick={() => this.props.removeFromEstimate(key)}>
+          &times;
+        </button>
       </li>
     );
   };

@@ -54,6 +54,15 @@ class App extends React.Component {
     });
   };
 
+  deleteTask = key => {
+    // take a copy of state
+    const tasks = { ...this.state.tasks };
+    // remove the item
+    tasks[key] = null;
+    // Update State
+    this.setState({ tasks });
+  };
+
   loadSampleTasks = () => {
     this.setState({ tasks: sampleTasks });
   };
@@ -63,6 +72,15 @@ class App extends React.Component {
     const estimate = { ...this.state.estimate };
     // add to the order or update the number
     estimate[key] = estimate[key] + 1 || 1;
+    // Call setState to update our state
+    this.setState({ estimate });
+  };
+
+  removeFromEstimate = key => {
+    // take a copy of state
+    const estimate = { ...this.state.estimate };
+    // remove item from estimate
+    estimate[key] = null;
     // Call setState to update our state
     this.setState({ estimate });
   };
@@ -83,10 +101,15 @@ class App extends React.Component {
             ))}
           </ul>
         </div>
-        <Estimate tasks={this.state.tasks} estimate={this.state.estimate} />
+        <Estimate
+          tasks={this.state.tasks}
+          estimate={this.state.estimate}
+          removeFromEstimate={this.removeFromEstimate}
+        />
         <Tasks
           addTask={this.addTask}
           updateTask={this.updateTask}
+          deleteTask={this.deleteTask}
           loadSampleTasks={this.loadSampleTasks}
           tasks={this.state.tasks}
         />

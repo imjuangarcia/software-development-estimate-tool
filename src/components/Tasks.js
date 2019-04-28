@@ -13,6 +13,7 @@ class Tasks extends React.Component {
             index={key}
             task={this.props.tasks[key]}
             updateTask={this.props.updateTask}
+            deleteTask={this.props.deleteTask}
           />
         ))}
         <AddTaskForm addTask={this.props.addTask} />
