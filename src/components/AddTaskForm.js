@@ -34,12 +34,17 @@ class AddTaskForm extends React.Component {
     return (
       <form className="fish-edit" onSubmit={this.createTask}>
         <input name="task" ref={this.taskRef} type="text" placeholder="Task" />
-        <input
-          name="section"
-          ref={this.sectionRef}
-          type="text"
-          placeholder="Section"
-        />
+        <select name="section" ref={this.sectionRef}>
+          <option>Definici&oacute;n</option>
+          <option>Iniciaci&oacute;n</option>
+          <option>Realizaci&oacute;n: Frontend</option>
+          <option>Backend: APIs</option>
+          <option>Backend: Base de datos</option>
+          <option>Realizaci&oacute;n: Backend</option>
+          <option>Responsive: Frontend</option>
+          <option>Responsive: Backend</option>
+          <option>Testing</option>
+        </select>
         <input
           name="minhours"
           ref={this.minHoursRef}

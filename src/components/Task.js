@@ -10,11 +10,10 @@ class Task extends React.Component {
       maxHours,
       expectedHours
     } = this.props.details;
-
     return (
       <li className="menu-fish">
         <h3 className="fish-name">{taskName}</h3>
-        {/* <h6 className="fish-name">{sectionName}</h6> */}
+        <h6 className="fish-name">{sectionName}</h6>
         <p>{minHours}</p>
         <p>{avgHours}</p>
         <p>{maxHours}</p>

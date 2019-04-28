@@ -8,22 +8,17 @@ import sampleTasks from "../sample-tasks";
 class App extends React.Component {
   state = {
     tasks: {},
-    estimate: {},
-    sections: {}
+    estimate: {}
   };
   addTask = task => {
     // Take a copy of the existing state we'll be updating
     const tasks = { ...this.state.tasks };
-    let sections = { ...this.state.sections };
     // Add new task to tasks variable
     tasks[`task${Date.now()}`] = task;
-    // Add section to section variable
-    sections[`section${Date.now()}`] = task.sectionName;
 
     // Set the new tasks and sections objects to state
     this.setState({
-      tasks,
-      sections
+      tasks
     });
   };
   loadSampleTasks = () => {
