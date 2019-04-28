@@ -42,6 +42,18 @@ class App extends React.Component {
       tasks
     });
   };
+
+  updateTask = (key, updatedTask) => {
+    // Copy of the current state
+    const tasks = { ...this.state.tasks };
+    // Update state
+    tasks[key] = updatedTask;
+    // Set that to state
+    this.setState({
+      tasks
+    });
+  };
+
   loadSampleTasks = () => {
     this.setState({ tasks: sampleTasks });
   };
@@ -72,7 +84,12 @@ class App extends React.Component {
           </ul>
         </div>
         <Estimate tasks={this.state.tasks} estimate={this.state.estimate} />
-        <Tasks addTask={this.addTask} loadSampleTasks={this.loadSampleTasks} />
+        <Tasks
+          addTask={this.addTask}
+          updateTask={this.updateTask}
+          loadSampleTasks={this.loadSampleTasks}
+          tasks={this.state.tasks}
+        />
       </div>
     );
   }
