@@ -4,12 +4,25 @@ import Estimate from "./Estimate";
 import Tasks from "./Tasks";
 import Task from "./Task";
 import sampleTasks from "../sample-tasks";
+import base from "../base";
 
 class App extends React.Component {
   state = {
     tasks: {},
     estimate: {}
   };
+
+  componentDidMount() {
+    this.ref = base.syncState(`${this.props.match.params.estimateId}/tasks`, {
+      context: this,
+      state: "tasks"
+    });
+  }
+
+  componentWillUnmount() {
+    base.removeBinding(this.ref);
+  }
+
   addTask = task => {
     // Take a copy of the existing state we'll be updating
     const tasks = { ...this.state.tasks };
