@@ -17,6 +17,14 @@ class App extends React.Component {
       context: this,
       state: "tasks"
     });
+
+    this.ref = base.syncState(
+      `${this.props.match.params.estimateId}/estimate`,
+      {
+        context: this,
+        state: "estimate"
+      }
+    );
   }
 
   componentWillUnmount() {
