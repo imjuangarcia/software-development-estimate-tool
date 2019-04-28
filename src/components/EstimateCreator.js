@@ -1,7 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { slugify } from "../helpers";
 
 class EstimateCreator extends React.Component {
+  static propTypes = {
+    history: PropTypes.object
+  };
   myInput = React.createRef();
   goToEstimate = event => {
     // Stop the form from submitting

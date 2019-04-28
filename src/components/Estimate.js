@@ -1,6 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class Estimate extends React.Component {
+  static propTypes = {
+    tasks: PropTypes.object,
+    estimate: PropTypes.object,
+    removeFromEstimate: PropTypes.func
+  };
   renderEstimate = key => {
     const task = this.props.tasks[key];
     const count = this.props.estimate[key];

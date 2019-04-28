@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Header from "./Header";
 import Estimate from "./Estimate";
 import Tasks from "./Tasks";
@@ -10,6 +11,10 @@ class App extends React.Component {
   state = {
     tasks: {},
     estimate: {}
+  };
+
+  static propTypes = {
+    match: PropTypes.object
   };
 
   componentDidMount() {

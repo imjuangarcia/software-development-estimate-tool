@@ -1,8 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
 import AddTaskForm from "./AddTaskForm";
 import EditTaskForm from "./EditTaskForm";
 
 class Tasks extends React.Component {
+  static propTypes = {
+    tasks: PropTypes.object,
+    updateTask: PropTypes.func,
+    deleteTask: PropTypes.func,
+    loadSampleTasks: PropTypes.func
+  };
   render() {
     return (
       <div className="inventory">

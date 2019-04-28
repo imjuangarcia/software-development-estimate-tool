@@ -1,6 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class EditTaskForm extends React.Component {
+  static propTypes = {
+    task: PropTypes.shape({
+      taskName: PropTypes.string,
+      sectionName: PropTypes.string,
+      minHours: PropTypes.number,
+      avgHours: PropTypes.number,
+      maxHours: PropTypes.number,
+      expectedHours: PropTypes.number
+    }),
+    index: PropTypes.string,
+    updateTask: PropTypes.func
+  };
   handleChange = event => {
     // Update the task
     const updatedTask = {

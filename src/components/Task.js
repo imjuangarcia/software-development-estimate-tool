@@ -1,6 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class Task extends React.Component {
+  static propTypes = {
+    details: PropTypes.shape({
+      taskName: PropTypes.string,
+      sectionName: PropTypes.string,
+      minHours: PropTypes.number,
+      avgHours: PropTypes.number,
+      maxHours: PropTypes.number,
+      expectedHours: PropTypes.number
+    }),
+    addToEstimate: PropTypes.func
+  };
   render() {
     const {
       taskName,
