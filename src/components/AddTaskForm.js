@@ -33,8 +33,14 @@ class AddTaskForm extends React.Component {
   render() {
     return (
       <form className="fish-edit" onSubmit={this.createTask}>
-        <input name="task" ref={this.taskRef} type="text" placeholder="Task" />
-        <select name="section" ref={this.sectionRef}>
+        <input
+          required
+          name="task"
+          ref={this.taskRef}
+          type="text"
+          placeholder="Task"
+        />
+        <select required name="section" ref={this.sectionRef}>
           <option value="Definición">Definici&oacute;n</option>
           <option value="Iniciación">Iniciaci&oacute;n</option>
           <option value="Realización: Frontend">
@@ -50,18 +56,21 @@ class AddTaskForm extends React.Component {
           <option value="Testing">Testing</option>
         </select>
         <input
+          required
           name="minhours"
           ref={this.minHoursRef}
           type="number"
           placeholder="Minimum Hours"
         />
         <input
+          required
           name="avghours"
           ref={this.avgHoursRef}
           type="number"
           placeholder="Average Hours"
         />
         <input
+          required
           name="maxhours"
           ref={this.maxHoursRef}
           type="number"
