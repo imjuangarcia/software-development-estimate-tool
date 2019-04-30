@@ -68,6 +68,12 @@ class EditTaskForm extends React.Component {
           onChange={this.handleChange}
           value={this.props.task.maxHours}
         />
+        <input
+          type="text"
+          name="expectedHours"
+          onChange={this.handleChange}
+          value={this.props.task.expectedHours}
+        />
         <button onClick={() => this.props.deleteTask(this.props.index)}>
           Remove Task
         </button>

@@ -7,6 +7,7 @@ class AddTaskForm extends React.Component {
   minHoursRef = React.createRef();
   avgHoursRef = React.createRef();
   maxHoursRef = React.createRef();
+  expectedHoursRef = React.createRef();
 
   static propTypes = {
     addTas: PropTypes.func
@@ -20,7 +21,7 @@ class AddTaskForm extends React.Component {
     const minHours = parseFloat(this.minHoursRef.current.value);
     const avgHours = parseFloat(this.avgHoursRef.current.value);
     const maxHours = parseFloat(this.maxHoursRef.current.value);
-    const expectedHours = parseFloat((maxHours + minHours + avgHours * 4) / 6);
+    const expectedHours = parseFloat(this.expectedHoursRef.current.value);
 
     // Create the task object
     const task = {
@@ -80,6 +81,13 @@ class AddTaskForm extends React.Component {
           ref={this.maxHoursRef}
           type="number"
           placeholder="Maximum Hours"
+        />
+        <input
+          required
+          name="expectedhours"
+          ref={this.expectedHoursRef}
+          type="text"
+          placeholder="Expected Hours"
         />
         <button type="submit">+ Add Task</button>
       </form>
