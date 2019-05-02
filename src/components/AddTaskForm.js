@@ -86,7 +86,7 @@ class AddTaskForm extends React.Component {
           required
           name="expectedhours"
           ref={this.expectedHoursRef}
-          type="text"
+          type="number"
           placeholder="Expected Hours"
         />
         <button type="submit">+ Add Task</button>

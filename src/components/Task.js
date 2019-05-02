@@ -9,7 +9,7 @@ class Task extends React.Component {
       minHours: PropTypes.number,
       avgHours: PropTypes.number,
       maxHours: PropTypes.number,
-      expectedHours: PropTypes.number
+      expectedHours: PropTypes.string
     }),
     addToEstimate: PropTypes.func
   };
