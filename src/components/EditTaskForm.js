@@ -9,7 +9,7 @@ class EditTaskForm extends React.Component {
       minHours: PropTypes.number,
       avgHours: PropTypes.number,
       maxHours: PropTypes.number,
-      expectedHours: PropTypes.string
+      expectedHours: PropTypes.number
     }),
     index: PropTypes.string,
     updateTask: PropTypes.func
