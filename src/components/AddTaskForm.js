@@ -36,6 +36,18 @@ class AddTaskForm extends React.Component {
     // Refresh the form
     event.currentTarget.reset();
   };
+
+  setExpectedHours = () => {
+    if (
+      this.maxHoursRef.current.value &&
+      this.minHoursRef.current.value != "undefined"
+    ) {
+      const sum =
+        +this.maxHoursRef.current.value + +this.minHoursRef.current.value;
+      const sigma = +this.avgHoursRef.current.value * 4;
+      this.expectedHoursRef.current.value = (sum + sigma) / 6;
+    }
+  };
   render() {
     return (
       <form className="fish-edit" onSubmit={this.createTask}>
@@ -67,6 +79,7 @@ class AddTaskForm extends React.Component {
           ref={this.minHoursRef}
           type="number"
           placeholder="Minimum Hours"
+          onChange={this.setExpectedHours}
         />
         <input
           required
@@ -74,6 +87,7 @@ class AddTaskForm extends React.Component {
           ref={this.avgHoursRef}
           type="number"
           placeholder="Average Hours"
+          onChange={this.setExpectedHours}
         />
         <input
           required
@@ -81,13 +95,15 @@ class AddTaskForm extends React.Component {
           ref={this.maxHoursRef}
           type="number"
           placeholder="Maximum Hours"
+          onChange={this.setExpectedHours}
         />
         <input
           required
           name="expectedhours"
           ref={this.expectedHoursRef}
-          type="number"
+          type="text"
           placeholder="Expected Hours"
+          disabled
         />
         <button type="submit">+ Add Task</button>
       </form>
