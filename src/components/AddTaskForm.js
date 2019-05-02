@@ -80,6 +80,7 @@ class AddTaskForm extends React.Component {
           type="number"
           placeholder="Minimum Hours"
           onChange={this.setExpectedHours}
+          step=".01"
         />
         <input
           required
@@ -88,6 +89,7 @@ class AddTaskForm extends React.Component {
           type="number"
           placeholder="Average Hours"
           onChange={this.setExpectedHours}
+          step=".01"
         />
         <input
           required
@@ -96,6 +98,7 @@ class AddTaskForm extends React.Component {
           type="number"
           placeholder="Maximum Hours"
           onChange={this.setExpectedHours}
+          step=".01"
         />
         <input
           required
@@ -104,6 +107,7 @@ class AddTaskForm extends React.Component {
           type="text"
           placeholder="Expected Hours"
           disabled
+          step=".01"
         />
         <button type="submit">+ Add Task</button>
       </form>
