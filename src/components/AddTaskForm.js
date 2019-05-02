@@ -40,7 +40,7 @@ class AddTaskForm extends React.Component {
   setExpectedHours = () => {
     if (
       this.maxHoursRef.current.value &&
-      this.minHoursRef.current.value != "undefined"
+      this.minHoursRef.current.value !== "undefined"
     ) {
       const sum =
         +this.maxHoursRef.current.value + +this.minHoursRef.current.value;

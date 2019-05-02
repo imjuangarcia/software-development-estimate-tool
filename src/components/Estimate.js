@@ -33,7 +33,7 @@ class Estimate extends React.Component {
           <strong>
             {estimateIds.reduce((prevTotal, key) => {
               const task = this.props.tasks[key];
-              if (task != undefined) {
+              if (task !== undefined) {
                 const count = this.props.estimate[key];
                 return prevTotal + count * task.expectedHours;
               }
