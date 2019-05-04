@@ -123,6 +123,7 @@ class App extends React.Component {
           tasks={this.state.tasks}
           estimate={this.state.estimate}
           removeFromEstimate={this.removeFromEstimate}
+          estimateId={this.props.match.params.estimateId}
         />
         <Client details={this.state.client} addClient={this.addClient} />
         <Tasks
