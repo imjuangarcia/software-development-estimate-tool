@@ -35,7 +35,8 @@ class Estimate extends React.Component {
               const task = this.props.tasks[key];
               if (task !== undefined) {
                 const count = this.props.estimate[key];
-                return prevTotal + count * task.expectedHours;
+                const totalHours = prevTotal + count * task.expectedHours;
+                return totalHours;
               }
             }, 0)}
           </strong>{" "}

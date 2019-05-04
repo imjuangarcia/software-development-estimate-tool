@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Header from "./Header";
 import Estimate from "./Estimate";
+import Client from "./Client";
 import Tasks from "./Tasks";
 import Task from "./Task";
 import sampleTasks from "../sample-tasks";
@@ -9,6 +10,7 @@ import base from "../base";
 
 class App extends React.Component {
   state = {
+    client: {},
     tasks: {},
     estimate: {}
   };
@@ -18,18 +20,21 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.ref = base.syncState(`${this.props.match.params.estimateId}/tasks`, {
+    const { params } = this.props.match;
+    this.ref = base.syncState(`${params.estimateId}/tasks`, {
       context: this,
       state: "tasks"
     });
 
-    this.ref = base.syncState(
-      `${this.props.match.params.estimateId}/estimate`,
-      {
-        context: this,
-        state: "estimate"
-      }
-    );
+    this.ref = base.syncState(`${params.estimateId}/estimate`, {
+      context: this,
+      state: "estimate"
+    });
+
+    this.ref = base.syncState(`${params.estimateId}/client`, {
+      context: this,
+      state: "client"
+    });
   }
 
   componentWillUnmount() {
@@ -46,6 +51,14 @@ class App extends React.Component {
     this.setState({
       tasks
     });
+  };
+
+  addClient = () => {
+    if (this.props.location.client !== undefined) {
+      this.setState({
+        client: this.props.location.client
+      });
+    }
   };
 
   updateTask = (key, updatedTask) => {
@@ -111,6 +124,7 @@ class App extends React.Component {
           estimate={this.state.estimate}
           removeFromEstimate={this.removeFromEstimate}
         />
+        <Client details={this.state.client} addClient={this.addClient} />
         <Tasks
           addTask={this.addTask}
           updateTask={this.updateTask}
