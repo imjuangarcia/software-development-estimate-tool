@@ -339,3 +339,16 @@ table tbody tr td {
   font-weight: 700;
   color: #1957f3;
 }
+.terms h2 {
+  margin: 1.5rem 0;
+}
+.terms h3 {
+  color: #2f343d;
+  margin-bottom: 1rem;
+}
+.terms p {
+  margin-bottom: 1.5rem;
+}
+.terms p strong {
+  font-weight: 700;
+}

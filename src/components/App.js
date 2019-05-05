@@ -5,6 +5,7 @@ import Estimate from "./Estimate";
 import Client from "./Client";
 import Tasks from "./Tasks";
 import Task from "./Task";
+import Terms from "./Terms";
 import sampleTasks from "../sample-tasks";
 import base from "../base";
 
@@ -145,6 +146,7 @@ class App extends React.Component {
             />
           ))}
         </section>
+        <Terms details={this.state.client} />
         <Tasks
           addTask={this.addTask}
           updateTask={this.updateTask}
