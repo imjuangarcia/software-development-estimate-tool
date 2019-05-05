@@ -17,6 +17,8 @@ class Estimate extends React.Component {
   static propTypes = {
     tasks: PropTypes.object,
     estimate: PropTypes.object,
+    estimateId: PropTypes.string,
+    auth: PropTypes.object,
     removeFromEstimate: PropTypes.func
   };
 
@@ -104,57 +106,137 @@ class Estimate extends React.Component {
   render() {
     const estimateIds = Object.keys(this.props.estimate);
     return (
-      <div className="order-wrap">
-        <h2>Estimate</h2>
-        <ul className="order">{estimateIds.map(this.renderEstimate)}</ul>
-        <div className="total">
-          Total
-          <input
-            type="number"
-            ref={this.totalTimeRef}
-            name="total"
-            disabled
-            defaultValue={estimateIds.reduce((prevTotal, key) => {
-              const task = this.props.tasks[key];
-              if (task !== undefined) {
-                const count = this.props.estimate[key];
-                const totalHours = parseFloat(
-                  prevTotal + count * task.expectedHours
-                );
-                return totalHours;
-              }
-            }, "")}
-          />{" "}
-          horas
-        </div>
-        <div className="admin">
-          Admin time:
-          <input
-            type="number"
-            ref={this.adminTimeRef}
-            name="admin"
-            onChange={this.calculateTotalHours}
-            defaultValue={this.state.time.adminTime}
-          />{" "}
-          %
-        </div>
-        <div className="totaltime">Total Time: {this.state.time.totalTime}</div>
-        <div className="hourly">
-          Hourly Value{" "}
-          <input
-            type="number"
-            required
-            name="hour"
-            ref={this.hourlyValueRef}
-            placeholder="Hourly value for this project"
-            onChange={this.calculateTotalPrice}
-            defaultValue={this.state.cost.hourlyValue}
-          />
-        </div>
-        <div className="totaltime">
-          Total Price: ${this.state.cost.totalPrice}
-        </div>
-      </div>
+      <React.Fragment>
+        <section className="estimate">
+          <h2>Work Plan Summary</h2>
+          <p>
+            The following is a summary of the Time, Costs, Resources, and
+            Deadlines estimates, all of which will be covered in further detail
+            below.
+          </p>
+          <h3>Time</h3>
+          <table>
+            <thead>
+              <tr>
+                <td>Ideal Hours</td>
+                <td>Extra % for Admin Time</td>
+                <td>Total Hours</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input
+                    type="number"
+                    ref={this.totalTimeRef}
+                    name="total"
+                    disabled
+                    defaultValue={estimateIds.reduce((prevTotal, key) => {
+                      const task = this.props.tasks[key];
+                      if (task !== undefined) {
+                        const count = this.props.estimate[key];
+                        const totalHours = parseFloat(
+                          prevTotal + count * task.expectedHours
+                        );
+                        return totalHours;
+                      } else {
+                        return 0;
+                      }
+                    }, "")}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    ref={this.adminTimeRef}
+                    name="admin"
+                    onChange={this.calculateTotalHours}
+                    defaultValue={this.state.time.adminTime}
+                    placeholder="Add Admin Time Here"
+                    required
+                  />
+                  %
+                </td>
+                <td>{this.state.time.totalTime}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Costs</h3>
+          <table>
+            <thead>
+              <tr>
+                <td>Hourly Value based on the Project Complexity</td>
+                <td>Cost according to Total Hours</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  $
+                  <input
+                    type="number"
+                    required
+                    name="hour"
+                    ref={this.hourlyValueRef}
+                    placeholder="Set Hourly Value Here"
+                    onChange={this.calculateTotalPrice}
+                    defaultValue={this.state.cost.hourlyValue}
+                  />
+                </td>
+                <td>
+                  <strong>${this.state.cost.totalPrice}</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Resources</h3>
+          <table>
+            <thead>
+              <tr>
+                <td>Quantity</td>
+                <td>Type</td>
+                <td>Availability</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1 (one)</td>
+                <td>Front-End Developer</td>
+                <td>10 hours/week</td>
+              </tr>
+              <tr>
+                <td>1 (one)</td>
+                <td>Back-End Developer</td>
+                <td>10 hours/week</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>
+            Deadlines<sup>*</sup>
+          </h3>
+          <table>
+            <thead>
+              <tr>
+                <td>Minimum</td>
+                <td>Average</td>
+                <td>Maximum</td>
+                <td>Expected</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>4,5 weeks</td>
+                <td>6 weeks</td>
+                <td>8 weeks</td>
+                <td>
+                  <strong>6 weeks</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ul className="tasks">{estimateIds.map(this.renderEstimate)}</ul>
+        </section>
+      </React.Fragment>
     );
   }
 }

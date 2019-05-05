@@ -127,6 +127,24 @@ class App extends React.Component {
       <React.Fragment>
         <Header />
         <Client details={this.state.client} addClient={this.addClient} />
+        <Estimate
+          tasks={this.state.tasks}
+          estimate={this.state.estimate}
+          removeFromEstimate={this.removeFromEstimate}
+          estimateId={this.props.match.params.estimateId}
+          auth={this.state.auth}
+        />
+        <section className="tasks">
+          {Object.keys(this.state.tasks).map(key => (
+            <Task
+              key={key}
+              index={key}
+              details={this.state.tasks[key]}
+              addToEstimate={this.addToEstimate}
+              auth={this.state.auth}
+            />
+          ))}
+        </section>
         <Tasks
           addTask={this.addTask}
           updateTask={this.updateTask}
@@ -137,28 +155,6 @@ class App extends React.Component {
           propagateAuthState={this.propagateAuthState}
         />
       </React.Fragment>
-      // <div className="catch-of-the-day">
-      //   <div className="menu">
-      //     <ul className="fishes">
-      //       {Object.keys(this.state.tasks).map(key => (
-      //         <Task
-      //           key={key}
-      //           index={key}
-      //           details={this.state.tasks[key]}
-      //           addToEstimate={this.addToEstimate}
-      //           auth={this.state.auth}
-      //         />
-      //       ))}
-      //     </ul>
-      //   </div>
-      //   <Estimate
-      //     tasks={this.state.tasks}
-      //     estimate={this.state.estimate}
-      //     removeFromEstimate={this.removeFromEstimate}
-      //     estimateId={this.props.match.params.estimateId}
-      //     auth={this.state.auth}
-      //   />
-      // </div>
     );
   }
 }

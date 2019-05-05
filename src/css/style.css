@@ -156,6 +156,7 @@ h1 strong {
 }
 p {
   font-size: 0.8rem;
+  line-height: 1.9;
 }
 h2 {
   font-size: 1.5rem;
@@ -218,6 +219,26 @@ footer a {
   color: #2f343d;
   text-decoration: none;
 }
+table {
+  width: 100%;
+  border: 1px solid #eaeaea;
+}
+table thead {
+  background-color: #f8f8f8;
+}
+table thead tr td {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: #2f343d;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid #eaeaea;
+}
+table tbody tr td {
+  padding: 0.75rem;
+  font-size: 0.8rem;
+}
 .hidden {
   display: none;
 }
@@ -265,19 +286,48 @@ footer a {
 }
 .client table {
   background-color: #f8f8f8;
-  width: 100%;
   margin-top: 1rem;
 }
 .client table tbody tr td {
-  border: 1px solid #eaeaea;
-  padding: 0.75rem;
-  font-size: 0.8rem;
-  text-transform: uppercase;
   color: #aaa;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  text-transform: uppercase;
 }
 .client table tbody tr td h4 {
   display: inline-block;
   min-width: 160px;
+}
+.estimate {
+  margin-top: 1.5rem;
+}
+.estimate h2 {
+  margin-bottom: 1rem;
+}
+.estimate p {
+  margin-bottom: 1.5rem;
+}
+.estimate h3 {
+  color: #2f343d;
+  margin-bottom: 0.5rem;
+}
+.estimate table {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.estimate table tbody tr td input {
+  display: inline;
+  width: auto;
+  height: auto;
+  padding: 0;
+  text-align: center;
+  border: none;
+  font-size: 0.8rem;
+}
+.estimate table tbody tr td input:invalid {
+  border: 2px solid #c62300;
+}
+.estimate table tbody tr td strong {
+  font-weight: 700;
+  color: #1957f3;
 }
