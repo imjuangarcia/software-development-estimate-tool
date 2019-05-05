@@ -58,15 +58,22 @@ class Estimate extends React.Component {
     const count = this.props.estimate[key];
     if (task) {
       return (
-        <li key={key}>
-          {count} unidad {task.taskName}
-          <button
-            ref={this.removeFromEstimateRef}
-            onClick={() => this.props.removeFromEstimate(key)}
-          >
-            &times;
-          </button>
-        </li>
+        <tr key={key}>
+          <td>
+            {count} {count > 1 ? "units" : "unit"} of {task.taskName}
+            <button
+              ref={this.removeFromEstimateRef}
+              onClick={() => this.props.removeFromEstimate(key)}
+            >
+              &times;
+            </button>
+          </td>
+          <td>{task.sectionName}</td>
+          <td>{task.minHours}</td>
+          <td>{task.avgHours}</td>
+          <td>{task.maxHours}</td>
+          <td>{task.expectedHours}</td>
+        </tr>
       );
     }
   };
@@ -234,7 +241,31 @@ class Estimate extends React.Component {
               </tr>
             </tbody>
           </table>
-          <ul className="tasks">{estimateIds.map(this.renderEstimate)}</ul>
+          <hr />
+          <h2>Task Estimation</h2>
+          <p>
+            The following section contains the detailed estimation of stages and
+            tasks for the project and the expected time for each. The
+            calculation is done through the 6-sigma methodology, use the
+            following formula to calculate the expected time:{" "}
+            <span>exp = (max + min + 4*avg)/6</span>. The measurement unit used
+            is Hours, and values will be rounded if necessary. Any stage or task
+            not envisioned below and added after the budget's approval should be
+            quoted separately.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <td>Task</td>
+                <td>Stage</td>
+                <td>Minimum Hours</td>
+                <td>Average Hours</td>
+                <td>Maximum Hours</td>
+                <td>Expected Hours</td>
+              </tr>
+            </thead>
+            <tbody>{estimateIds.map(this.renderEstimate)}</tbody>
+          </table>
         </section>
       </React.Fragment>
     );

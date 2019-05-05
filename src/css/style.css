@@ -204,7 +204,7 @@ header p {
   margin-top: 0.75rem;
   color: #aaa;
 }
-header hr {
+hr {
   border: none;
   border-top: 1px solid #eaeaea;
   margin: 1rem 0;
@@ -306,6 +306,14 @@ table tbody tr td {
 }
 .estimate p {
   margin-bottom: 1.5rem;
+}
+.estimate p span {
+  background-color: #eaeaea;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  color: #1957f3;
+  font-family: monospace;
+  font-size: 1rem;
 }
 .estimate h3 {
   color: #2f343d;
