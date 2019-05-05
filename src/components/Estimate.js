@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import base from "../base";
 
 class Estimate extends React.Component {
+  removeFromEstimateRef = React.createRef();
   totalTimeRef = React.createRef();
   adminTimeRef = React.createRef();
   hourlyValueRef = React.createRef();
@@ -38,6 +39,12 @@ class Estimate extends React.Component {
     ) {
       this.calculateTotalHours();
     }
+
+    if (this.props.auth.owner !== this.props.auth.uid) {
+      this.adminTimeRef.current.setAttribute("disabled", true);
+      this.hourlyValueRef.current.setAttribute("disabled", true);
+      this.removeFromEstimateRef.current.classList.add("hidden");
+    }
   }
 
   componentWillUnmount() {
@@ -51,7 +58,10 @@ class Estimate extends React.Component {
       return (
         <li key={key}>
           {count} unidad {task.taskName}
-          <button onClick={() => this.props.removeFromEstimate(key)}>
+          <button
+            ref={this.removeFromEstimateRef}
+            onClick={() => this.props.removeFromEstimate(key)}
+          >
             &times;
           </button>
         </li>

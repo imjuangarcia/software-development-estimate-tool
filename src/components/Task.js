@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class Task extends React.Component {
+  addToEstimateRef = React.createRef();
+
   static propTypes = {
     details: PropTypes.shape({
       taskName: PropTypes.string,
@@ -13,6 +15,12 @@ class Task extends React.Component {
     }),
     addToEstimate: PropTypes.func
   };
+  componentDidUpdate() {
+    if (this.props.auth.owner !== this.props.auth.uid) {
+      this.addToEstimateRef.current.classList.add("hidden");
+      this.addToEstimateRef.current.setAttribute("disabled", true);
+    }
+  }
   render() {
     const {
       taskName,
@@ -30,7 +38,10 @@ class Task extends React.Component {
         <p>{avgHours}</p>
         <p>{maxHours}</p>
         <p>{expectedHours}</p>
-        <button onClick={() => this.props.addToEstimate(this.props.index)}>
+        <button
+          ref={this.addToEstimateRef}
+          onClick={() => this.props.addToEstimate(this.props.index)}
+        >
           Add to Estimate
         </button>
       </li>

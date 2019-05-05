@@ -12,7 +12,8 @@ class App extends React.Component {
   state = {
     client: {},
     tasks: {},
-    estimate: {}
+    estimate: {},
+    auth: {}
   };
 
   static propTypes = {
@@ -103,6 +104,15 @@ class App extends React.Component {
     this.setState({ estimate });
   };
 
+  propagateAuthState = state => {
+    this.setState({
+      auth: {
+        owner: state.owner,
+        uid: state.uid
+      }
+    });
+  };
+
   render() {
     return (
       <div className="catch-of-the-day">
@@ -115,6 +125,7 @@ class App extends React.Component {
                 index={key}
                 details={this.state.tasks[key]}
                 addToEstimate={this.addToEstimate}
+                auth={this.state.auth}
               />
             ))}
           </ul>
@@ -124,6 +135,7 @@ class App extends React.Component {
           estimate={this.state.estimate}
           removeFromEstimate={this.removeFromEstimate}
           estimateId={this.props.match.params.estimateId}
+          auth={this.state.auth}
         />
         <Client details={this.state.client} addClient={this.addClient} />
         <Tasks
@@ -133,6 +145,7 @@ class App extends React.Component {
           loadSampleTasks={this.loadSampleTasks}
           tasks={this.state.tasks}
           estimateId={this.props.match.params.estimateId}
+          propagateAuthState={this.propagateAuthState}
         />
       </div>
     );

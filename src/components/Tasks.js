@@ -42,6 +42,7 @@ class Tasks extends React.Component {
       uid: authData.user.uid,
       owner: estimate.owner || authData.user.uid
     });
+    this.props.propagateAuthState(this.state);
   };
 
   authenticate = provider => {
