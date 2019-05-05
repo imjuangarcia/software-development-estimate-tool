@@ -1,17 +1,16 @@
 import React from "react";
-import PropTypes from "prop-types";
 
-const Header = props => (
-  <header className="top">
-    <h1>Software Development Estimate</h1>
-    <h3 className="tagline">
-      <span>{props.tagline}</span>
-    </h3>
+const Header = () => (
+  <header>
+    <h1>
+      Software Development <strong>Estimate</strong>
+    </h1>
+    <p>
+      Juan Mart&iacute;n Garc&iacute;a – Product Designer &amp; Frontend
+      Developer
+    </p>
+    <hr />
   </header>
 );
-
-Header.propTypes = {
-  tagline: PropTypes.string.isRequired
-};
 
 export default Header;

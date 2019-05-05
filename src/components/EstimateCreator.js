@@ -32,7 +32,7 @@ class EstimateCreator extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <section className="create-project">
+        <header>
           <h1>
             Software Development <strong>Estimate</strong>
           </h1>
@@ -41,6 +41,8 @@ class EstimateCreator extends React.Component {
             Developer
           </p>
           <hr />
+        </header>
+        <section className="create-project">
           <form action="" onSubmit={this.goToEstimate}>
             <h2>Please Enter the details of the project to estimate</h2>
             <fieldset>
@@ -94,7 +96,11 @@ class EstimateCreator extends React.Component {
         </section>
         <footer>
           &copy; {new Date().getFullYear()} JMG. Designed and Developed by{" "}
-          <a href="https://www.juangarcia.design" target="_blank">
+          <a
+            href="https://www.juangarcia.design"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Juan Mart&iacute;n Garc&iacute;a
           </a>
         </footer>

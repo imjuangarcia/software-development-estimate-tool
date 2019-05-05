@@ -23,6 +23,16 @@ button
   border none
   cursor pointer
 
+header
+  p
+    margin-top 0.75rem
+    color gray
+  
+  hr
+    border none 
+    border-top 1px solid #EAEAEA
+    margin 1rem 0
+
 footer
   margin-top 2rem
   text-align center
@@ -33,17 +43,12 @@ footer
     color black
     text-decoration none
 
+// Class to hide the elements
+.hidden
+  display none
+
 // Estimate creator
 .create-project
-  p
-    margin-top 0.75rem
-    color gray
-  
-  hr
-    border none 
-    border-top 1px solid #EAEAEA
-    margin 1rem 0
-  
   form
     display grid
     grid-gap 1rem
@@ -65,3 +70,42 @@ footer
         background-color blue
         border 1px solid blue
         color white
+
+// Client data
+.client
+  h3
+    margin-top 1rem
+
+  button
+    border 1px solid blue
+    color blue
+    background-color transparent
+    height 54px
+    transition all .3s
+    width 100%
+    margin-top 1rem
+
+    &:hover
+      background-color blue
+      border 1px solid blue
+      color white
+
+  table
+    background-color #F8F8F8
+    width 100%
+    margin-top 1rem
+
+    tbody
+      tr
+        td
+          border 1px solid #EAEAEA
+          padding .75rem
+          font-size .8rem
+          text-transform uppercase
+          color gray
+          font-family 'Montserrat', sans-serif
+          font-weight 600
+
+          h4
+            display inline-block
+            min-width 160px

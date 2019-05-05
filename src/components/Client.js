@@ -2,8 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class Client extends React.Component {
-  componentDidMount() {
-    this.props.addClient();
+  loadClientDataButtonRef = React.createRef();
+
+  componentDidUpdate() {
+    if (Object.keys(this.props.details).length !== 0) {
+      this.loadClientDataButtonRef.current.classList.add("hidden");
+    }
   }
   render() {
     const {
@@ -14,14 +18,43 @@ class Client extends React.Component {
       versionNumber
     } = this.props.details;
     return (
-      <div>
-        <button onClick={this.props.addClient}>Load Client Data</button>
-        <p>{clientName}</p>
-        <p>{projectName}</p>
-        <p>{date}</p>
-        <p>{estimateNumber}</p>
-        <p>{versionNumber}</p>
-      </div>
+      <section className="client">
+        <h3>Client &amp; Project Details</h3>
+        <button
+          ref={this.loadClientDataButtonRef}
+          onClick={this.props.addClient}
+        >
+          Load Client Data
+        </button>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <h4>Project:</h4> {projectName}
+              </td>
+              <td>
+                <h4>Client:</h4> {clientName}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4>Date:</h4> {date}
+              </td>
+              <td>
+                <h4>Author:</h4> Juan Mart&iacute;n Garc&iacute;a
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h4>Version:</h4> {versionNumber}
+              </td>
+              <td>
+                <h4>Estimate Number:</h4> {estimateNumber}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     );
   }
 }

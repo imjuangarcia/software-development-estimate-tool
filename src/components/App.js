@@ -55,9 +55,18 @@ class App extends React.Component {
   };
 
   addClient = () => {
-    if (this.props.location.client !== undefined) {
+    // If there's a client set...
+    if (
+      this.props.location.client !== undefined ||
+      Object.keys(this.state.client).length !== 0
+    ) {
+      // Let's save its data into state...
       this.setState({
         client: this.props.location.client
+      });
+    } else {
+      this.props.history.push({
+        pathname: `/`
       });
     }
   };
@@ -115,28 +124,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="catch-of-the-day">
-        <div className="menu">
-          <Header tagline="Juan Martín García – Product Designer &amp; Frontend Developer" />
-          <ul className="fishes">
-            {Object.keys(this.state.tasks).map(key => (
-              <Task
-                key={key}
-                index={key}
-                details={this.state.tasks[key]}
-                addToEstimate={this.addToEstimate}
-                auth={this.state.auth}
-              />
-            ))}
-          </ul>
-        </div>
-        <Estimate
-          tasks={this.state.tasks}
-          estimate={this.state.estimate}
-          removeFromEstimate={this.removeFromEstimate}
-          estimateId={this.props.match.params.estimateId}
-          auth={this.state.auth}
-        />
+      <React.Fragment>
+        <Header />
         <Client details={this.state.client} addClient={this.addClient} />
         <Tasks
           addTask={this.addTask}
@@ -147,7 +136,29 @@ class App extends React.Component {
           estimateId={this.props.match.params.estimateId}
           propagateAuthState={this.propagateAuthState}
         />
-      </div>
+      </React.Fragment>
+      // <div className="catch-of-the-day">
+      //   <div className="menu">
+      //     <ul className="fishes">
+      //       {Object.keys(this.state.tasks).map(key => (
+      //         <Task
+      //           key={key}
+      //           index={key}
+      //           details={this.state.tasks[key]}
+      //           addToEstimate={this.addToEstimate}
+      //           auth={this.state.auth}
+      //         />
+      //       ))}
+      //     </ul>
+      //   </div>
+      //   <Estimate
+      //     tasks={this.state.tasks}
+      //     estimate={this.state.estimate}
+      //     removeFromEstimate={this.removeFromEstimate}
+      //     estimateId={this.props.match.params.estimateId}
+      //     auth={this.state.auth}
+      //   />
+      // </div>
     );
   }
 }

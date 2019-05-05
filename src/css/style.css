@@ -162,6 +162,11 @@ h2 {
   color: #2f343d;
   font-weight: 700;
 }
+h3 {
+  color: #aaa;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
 label {
   display: block;
   margin-bottom: 0.5rem;
@@ -194,6 +199,15 @@ button {
   border: none;
   cursor: pointer;
 }
+header p {
+  margin-top: 0.75rem;
+  color: #aaa;
+}
+header hr {
+  border: none;
+  border-top: 1px solid #eaeaea;
+  margin: 1rem 0;
+}
 footer {
   margin-top: 2rem;
   text-align: center;
@@ -204,14 +218,8 @@ footer a {
   color: #2f343d;
   text-decoration: none;
 }
-.create-project p {
-  margin-top: 0.75rem;
-  color: #aaa;
-}
-.create-project hr {
-  border: none;
-  border-top: 1px solid #eaeaea;
-  margin: 1rem 0;
+.hidden {
+  display: none;
 }
 .create-project form {
   display: grid;
@@ -236,4 +244,40 @@ footer a {
   background-color: #1957f3;
   border: 1px solid #1957f3;
   color: #fff;
+}
+.client h3 {
+  margin-top: 1rem;
+}
+.client button {
+  border: 1px solid #1957f3;
+  color: #1957f3;
+  background-color: transparent;
+  height: 54px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  width: 100%;
+  margin-top: 1rem;
+}
+.client button:hover {
+  background-color: #1957f3;
+  border: 1px solid #1957f3;
+  color: #fff;
+}
+.client table {
+  background-color: #f8f8f8;
+  width: 100%;
+  margin-top: 1rem;
+}
+.client table tbody tr td {
+  border: 1px solid #eaeaea;
+  padding: 0.75rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #aaa;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+.client table tbody tr td h4 {
+  display: inline-block;
+  min-width: 160px;
 }
