@@ -31,37 +31,74 @@ class EstimateCreator extends React.Component {
   };
   render() {
     return (
-      <form action="" className="store-selector" onSubmit={this.goToEstimate}>
-        <h2>Please Enter the details of the project to estimate</h2>
-        <input
-          type="text"
-          ref={this.projectNameRef}
-          required
-          placeholder="Project name"
-        />
-        <input
-          type="text"
-          ref={this.clientNameRef}
-          required
-          placeholder="Client name"
-        />
-        <input type="date" ref={this.dateRef} required placeholder="Date" />
-        <input
-          type="number"
-          ref={this.versionNumberRef}
-          required
-          placeholder="Version Number"
-          defaultValue={1.0}
-          step="0.1"
-        />
-        <input
-          type="number"
-          ref={this.estimateNumberRef}
-          required
-          placeholder="Estimate Number"
-        />
-        <button type="submit">Go to the estimate</button>
-      </form>
+      <React.Fragment>
+        <section className="create-project">
+          <h1>
+            Software Development <strong>Estimate</strong>
+          </h1>
+          <p>
+            Juan Mart&iacute;n Garc&iacute;a – Product Designer &amp; Frontend
+            Developer
+          </p>
+          <hr />
+          <form action="" onSubmit={this.goToEstimate}>
+            <h2>Please Enter the details of the project to estimate</h2>
+            <fieldset>
+              <label htmlFor="projectName">Project Name</label>
+              <input
+                type="text"
+                ref={this.projectNameRef}
+                required
+                placeholder="Enter the Project Name Here"
+                name="projectName"
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="clientName">Client Name</label>
+              <input
+                type="text"
+                ref={this.clientNameRef}
+                required
+                placeholder="Enter the Client Name Here"
+                name="clientName"
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="date">Estimate Date</label>
+              <input type="date" ref={this.dateRef} required name="date" />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="versionNumber">Estimate Version Number</label>
+              <input
+                type="number"
+                ref={this.versionNumberRef}
+                required
+                placeholder="Enter Version Number Here"
+                name="versionNumber"
+                defaultValue={1.0}
+                step="0.1"
+              />
+            </fieldset>
+            <fieldset>
+              <label htmlFor="estimateNumber">Estimate Number</label>
+              <input
+                type="number"
+                ref={this.estimateNumberRef}
+                required
+                name="estimateNumber"
+                placeholder="Enter Estimate Number Here"
+              />
+            </fieldset>
+            <button type="submit">Go to the estimate</button>
+          </form>
+        </section>
+        <footer>
+          &copy; {new Date().getFullYear()} JMG. Designed and Developed by{" "}
+          <a href="https://www.juangarcia.design" target="_blank">
+            Juan Mart&iacute;n Garc&iacute;a
+          </a>
+        </footer>
+      </React.Fragment>
     );
   }
 }
