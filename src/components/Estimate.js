@@ -5,7 +5,7 @@ import base from "../base";
 class Estimate extends React.Component {
   totalTimeRef = React.createRef();
   adminTimeRef = React.createRef();
-  hourlyRef = React.createRef();
+  hourlyValueRef = React.createRef();
 
   state = {
     time: {},
@@ -24,10 +24,18 @@ class Estimate extends React.Component {
       context: this,
       state: "time"
     });
+    this.ref = base.syncState(`${this.props.estimateId}/cost`, {
+      context: this,
+      state: "cost"
+    });
   }
 
   componentDidUpdate() {
-    if (this.totalTimeRef.current.value != "") {
+    if (
+      this.totalTimeRef.current.value !== "" &&
+      this.adminTimeRef.current.value !== undefined &&
+      this.adminTimeRef.current.value !== ""
+    ) {
       this.calculateTotalHours();
     }
   }
@@ -53,8 +61,9 @@ class Estimate extends React.Component {
 
   calculateTotalHours = () => {
     const adminTime = this.adminTimeRef.current.value;
-    const thirdsRule =
-      (this.totalTimeRef.current.value / 100) * this.adminTimeRef.current.value;
+    const totalPrice =
+      this.state.time.totalTime * this.hourlyValueRef.current.value;
+    const thirdsRule = (this.totalTimeRef.current.value / 100) * adminTime;
     const totalTime = (+this.totalTimeRef.current.value + thirdsRule).toFixed(
       2
     );
@@ -65,11 +74,22 @@ class Estimate extends React.Component {
         totalTime
       }
     });
-    this.calculateTotalPrice();
+    if (isNaN(totalPrice) || totalPrice === 0) {
+    } else {
+      this.calculateTotalPrice();
+    }
   };
 
   calculateTotalPrice = () => {
-    console.log("calculating total price");
+    const hourlyValue = parseFloat(this.hourlyValueRef.current.value);
+    const totalPrice = this.state.time.totalTime * hourlyValue;
+
+    this.setState({
+      cost: {
+        hourlyValue,
+        totalPrice
+      }
+    });
   };
   render() {
     const estimateIds = Object.keys(this.props.estimate);
@@ -115,10 +135,14 @@ class Estimate extends React.Component {
             type="number"
             required
             name="hour"
-            ref={this.hourlyRef}
+            ref={this.hourlyValueRef}
             placeholder="Hourly value for this project"
             onChange={this.calculateTotalPrice}
+            defaultValue={this.state.cost.hourlyValue}
           />
+        </div>
+        <div className="totaltime">
+          Total Price: ${this.state.cost.totalPrice}
         </div>
       </div>
     );
