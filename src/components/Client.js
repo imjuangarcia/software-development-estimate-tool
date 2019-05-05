@@ -2,8 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class Client extends React.Component {
+  // Refs
   loadClientDataButtonRef = React.createRef();
 
+  // Proptypes
+  static propTypes = {
+    details: PropTypes.shape({
+      clientName: PropTypes.string,
+      projectName: PropTypes.string,
+      date: PropTypes.string,
+      estimateNumber: PropTypes.number,
+      versionNumber: PropTypes.number
+    }),
+    addClient: PropTypes.func
+  };
+
+  // Lifecycle methods
   componentDidUpdate() {
     if (Object.keys(this.props.details).length !== 0) {
       this.loadClientDataButtonRef.current.classList.add("hidden");

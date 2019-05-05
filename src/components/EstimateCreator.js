@@ -21,8 +21,8 @@ class EstimateCreator extends React.Component {
       projectName: this.projectNameRef.current.value,
       clientName: this.clientNameRef.current.value,
       date: this.dateRef.current.value,
-      versionNumber: this.versionNumberRef.current.value,
-      estimateNumber: this.estimateNumberRef.current.value
+      versionNumber: parseFloat(this.versionNumberRef.current.value),
+      estimateNumber: parseFloat(this.estimateNumberRef.current.value)
     };
     // Get the text from the input
     const estimate = slugify(this.projectNameRef.current.value);
