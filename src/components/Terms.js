@@ -48,6 +48,23 @@ class Terms extends React.Component {
           of raster files, like JPG, PNG, etc., will result in the need to
           recreate the original files, which will be quoted separately.
         </p>
+        <img
+          src="/images/jmg-signature.png"
+          alt="Juan Martín García - Signature"
+        />
+        <h4>Juan Mart&iacute;n Garc&iacute;a</h4>
+        <h5>
+          Monta&ntilde;eses 2678 3c,<br />1428, belgrano caba
+        </h5>
+        <h5>+54 9 11 3287 0377</h5>
+        <a href="mailto:hello@juangarcia.com.ar">hello@juangarcia.com.ar</a>
+        <a
+          href="https://www.juangarcia.design"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          juangarcia.design
+        </a>
       </section>
     );
   }
