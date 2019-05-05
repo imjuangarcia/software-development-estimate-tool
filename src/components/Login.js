@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 
 const Login = props => {
   return (
-    <nav className="login">
-      <h2>Login</h2>
+    <section className="tasks">
+      <h1>
+        Admin Area: <strong>Login</strong>
+      </h1>
       <p>Sign in to manage the tasks on this estimate</p>
       <button className="github" onClick={() => props.authenticate("Github")}>
         Log in with GitHub
@@ -18,7 +20,7 @@ const Login = props => {
       >
         Log in with Facebook
       </button>
-    </nav>
+    </section>
   );
 };
 

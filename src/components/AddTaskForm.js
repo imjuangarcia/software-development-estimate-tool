@@ -50,66 +50,88 @@ class AddTaskForm extends React.Component {
   };
   render() {
     return (
-      <form className="fish-edit" onSubmit={this.createTask}>
-        <input
-          required
-          name="task"
-          ref={this.taskRef}
-          type="text"
-          placeholder="Task"
-        />
-        <select required name="section" ref={this.sectionRef}>
-          <option value="Definición">Definici&oacute;n</option>
-          <option value="Iniciación">Iniciaci&oacute;n</option>
-          <option value="Realización: Frontend">
-            Realizaci&oacute;n: Frontend
-          </option>
-          <option value="Backend: APIs">Backend: APIs</option>
-          <option value="Backend: Base de datos">Backend: Base de datos</option>
-          <option value="Realización: Backend">
-            Realizaci&oacute;n: Backend
-          </option>
-          <option value="Responsive: Frontend">Responsive: Frontend</option>
-          <option value="Responsive: Backend">Responsive: Backend</option>
-          <option value="Testing">Testing</option>
-        </select>
-        <input
-          required
-          name="minhours"
-          ref={this.minHoursRef}
-          type="number"
-          placeholder="Minimum Hours"
-          onChange={this.setExpectedHours}
-          step=".01"
-        />
-        <input
-          required
-          name="avghours"
-          ref={this.avgHoursRef}
-          type="number"
-          placeholder="Average Hours"
-          onChange={this.setExpectedHours}
-          step=".01"
-        />
-        <input
-          required
-          name="maxhours"
-          ref={this.maxHoursRef}
-          type="number"
-          placeholder="Maximum Hours"
-          onChange={this.setExpectedHours}
-          step=".01"
-        />
-        <input
-          required
-          name="expectedhours"
-          ref={this.expectedHoursRef}
-          type="text"
-          placeholder="Expected Hours"
-          disabled
-          step=".01"
-        />
-        <button type="submit">+ Add Task</button>
+      <form onSubmit={this.createTask}>
+        <fieldset>
+          <label htmlFor="task">Task Name</label>
+          <input
+            required
+            name="task"
+            ref={this.taskRef}
+            type="text"
+            placeholder="Task"
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="section">Section Name</label>
+          <select required name="section" ref={this.sectionRef}>
+            <option value="Definición">Definici&oacute;n</option>
+            <option value="Iniciación">Iniciaci&oacute;n</option>
+            <option value="Realización: Frontend">
+              Realizaci&oacute;n: Frontend
+            </option>
+            <option value="Backend: APIs">Backend: APIs</option>
+            <option value="Backend: Base de datos">
+              Backend: Base de datos
+            </option>
+            <option value="Realización: Backend">
+              Realizaci&oacute;n: Backend
+            </option>
+            <option value="Responsive: Frontend">Responsive: Frontend</option>
+            <option value="Responsive: Backend">Responsive: Backend</option>
+            <option value="Testing">Testing</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <label htmlFor="minhours">Minimum hours</label>
+          <input
+            required
+            name="minhours"
+            ref={this.minHoursRef}
+            type="number"
+            placeholder="Minimum Hours"
+            onChange={this.setExpectedHours}
+            step=".01"
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="avghours">Average hours</label>
+          <input
+            required
+            name="avghours"
+            ref={this.avgHoursRef}
+            type="number"
+            placeholder="Average Hours"
+            onChange={this.setExpectedHours}
+            step=".01"
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="maxhours">Maximum hours</label>
+          <input
+            required
+            name="maxhours"
+            ref={this.maxHoursRef}
+            type="number"
+            placeholder="Maximum Hours"
+            onChange={this.setExpectedHours}
+            step=".01"
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="expectedhours">Expected hours</label>
+          <input
+            required
+            name="expectedhours"
+            ref={this.expectedHoursRef}
+            type="text"
+            placeholder="Expected Hours"
+            disabled
+            step=".01"
+          />
+        </fieldset>
+        <button className="remove" type="submit">
+          + Add Task
+        </button>
       </form>
     );
   }

@@ -174,6 +174,79 @@ table
             font-weight 700
             color blue
 
+// Tasks
+.tasks
+  background-color #f8f8f8
+  padding 1.5rem
+  margin-top 1.5rem
+
+  h1
+    margin-bottom 1rem
+  
+  h2
+    margin-bottom .5rem
+
+  h3
+    color black
+    margin-top 1rem
+    margin-bottom 0.5rem
+
+  button
+    margin-top 1rem
+    border 1px solid blue
+    color blue
+    background-color transparent
+    transition all .3s
+    padding 1rem
+    margin-left 1rem
+
+    &:hover
+      background-color blue
+      border 1px solid blue
+      color white
+    
+    &:first-child
+      margin-left 0
+
+  .title
+    display flex
+    align-items center
+
+    h2
+      margin-bottom 0
+      flex 1
+    
+    button
+      margin-top 0
+
+  form
+    display grid
+    grid-template-columns repeat(auto-fit, minmax(320px, 1fr))
+    grid-gap 1rem
+    margin-bottom 1.5rem
+    border 1px solid #CCCCCC 
+    padding 1rem
+
+    select
+      height 54px
+      width 100%
+      background-color white
+
+    .remove
+      margin-top 0
+      margin-left 0
+      border-color gray
+      color gray
+      
+      &:hover
+        background-color black
+        color white
+        border 1px solid transparent
+
+  .sample
+    margin-left 0
+    margin-top 0
+
 // Terms
 .terms
   h2

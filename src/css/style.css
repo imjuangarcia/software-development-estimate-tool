@@ -346,6 +346,82 @@ table tbody tr td {
   font-weight: 700;
   color: #1957f3;
 }
+.tasks {
+  background-color: #f8f8f8;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+.tasks h1 {
+  margin-bottom: 1rem;
+}
+.tasks h2 {
+  margin-bottom: 0.5rem;
+}
+.tasks h3 {
+  color: #2f343d;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+.tasks button {
+  margin-top: 1rem;
+  border: 1px solid #1957f3;
+  color: #1957f3;
+  background-color: transparent;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  padding: 1rem;
+  margin-left: 1rem;
+}
+.tasks button:hover {
+  background-color: #1957f3;
+  border: 1px solid #1957f3;
+  color: #fff;
+}
+.tasks button:first-child {
+  margin-left: 0;
+}
+.tasks .title {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+}
+.tasks .title h2 {
+  margin-bottom: 0;
+  -webkit-box-flex: 1;
+          flex: 1;
+}
+.tasks .title button {
+  margin-top: 0;
+}
+.tasks form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+.tasks form select {
+  height: 54px;
+  width: 100%;
+  background-color: #fff;
+}
+.tasks form .remove {
+  margin-top: 0;
+  margin-left: 0;
+  border-color: #aaa;
+  color: #aaa;
+}
+.tasks form .remove:hover {
+  background-color: #2f343d;
+  color: #fff;
+  border: 1px solid transparent;
+}
+.tasks .sample {
+  margin-left: 0;
+  margin-top: 0;
+}
 .terms h2 {
   margin: 1.5rem 0;
 }

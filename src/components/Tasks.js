@@ -59,7 +59,7 @@ class Tasks extends React.Component {
   };
 
   render() {
-    const logout = <button onClick={this.logout}>Log Out!</button>;
+    const logout = <button onClick={this.logout}>Log Out</button>;
     // check if they're logged in
     if (!this.state.uid) {
       return <Login authenticate={this.authenticate} />;
@@ -68,18 +68,25 @@ class Tasks extends React.Component {
     // Check if they're not the owner of the estimate
     if (this.state.uid !== this.state.owner) {
       return (
-        <div>
-          <p>Sorry, you're not the owner</p>
+        <section className="tasks">
+          <h1>Admin Area</h1>
+          <h2>Sorry, you're not the owner</h2>
+          <p>
+            That means that you have read-only access to this estimate. If you
+            want to suggest editions, please contact the author.
+          </p>
           {logout}
-        </div>
+        </section>
       );
     }
 
     // They must be the owner
     return (
-      <div className="inventory">
-        <h2>Tasks</h2>
-        {logout}
+      <section className="tasks edit">
+        <div className="title">
+          <h2>Tasks</h2>
+          {logout}
+        </div>
         {Object.keys(this.props.tasks).map(key => (
           <EditTaskForm
             key={key}
@@ -89,9 +96,12 @@ class Tasks extends React.Component {
             deleteTask={this.props.deleteTask}
           />
         ))}
+        <h3>Add a New Task</h3>
         <AddTaskForm addTask={this.props.addTask} />
-        <button onClick={this.props.loadSampleTasks}>Load Sample Tasks</button>
-      </div>
+        <button className="sample" onClick={this.props.loadSampleTasks}>
+          Load Sample Tasks
+        </button>
+      </section>
     );
   }
 }
