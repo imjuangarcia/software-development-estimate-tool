@@ -2,6 +2,36 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class EditResourceForm extends React.Component {
+  // Refs
+  removeResourceButtonRef = React.createRef();
+  resourceQuantityRef = React.createRef();
+  resourceTypeRef = React.createRef();
+  resourceAvailabilityRef = React.createRef();
+
+  componentDidUpdate() {
+    // if they're not logged in
+    if (Object.keys(this.props.auth).length === 0) {
+      this.resourceQuantityRef.current.setAttribute("disabled", true);
+      this.resourceTypeRef.current.setAttribute("disabled", true);
+      this.resourceAvailabilityRef.current.setAttribute("disabled", true);
+      this.removeResourceButtonRef.current.classList.add("hidden");
+    }
+    // if they're logged in, but they're now owners
+    else if (this.props.auth.owner !== this.props.auth.uid) {
+      this.resourceQuantityRef.current.setAttribute("disabled", true);
+      this.resourceTypeRef.current.setAttribute("disabled", true);
+      this.resourceAvailabilityRef.current.setAttribute("disabled", true);
+      this.removeResourceButtonRef.current.classList.add("hidden");
+    }
+    // if they're owners
+    else {
+      this.resourceQuantityRef.current.removeAttribute("disabled");
+      this.resourceTypeRef.current.removeAttribute("disabled");
+      this.resourceAvailabilityRef.current.removeAttribute("disabled");
+      this.removeResourceButtonRef.current.classList.remove("hidden");
+    }
+  }
+
   handleChange = event => {
     const updatedResource = {
       ...this.props.resources,
@@ -48,7 +78,10 @@ class EditResourceForm extends React.Component {
           hours/week
         </td>
         <td>
-          <button onClick={() => this.props.deleteResource(this.props.index)}>
+          <button
+            onClick={() => this.props.deleteResource(this.props.index)}
+            ref={this.removeResourceButtonRef}
+          >
             Remove resource
           </button>
         </td>

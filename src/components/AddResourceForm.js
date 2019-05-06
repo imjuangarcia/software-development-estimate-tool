@@ -2,10 +2,26 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class AddResourceForm extends React.Component {
-  // Refts
+  // Refs
+  addResourceFormRef = React.createRef();
   resourceQuantityRef = React.createRef();
   resourceTypeRef = React.createRef();
   resourceAvailabilityRef = React.createRef();
+
+  componentDidUpdate() {
+    // if they're not logged in
+    if (Object.keys(this.props.auth).length === 0) {
+      this.addResourceFormRef.current.classList.add("hidden");
+    }
+    // if they're logged in, but they're now owners
+    else if (this.props.auth.owner !== this.props.auth.uid) {
+      this.addResourceFormRef.current.classList.add("hidden");
+    }
+    // if they're owners
+    else {
+      this.addResourceFormRef.current.classList.remove("hidden");
+    }
+  }
 
   addAnotherResource = event => {
     event.preventDefault();
@@ -21,7 +37,7 @@ class AddResourceForm extends React.Component {
   };
   render() {
     return (
-      <tr>
+      <tr ref={this.addResourceFormRef}>
         <td>
           <input
             type="number"

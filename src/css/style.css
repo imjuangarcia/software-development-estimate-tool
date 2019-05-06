@@ -259,7 +259,7 @@ table tbody tr td button:hover {
   color: #fff;
 }
 .hidden {
-  display: none;
+  display: none !important;
 }
 .create-project form {
   display: grid;
