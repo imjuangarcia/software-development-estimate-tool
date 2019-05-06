@@ -8,6 +8,13 @@ class AddResourceForm extends React.Component {
   resourceTypeRef = React.createRef();
   resourceAvailabilityRef = React.createRef();
 
+  // Proptypes
+  static propTypes = {
+    auth: PropTypes.object,
+    addResource: PropTypes.func
+  };
+
+  // Lifecycle methods
   componentDidUpdate() {
     // if they're not logged in
     if (Object.keys(this.props.auth).length === 0) {
@@ -23,6 +30,7 @@ class AddResourceForm extends React.Component {
     }
   }
 
+  // Custom functions
   addAnotherResource = event => {
     event.preventDefault();
     console.log("test");

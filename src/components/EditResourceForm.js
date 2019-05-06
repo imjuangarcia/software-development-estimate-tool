@@ -8,6 +8,17 @@ class EditResourceForm extends React.Component {
   resourceTypeRef = React.createRef();
   resourceAvailabilityRef = React.createRef();
 
+  // PropTypes
+  static propTypes = {
+    auth: PropTypes.object,
+    resources: PropTypes.object,
+    resource: PropTypes.object,
+    index: PropTypes.string,
+    updateResource: PropTypes.func,
+    deleteResource: PropTypes.func
+  };
+
+  // Lifecycle methods
   componentDidUpdate() {
     // if they're not logged in
     if (Object.keys(this.props.auth).length === 0) {
@@ -32,6 +43,7 @@ class EditResourceForm extends React.Component {
     }
   }
 
+  // Custom functions
   handleChange = event => {
     const updatedResource = {
       ...this.props.resources,
