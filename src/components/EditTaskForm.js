@@ -31,6 +31,8 @@ class EditTaskForm extends React.Component {
         sigma = +this.props.task.avgHours * 4;
         this.props.task.expectedHours = (sum + sigma) / 6;
         break;
+      default:
+        break;
     }
     // Update the task
     const updatedTask = {
