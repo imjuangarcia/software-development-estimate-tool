@@ -203,6 +203,9 @@ input:focus {
   outline: 1px solid #1957f3;
   outline-offset: 0;
 }
+input:disabled {
+  background-color: transparent;
+}
 button {
   border: none;
   cursor: pointer;
