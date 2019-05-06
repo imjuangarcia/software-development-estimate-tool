@@ -246,6 +246,18 @@ table tbody tr td {
   padding: 0.75rem;
   font-size: 0.8rem;
 }
+table tbody tr td button {
+  border: 1px solid #aaa;
+  color: #aaa;
+  padding: 0.5rem;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  width: 160px;
+}
+table tbody tr td button:hover {
+  background-color: #aaa;
+  color: #fff;
+}
 .hidden {
   display: none;
 }

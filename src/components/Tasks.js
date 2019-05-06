@@ -60,7 +60,7 @@ class Tasks extends React.Component {
 
   render() {
     const logout = (
-      <button class="logout" onClick={this.logout}>
+      <button className="logout" onClick={this.logout}>
         Log Out
       </button>
     );

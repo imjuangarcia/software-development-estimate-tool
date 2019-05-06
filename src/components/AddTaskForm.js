@@ -129,9 +129,7 @@ class AddTaskForm extends React.Component {
             step=".01"
           />
         </fieldset>
-        <button className="remove" type="submit">
-          + Add Task
-        </button>
+        <button type="submit">+ Add Task</button>
       </form>
     );
   }

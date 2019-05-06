@@ -13,7 +13,8 @@ class App extends React.Component {
     client: {},
     tasks: {},
     estimate: {},
-    auth: {}
+    auth: {},
+    resources: {}
   };
 
   static propTypes = {
@@ -36,6 +37,11 @@ class App extends React.Component {
       context: this,
       state: "client"
     });
+
+    this.ref = base.syncState(`${params.estimateId}/resources`, {
+      context: this,
+      state: "resources"
+    });
   }
 
   componentWillUnmount() {
@@ -51,6 +57,36 @@ class App extends React.Component {
     // Set the new tasks and sections objects to state
     this.setState({
       tasks
+    });
+  };
+
+  addResource = resource => {
+    // Take a copy of the existing state we'll be updating
+    const resources = {
+      ...this.state.resources
+    };
+    // Add new resource to resource variable
+    resources[`resource${Date.now()}`] = resource;
+
+    // Set the new tasks and sections objects to state
+    this.setState({
+      resources
+    });
+  };
+
+  updateResource = (key, updatedResource) => {
+    const resources = { ...this.state.resources };
+    resources[key] = updatedResource;
+    this.setState({
+      resources
+    });
+  };
+
+  deleteResource = key => {
+    const resources = { ...this.state.resources };
+    resources[key] = null;
+    this.setState({
+      resources
     });
   };
 
@@ -133,6 +169,10 @@ class App extends React.Component {
           removeFromEstimate={this.removeFromEstimate}
           estimateId={this.props.match.params.estimateId}
           auth={this.state.auth}
+          addResource={this.addResource}
+          updateResource={this.updateResource}
+          deleteResource={this.deleteResource}
+          resources={this.state.resources}
         />
         <Terms details={this.state.client} />
         <Tasks

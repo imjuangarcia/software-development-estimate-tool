@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import AddResourceForm from "./AddResourceForm";
+import EditResourceForm from "./EditResourceForm";
 import base from "../base";
 
 class Estimate extends React.Component {
@@ -203,19 +205,20 @@ class Estimate extends React.Component {
                 <td>Quantity</td>
                 <td>Type</td>
                 <td>Availability</td>
+                <td>&nbsp;</td>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1 (one)</td>
-                <td>Front-End Developer</td>
-                <td>10 hours/week</td>
-              </tr>
-              <tr>
-                <td>1 (one)</td>
-                <td>Back-End Developer</td>
-                <td>10 hours/week</td>
-              </tr>
+              {Object.keys(this.props.resources).map(key => (
+                <EditResourceForm
+                  key={key}
+                  index={key}
+                  resource={this.props.resources[key]}
+                  updateResource={this.props.updateResource}
+                  deleteResource={this.props.deleteResource}
+                />
+              ))}
+              <AddResourceForm addResource={this.props.addResource} />
             </tbody>
           </table>
           <h3>
