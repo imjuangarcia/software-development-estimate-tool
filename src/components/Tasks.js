@@ -94,6 +94,7 @@ class Tasks extends React.Component {
             task={this.props.tasks[key]}
             updateTask={this.props.updateTask}
             deleteTask={this.props.deleteTask}
+            addToEstimate={this.props.addToEstimate}
           />
         ))}
         <h3>Add a New Task</h3>

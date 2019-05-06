@@ -124,6 +124,14 @@ class EditTaskForm extends React.Component {
           >
             Remove Task
           </button>
+          <button
+            type="button"
+            className="add"
+            onClick={() => this.props.addToEstimate(this.props.index)}
+          >
+            {" "}
+            Add To Estimate
+          </button>
         </form>
       </React.Fragment>
     );

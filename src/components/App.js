@@ -4,7 +4,6 @@ import Header from "./Header";
 import Estimate from "./Estimate";
 import Client from "./Client";
 import Tasks from "./Tasks";
-import Task from "./Task";
 import Terms from "./Terms";
 import sampleTasks from "../sample-tasks";
 import base from "../base";
@@ -135,23 +134,13 @@ class App extends React.Component {
           estimateId={this.props.match.params.estimateId}
           auth={this.state.auth}
         />
-        <section className="tasks">
-          {Object.keys(this.state.tasks).map(key => (
-            <Task
-              key={key}
-              index={key}
-              details={this.state.tasks[key]}
-              addToEstimate={this.addToEstimate}
-              auth={this.state.auth}
-            />
-          ))}
-        </section>
         <Terms details={this.state.client} />
         <Tasks
           addTask={this.addTask}
           updateTask={this.updateTask}
           deleteTask={this.deleteTask}
           loadSampleTasks={this.loadSampleTasks}
+          addToEstimate={this.addToEstimate}
           tasks={this.state.tasks}
           estimateId={this.props.match.params.estimateId}
           propagateAuthState={this.propagateAuthState}

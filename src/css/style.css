@@ -418,6 +418,10 @@ table tbody tr td {
   color: #fff;
   border: 1px solid transparent;
 }
+.tasks form .add {
+  margin-top: 0;
+  margin-left: 0;
+}
 .tasks .sample {
   margin-left: 0;
   margin-top: 0;
