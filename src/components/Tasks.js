@@ -59,7 +59,11 @@ class Tasks extends React.Component {
   };
 
   render() {
-    const logout = <button onClick={this.logout}>Log Out</button>;
+    const logout = (
+      <button class="logout" onClick={this.logout}>
+        Log Out
+      </button>
+    );
     // check if they're logged in
     if (!this.state.uid) {
       return <Login authenticate={this.authenticate} />;

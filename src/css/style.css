@@ -370,15 +370,15 @@ table tbody tr td {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   padding: 1rem;
-  margin-left: 1rem;
+  margin-right: 1rem;
 }
 .tasks button:hover {
   background-color: #1957f3;
   border: 1px solid #1957f3;
   color: #fff;
 }
-.tasks button:first-child {
-  margin-left: 0;
+.tasks .logout {
+  margin-right: 0;
 }
 .tasks .title {
   display: -webkit-box;
