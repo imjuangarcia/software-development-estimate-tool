@@ -261,6 +261,15 @@ table tbody tr td button:hover {
   background-color: #aaa;
   color: #fff;
 }
+table tbody tr td .cross {
+  border: none;
+  color: #2f343d;
+  width: auto;
+}
+table tbody tr td .cross:hover {
+  background-color: transparent;
+  color: #1957f3;
+}
 .hidden {
   display: none !important;
 }
