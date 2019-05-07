@@ -198,7 +198,7 @@ table
             color blue
 
 // Tasks
-.tasks
+.tasks, .tech
   background-color #f8f8f8
   padding 1.5rem
   margin-top 1.5rem
@@ -309,3 +309,23 @@ table
     text-transform uppercase
     display block
     line-height 1.6
+
+// Tech
+.tech
+  .title
+    h2
+      margin-bottom 1.5rem
+
+.technologies
+  ul
+    display grid
+    grid-template-columns repeat(auto-fit, minmax(75px, 1fr))
+    grid-gap 1rem
+    margin-top 1.5rem
+
+    li
+      text-align center
+
+      img
+        width 100%
+        filter grayscale(100%)

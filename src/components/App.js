@@ -4,6 +4,8 @@ import Header from "./Header";
 import Estimate from "./Estimate";
 import Client from "./Client";
 import Tasks from "./Tasks";
+import TechStack from "./TechStack";
+import Technologies from "./Technologies";
 import Terms from "./Terms";
 import sampleTasks from "../sample-tasks";
 import base from "../base";
@@ -14,7 +16,8 @@ class App extends React.Component {
     tasks: {},
     estimate: {},
     auth: {},
-    resources: {}
+    resources: {},
+    technologies: {}
   };
 
   static propTypes = {
@@ -42,23 +45,16 @@ class App extends React.Component {
       context: this,
       state: "resources"
     });
+
+    this.ref = base.syncState(`${params.estimateId}/technologies`, {
+      context: this,
+      state: "technologies"
+    });
   }
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
   }
-
-  addTask = task => {
-    // Take a copy of the existing state we'll be updating
-    const tasks = { ...this.state.tasks };
-    // Add new task to tasks variable
-    tasks[`task${Date.now()}`] = task;
-
-    // Set the new tasks and sections objects to state
-    this.setState({
-      tasks
-    });
-  };
 
   addResource = resource => {
     // Take a copy of the existing state we'll be updating
@@ -107,6 +103,18 @@ class App extends React.Component {
     }
   };
 
+  addTask = task => {
+    // Take a copy of the existing state we'll be updating
+    const tasks = { ...this.state.tasks };
+    // Add new task to tasks variable
+    tasks[`task${Date.now()}`] = task;
+
+    // Set the new tasks and sections objects to state
+    this.setState({
+      tasks
+    });
+  };
+
   updateTask = (key, updatedTask) => {
     // Copy of the current state
     const tasks = { ...this.state.tasks };
@@ -129,6 +137,18 @@ class App extends React.Component {
 
   loadSampleTasks = () => {
     this.setState({ tasks: sampleTasks });
+  };
+
+  addTechStack = tech => {
+    // Take a copy of the existing state we'll be updating
+    const technologies = { ...this.state.technologies };
+    // Add new task to tasks variable
+    technologies[`tech${Date.now()}`] = tech;
+
+    // Set the new tasks and sections objects to state
+    this.setState({
+      technologies
+    });
   };
 
   addToEstimate = key => {
@@ -174,6 +194,7 @@ class App extends React.Component {
           deleteResource={this.deleteResource}
           resources={this.state.resources}
         />
+        <Technologies details={this.state.technologies} />
         <Terms details={this.state.client} />
         <Tasks
           addTask={this.addTask}
@@ -185,6 +206,7 @@ class App extends React.Component {
           estimateId={this.props.match.params.estimateId}
           propagateAuthState={this.propagateAuthState}
         />
+        <TechStack auth={this.state.auth} addTechStack={this.addTechStack} />
       </React.Fragment>
     );
   }

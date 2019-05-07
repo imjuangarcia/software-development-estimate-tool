@@ -370,23 +370,28 @@ table tbody tr td .cross:hover {
   font-weight: 700;
   color: #1957f3;
 }
-.tasks {
+.tasks,
+.tech {
   background-color: #f8f8f8;
   padding: 1.5rem;
   margin-top: 1.5rem;
 }
-.tasks h1 {
+.tasks h1,
+.tech h1 {
   margin-bottom: 1rem;
 }
-.tasks h2 {
+.tasks h2,
+.tech h2 {
   margin-bottom: 0.5rem;
 }
-.tasks h3 {
+.tasks h3,
+.tech h3 {
   color: #2f343d;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
-.tasks button {
+.tasks button,
+.tech button {
   margin-top: 1rem;
   border: 1px solid #1957f3;
   color: #1957f3;
@@ -396,29 +401,35 @@ table tbody tr td .cross:hover {
   padding: 1rem;
   margin-right: 1rem;
 }
-.tasks button:hover {
+.tasks button:hover,
+.tech button:hover {
   background-color: #1957f3;
   border: 1px solid #1957f3;
   color: #fff;
 }
-.tasks .logout {
+.tasks .logout,
+.tech .logout {
   margin-right: 0;
 }
-.tasks .title {
+.tasks .title,
+.tech .title {
   display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
           align-items: center;
 }
-.tasks .title h2 {
+.tasks .title h2,
+.tech .title h2 {
   margin-bottom: 0;
   -webkit-box-flex: 1;
           flex: 1;
 }
-.tasks .title button {
+.tasks .title button,
+.tech .title button {
   margin-top: 0;
 }
-.tasks form {
+.tasks form,
+.tech form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 1rem;
@@ -426,27 +437,32 @@ table tbody tr td .cross:hover {
   border: 1px solid #ccc;
   padding: 1rem;
 }
-.tasks form select {
+.tasks form select,
+.tech form select {
   height: 54px;
   width: 100%;
   background-color: #fff;
 }
-.tasks form .remove {
+.tasks form .remove,
+.tech form .remove {
   margin-top: 0;
   margin-left: 0;
   border-color: #aaa;
   color: #aaa;
 }
-.tasks form .remove:hover {
+.tasks form .remove:hover,
+.tech form .remove:hover {
   background-color: #2f343d;
   color: #fff;
   border: 1px solid transparent;
 }
-.tasks form .add {
+.tasks form .add,
+.tech form .add {
   margin-top: 0;
   margin-left: 0;
 }
-.tasks .sample {
+.tasks .sample,
+.tech .sample {
   margin-left: 0;
   margin-top: 0;
 }
@@ -483,4 +499,21 @@ table tbody tr td .cross:hover {
   text-transform: uppercase;
   display: block;
   line-height: 1.6;
+}
+.tech .title h2 {
+  margin-bottom: 1.5rem;
+}
+.technologies ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+  grid-gap: 1rem;
+  margin-top: 1.5rem;
+}
+.technologies ul li {
+  text-align: center;
+}
+.technologies ul li img {
+  width: 100%;
+  -webkit-filter: grayscale(100%);
+          filter: grayscale(100%);
 }
