@@ -24,11 +24,15 @@ class Estimate extends React.Component {
 
   // Proptypes
   static propTypes = {
-    tasks: PropTypes.object,
-    estimate: PropTypes.object,
-    estimateId: PropTypes.string,
-    auth: PropTypes.object,
-    removeFromEstimate: PropTypes.func
+    tasks: PropTypes.object.isRequired,
+    estimate: PropTypes.object.isRequired,
+    estimateId: PropTypes.string.isRequired,
+    auth: PropTypes.object.isRequired,
+    removeFromEstimate: PropTypes.func.isRequired,
+    resources: PropTypes.object.isRequired,
+    addResource: PropTypes.func.isRequired,
+    updateResource: PropTypes.func.isRequired,
+    deleteResource: PropTypes.func.isRequired
   };
 
   // Lifecycle methods

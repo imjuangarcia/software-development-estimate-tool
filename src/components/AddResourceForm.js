@@ -10,8 +10,8 @@ class AddResourceForm extends React.Component {
 
   // Proptypes
   static propTypes = {
-    auth: PropTypes.object,
-    addResource: PropTypes.func
+    auth: PropTypes.object.isRequired,
+    addResource: PropTypes.func.isRequired
   };
 
   // Lifecycle methods

@@ -18,7 +18,7 @@ class App extends React.Component {
   };
 
   static propTypes = {
-    match: PropTypes.object
+    match: PropTypes.object.isRequired
   };
 
   componentDidMount() {

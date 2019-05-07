@@ -8,13 +8,13 @@ class Client extends React.Component {
   // Proptypes
   static propTypes = {
     details: PropTypes.shape({
-      clientName: PropTypes.string,
-      projectName: PropTypes.string,
-      date: PropTypes.string,
-      estimateNumber: PropTypes.number,
-      versionNumber: PropTypes.number
+      clientName: PropTypes.string.isRequired,
+      projectName: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      estimateNumber: PropTypes.number.isRequired,
+      versionNumber: PropTypes.number.isRequired
     }),
-    addClient: PropTypes.func
+    addClient: PropTypes.func.isRequired
   };
 
   // Lifecycle methods

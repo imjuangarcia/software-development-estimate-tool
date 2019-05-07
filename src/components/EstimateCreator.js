@@ -10,7 +10,7 @@ class EstimateCreator extends React.Component {
   estimateNumberRef = React.createRef();
 
   static propTypes = {
-    history: PropTypes.object
+    history: PropTypes.object.isRequired
   };
 
   goToEstimate = event => {

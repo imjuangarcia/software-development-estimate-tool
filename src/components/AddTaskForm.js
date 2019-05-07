@@ -10,7 +10,7 @@ class AddTaskForm extends React.Component {
   expectedHoursRef = React.createRef();
 
   static propTypes = {
-    addTask: PropTypes.func
+    addTask: PropTypes.func.isRequired
   };
 
   createTask = event => {

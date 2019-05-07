@@ -10,12 +10,12 @@ class EditResourceForm extends React.Component {
 
   // PropTypes
   static propTypes = {
-    auth: PropTypes.object,
-    resources: PropTypes.object,
-    resource: PropTypes.object,
-    index: PropTypes.string,
-    updateResource: PropTypes.func,
-    deleteResource: PropTypes.func
+    auth: PropTypes.object.isRequired,
+    resources: PropTypes.object.isRequired,
+    resource: PropTypes.object.isRequired,
+    index: PropTypes.string.isRequired,
+    updateResource: PropTypes.func.isRequired,
+    deleteResource: PropTypes.func.isRequired
   };
 
   // Lifecycle methods

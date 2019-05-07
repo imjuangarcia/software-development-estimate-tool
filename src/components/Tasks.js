@@ -8,10 +8,10 @@ import base, { firebaseApp } from "../base";
 
 class Tasks extends React.Component {
   static propTypes = {
-    tasks: PropTypes.object,
-    updateTask: PropTypes.func,
-    deleteTask: PropTypes.func,
-    loadSampleTasks: PropTypes.func
+    tasks: PropTypes.object.isRequired,
+    updateTask: PropTypes.func.isRequired,
+    deleteTask: PropTypes.func.isRequired,
+    loadSampleTasks: PropTypes.func.isRequired
   };
 
   state = {
