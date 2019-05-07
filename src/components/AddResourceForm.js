@@ -33,7 +33,6 @@ class AddResourceForm extends React.Component {
   // Custom functions
   addAnotherResource = event => {
     event.preventDefault();
-    console.log("test");
 
     const resource = {
       quantity: parseFloat(this.resourceQuantityRef.current.value),

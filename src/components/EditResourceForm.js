@@ -19,7 +19,25 @@ class EditResourceForm extends React.Component {
   };
 
   // Lifecycle methods
+  componentDidMount() {
+    this.checkAuth();
+  }
+
   componentDidUpdate() {
+    this.checkAuth();
+  }
+
+  // Custom functions
+  handleChange = event => {
+    const updatedResource = {
+      ...this.props.resources,
+      [event.currentTarget.name]: event.currentTarget.value
+    };
+
+    this.props.updateResource(this.props.index, updatedResource);
+  };
+
+  checkAuth = () => {
     // if they're not logged in
     if (Object.keys(this.props.auth).length === 0) {
       this.resourceQuantityRef.current.setAttribute("disabled", true);
@@ -41,17 +59,8 @@ class EditResourceForm extends React.Component {
       this.resourceAvailabilityRef.current.removeAttribute("disabled");
       this.removeResourceButtonRef.current.classList.remove("hidden");
     }
-  }
-
-  // Custom functions
-  handleChange = event => {
-    const updatedResource = {
-      ...this.props.resources,
-      [event.currentTarget.name]: event.currentTarget.value
-    };
-
-    this.props.updateResource(this.props.index, updatedResource);
   };
+
   render() {
     return (
       <tr>

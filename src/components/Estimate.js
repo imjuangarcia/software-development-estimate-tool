@@ -5,17 +5,24 @@ import EditResourceForm from "./EditResourceForm";
 import base from "../base";
 
 class Estimate extends React.Component {
+  // Refs
   removeFromEstimateRef = React.createRef();
   totalTimeRef = React.createRef();
   adminTimeRef = React.createRef();
   hourlyValueRef = React.createRef();
+  minTimeRef = React.createRef();
+  avgTimeRef = React.createRef();
+  maxTimeRef = React.createRef();
+  expectedTimeRef = React.createRef();
 
+  // State
   state = {
     time: {},
     resources: {},
     cost: {}
   };
 
+  // Proptypes
   static propTypes = {
     tasks: PropTypes.object,
     estimate: PropTypes.object,
@@ -24,6 +31,7 @@ class Estimate extends React.Component {
     removeFromEstimate: PropTypes.func
   };
 
+  // Lifecycle methods
   componentDidMount() {
     this.ref = base.syncState(`${this.props.estimateId}/time`, {
       context: this,
@@ -127,7 +135,32 @@ class Estimate extends React.Component {
         totalPrice
       }
     });
+
+    this.calculateDeadlines();
   };
+
+  calculateDeadlines = () => {
+    const calculation = Math.round(
+      this.state.time.totalTime /
+        Object.values(this.props.resources).reduce(function(
+          prevNumber,
+          resource
+        ) {
+          return +prevNumber + +resource.availability;
+        },
+        "")
+    );
+
+    this.minTimeRef.current.innerHTML = calculation;
+    this.avgTimeRef.current.innerHTML = calculation * 1.5;
+    this.maxTimeRef.current.innerHTML = calculation * 2;
+    this.expectedTimeRef.current.innerHTML =
+      (+this.maxTimeRef.current.innerHTML +
+        +this.minTimeRef.current.innerHTML +
+        +this.avgTimeRef.current.innerHTML * 4) /
+      6;
+  };
+
   render() {
     const estimateIds = Object.keys(this.props.estimate);
     return (
@@ -143,9 +176,9 @@ class Estimate extends React.Component {
           <table>
             <thead>
               <tr>
-                <td>Ideal Hours</td>
+                <td>Ideal Hours (rounded)</td>
                 <td>Extra % for Admin Time</td>
-                <td>Total Hours</td>
+                <td>Total Hours (rounded)</td>
               </tr>
             </thead>
             <tbody>
@@ -163,7 +196,7 @@ class Estimate extends React.Component {
                         const totalHours = parseFloat(
                           prevTotal + count * task.expectedHours
                         );
-                        return totalHours;
+                        return Math.round(totalHours);
                       } else {
                         return 0;
                       }
@@ -182,7 +215,7 @@ class Estimate extends React.Component {
                   />
                   %
                 </td>
-                <td>{this.state.time.totalTime}</td>
+                <td>{Math.round(this.state.time.totalTime)}</td>
               </tr>
             </tbody>
           </table>
@@ -242,7 +275,7 @@ class Estimate extends React.Component {
             </tbody>
           </table>
           <h3>
-            Deadlines<sup>*</sup>
+            Deadlines<sup>*</sup> (rounded)
           </h3>
           <table>
             <thead>
@@ -255,11 +288,19 @@ class Estimate extends React.Component {
             </thead>
             <tbody>
               <tr>
-                <td>4,5 weeks</td>
-                <td>6 weeks</td>
-                <td>8 weeks</td>
                 <td>
-                  <strong>6 weeks</strong>
+                  <span ref={this.minTimeRef} /> weeks
+                </td>
+                <td>
+                  <span ref={this.avgTimeRef} /> weeks
+                </td>
+                <td>
+                  <span ref={this.maxTimeRef} /> weeks
+                </td>
+                <td>
+                  <strong>
+                    <span ref={this.expectedTimeRef} /> weeks
+                  </strong>
                 </td>
               </tr>
             </tbody>
