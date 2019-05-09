@@ -63,11 +63,11 @@ class EditTaskForm extends React.Component {
               value={this.props.task.section}
             >
               <option value="Definition">Definition</option>
-              <option value="Iniciation">Iniciation</option>
+              <option value="Initiation">Initiation</option>
               <option value="Realization">Realization</option>
               <option value="Adaptation">Adaptation</option>
               <option value="Backend: APIs">Backend: APIs</option>
-              <option value="Backend: Database">Backend: Base de datos</option>
+              <option value="Backend: Database">Backend: Database</option>
               <option value="Backend">Backend</option>
               <option value="Testing">Testing</option>
               <option value="Wordpress">Wordpress</option>
