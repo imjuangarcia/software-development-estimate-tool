@@ -64,21 +64,15 @@ class AddTaskForm extends React.Component {
         <fieldset>
           <label htmlFor="section">Section Name</label>
           <select required name="section" ref={this.sectionRef}>
-            <option value="Definición">Definici&oacute;n</option>
-            <option value="Iniciación">Iniciaci&oacute;n</option>
-            <option value="Realización: Frontend">
-              Realizaci&oacute;n: Frontend
-            </option>
+            <option value="Definition">Definition</option>
+            <option value="Iniciation">Iniciation</option>
+            <option value="Realization">Realization</option>
+            <option value="Adaptation">Adaptation</option>
             <option value="Backend: APIs">Backend: APIs</option>
-            <option value="Backend: Base de datos">
-              Backend: Base de datos
-            </option>
-            <option value="Realización: Backend">
-              Realizaci&oacute;n: Backend
-            </option>
-            <option value="Responsive: Frontend">Responsive: Frontend</option>
-            <option value="Responsive: Backend">Responsive: Backend</option>
+            <option value="Backend: Database">Backend: Base de datos</option>
+            <option value="Backend">Backend</option>
             <option value="Testing">Testing</option>
+            <option value="Wordpress">Wordpress</option>
           </select>
         </fieldset>
         <fieldset>
