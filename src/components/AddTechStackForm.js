@@ -38,6 +38,8 @@ class AddTechStackForm extends React.Component {
           <select required name="type" ref={this.typeRef}>
             <option value="Frontend">Frontend</option>
             <option value="Backend">Backend</option>
+            <option value="Database">Database</option>
+            <option value="Deployment">Deployment</option>
             <option value="Tooling">Tooling</option>
           </select>
         </fieldset>
