@@ -52,18 +52,18 @@ class AddTaskForm extends React.Component {
     return (
       <form onSubmit={this.createTask}>
         <fieldset>
-          <label htmlFor="task">Task Name</label>
+          <label htmlFor="taskName">Task Name</label>
           <input
             required
-            name="task"
+            name="taskName"
             ref={this.taskRef}
             type="text"
             placeholder="Task"
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="section">Section Name</label>
-          <select required name="section" ref={this.sectionRef}>
+          <label htmlFor="sectionName">Section Name</label>
+          <select required name="sectionName" ref={this.sectionRef}>
             <option value="Definition">Definition</option>
             <option value="Initiation">Initiation</option>
             <option value="Realization">Realization</option>
@@ -76,10 +76,10 @@ class AddTaskForm extends React.Component {
           </select>
         </fieldset>
         <fieldset>
-          <label htmlFor="minhours">Minimum hours</label>
+          <label htmlFor="minHours">Minimum hours</label>
           <input
             required
-            name="minhours"
+            name="minHours"
             ref={this.minHoursRef}
             type="number"
             placeholder="Minimum Hours"
@@ -88,10 +88,10 @@ class AddTaskForm extends React.Component {
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="avghours">Average hours</label>
+          <label htmlFor="avgHours">Average hours</label>
           <input
             required
-            name="avghours"
+            name="avgHours"
             ref={this.avgHoursRef}
             type="number"
             placeholder="Average Hours"
@@ -100,10 +100,10 @@ class AddTaskForm extends React.Component {
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="maxhours">Maximum hours</label>
+          <label htmlFor="maxHours">Maximum hours</label>
           <input
             required
-            name="maxhours"
+            name="maxHours"
             ref={this.maxHoursRef}
             type="number"
             placeholder="Maximum Hours"
@@ -112,10 +112,10 @@ class AddTaskForm extends React.Component {
           />
         </fieldset>
         <fieldset>
-          <label htmlFor="expectedhours">Expected hours</label>
+          <label htmlFor="expectedHours">Expected hours</label>
           <input
             required
-            name="expectedhours"
+            name="expectedHours"
             ref={this.expectedHoursRef}
             type="text"
             placeholder="Expected Hours"
