@@ -13,7 +13,7 @@ class Technologies extends React.Component {
     if (tech) {
       return (
         <li key={key}>
-          <img src={tech.image} alt={tech.name} />
+          <div style={{ backgroundImage: "url(" + tech.image + ")" }} />
           <p>{tech.name}</p>
         </li>
       );
