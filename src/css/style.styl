@@ -2,6 +2,13 @@
 @require './_*.styl'
 
 // General Styling
+::-moz-selection
+  color white
+  background blue
+  
+::selection
+  color white
+  background blue
 
 main
   margin 1.5rem
@@ -88,6 +95,9 @@ table
           &:hover
             background-color transparent
             color blue
+            
+      .left
+        text-align left
 
 // Class to hide the elements
 .hidden

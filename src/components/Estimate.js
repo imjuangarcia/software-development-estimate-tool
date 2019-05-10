@@ -83,7 +83,7 @@ class Estimate extends React.Component {
     if (task) {
       return (
         <tr key={key}>
-          <td>
+          <td className="left">
             {count} {count > 1 ? "units" : "unit"} of {task.taskName}
             <button
               ref={this.removeFromEstimateRef}

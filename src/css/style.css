@@ -187,6 +187,14 @@ button {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
 }
+::-moz-selection {
+  color: #fff;
+  background: #1957f3;
+}
+::selection {
+  color: #fff;
+  background: #1957f3;
+}
 main {
   margin: 1.5rem;
 }
@@ -269,6 +277,9 @@ table tbody tr td .cross {
 table tbody tr td .cross:hover {
   background-color: transparent;
   color: #1957f3;
+}
+table tbody tr .left {
+  text-align: left;
 }
 .hidden {
   display: none !important;
