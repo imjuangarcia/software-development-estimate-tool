@@ -37,9 +37,9 @@ class Terms extends React.Component {
         </p>
         <h3>Hardware and third-party apps</h3>
         <p>
-          The hardware, servers, domains, and third-party apps necessary for the
-          correct functioning of the app in a production environment will be
-          provided by the client.
+          The hardware, servers, domains, and third-party apps, themes or
+          plugins necessary for the correct functioning of the app in a
+          production environment will be provided by the client.
         </p>
         <h3>Files Delivery</h3>
         <p>
@@ -54,7 +54,9 @@ class Terms extends React.Component {
         />
         <h4>Juan Mart&iacute;n Garc&iacute;a</h4>
         <h5>
-          Monta&ntilde;eses 2678 3c,<br />1428, belgrano caba
+          Monta&ntilde;eses 2678 3c,
+          <br />
+          1428, belgrano caba
         </h5>
         <h5>+54 9 11 3287 0377</h5>
         <a href="mailto:hello@juangarcia.com.ar">hello@juangarcia.com.ar</a>
