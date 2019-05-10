@@ -102,7 +102,7 @@ class Estimate extends React.Component {
           <td>{task.minHours}</td>
           <td>{task.avgHours}</td>
           <td>{task.maxHours}</td>
-          <td>{task.expectedHours}</td>
+          <td>{Math.round(task.expectedHours)}</td>
         </tr>
       );
     }
@@ -246,7 +246,7 @@ class Estimate extends React.Component {
                   />
                 </td>
                 <td>
-                  <strong>${this.state.cost.totalPrice}</strong>
+                  <strong>${Math.round(this.state.cost.totalPrice)}</strong>
                 </td>
               </tr>
             </tbody>
