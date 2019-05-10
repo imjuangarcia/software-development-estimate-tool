@@ -60,7 +60,7 @@ class EditTaskForm extends React.Component {
             <select
               name="sectionName"
               onChange={this.handleChange}
-              value={this.props.task.section}
+              defaultValue={this.props.task.sectionName}
             >
               <option value="Definition">Definition</option>
               <option value="Initiation">Initiation</option>

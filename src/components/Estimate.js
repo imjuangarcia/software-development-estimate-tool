@@ -98,7 +98,7 @@ class Estimate extends React.Component {
               &times;
             </button>
           </td>
-          <td>{task.section}</td>
+          <td>{task.sectionName}</td>
           <td>{task.minHours}</td>
           <td>{task.avgHours}</td>
           <td>{task.maxHours}</td>
