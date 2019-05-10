@@ -6,6 +6,12 @@ class TechStack extends React.Component {
   // Refs
   techStackFormRef = React.createRef();
 
+  // PropTypes
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+    addTechStack: PropTypes.func.isRequired
+  };
+
   // Lifecycle methods
   componentDidUpdate() {
     if (this.techStackFormRef.current !== null) {
