@@ -66,6 +66,7 @@ class AddTaskForm extends React.Component {
           <select required name="sectionName" ref={this.sectionRef}>
             <option value="Definition">Definition</option>
             <option value="Initiation">Initiation</option>
+            <option value="Design">Design</option>
             <option value="Realization">Realization</option>
             <option value="Adaptation">Adaptation</option>
             <option value="Backend: APIs">Backend: APIs</option>
