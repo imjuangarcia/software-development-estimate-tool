@@ -15,7 +15,8 @@ class EstimateCreator extends React.Component {
   estimateNumberRef = React.createRef();
 
   state = {
-    auth: {}
+    auth: {},
+    estimateNumber: 1,
   };
 
   componentDidMount() {
@@ -34,6 +35,19 @@ class EstimateCreator extends React.Component {
     else {
       this.props.history.push('/');
     }
+
+    // Fetch the existing projects on the db
+    base.fetch('/', {
+      context: this,
+      asArray: true,
+    }).then(data => {
+      // Set the count of projects + 1 as the value for the input
+      if(this.estimateNumberRef.current === null) {
+        return;
+      } else {
+        this.estimateNumberRef.current.value = data.length + 1;
+      }
+    })
   }
 
   static propTypes = {
