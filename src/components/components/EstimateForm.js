@@ -1,6 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import { slugify } from "../helpers";
+
+import { slugify } from "../../helpers";
+import base from "../../firebase";
+
+import Header from '../layout/Header'
+import Footer from '../layout/Footer'
 
 class EstimateCreator extends React.Component {
   projectNameRef = React.createRef();
@@ -9,39 +14,58 @@ class EstimateCreator extends React.Component {
   versionNumberRef = React.createRef();
   estimateNumberRef = React.createRef();
 
+  state = {
+    auth: {}
+  };
+
+  componentDidMount() {
+    // We check if the user is authenticated
+    const { owner, uid } = this.props.history.location.auth || '';
+    // If it is, we set that data to state
+    if(owner && uid) {
+      this.setState({
+        auth: {
+          owner: this.props.history.location.auth.owner,
+          uid: this.props.history.location.auth.uid,
+        }
+      });
+    } 
+    // If not, we redirect them to the log in page
+    else {
+      this.props.history.push('/');
+    }
+  }
+
   static propTypes = {
     history: PropTypes.object.isRequired
   };
 
-  goToEstimate = event => {
-    // Stop the form from submitting
+  goToEstimate = async event => {
     event.preventDefault();
-    // Store the rest of the info on an object
-    const client = {
-      projectName: this.projectNameRef.current.value,
-      clientName: this.clientNameRef.current.value,
-      date: this.dateRef.current.value,
-      versionNumber: parseFloat(this.versionNumberRef.current.value),
-      estimateNumber: parseFloat(this.estimateNumberRef.current.value)
-    };
-    // Get the text from the input
+    // Get the text from the input and create the slug
     const estimate = slugify(this.projectNameRef.current.value);
-    // Change the page
-    this.props.history.push({ pathname: `/estimate/${estimate}`, client });
+
+    // Send this data to firebase
+    await base.post(`${estimate}/`, {
+      data: {
+        owner: this.props.history.location.auth.owner,
+        client: {
+          projectName: this.projectNameRef.current.value,
+          clientName: this.clientNameRef.current.value,
+          date: this.dateRef.current.value,
+          versionNumber: parseFloat(this.versionNumberRef.current.value),
+          estimateNumber: parseFloat(this.estimateNumberRef.current.value)
+        }
+      }
+    });
+
+    // Redirect to tasks list
+    this.props.history.push({ pathname: `/estimate/${estimate}`});
   };
   render() {
     return (
-      <React.Fragment>
-        <header>
-          <h1>
-            Software Development <strong>Estimate</strong>
-          </h1>
-          <p>
-            Juan Mart&iacute;n Garc&iacute;a – Product Designer &amp; Frontend
-            Developer
-          </p>
-          <hr />
-        </header>
+      <Fragment>
+        <Header />
         <section className="create-project">
           <form action="" onSubmit={this.goToEstimate}>
             <h2>Please Enter the details of the project to estimate</h2>
@@ -94,17 +118,8 @@ class EstimateCreator extends React.Component {
             <button type="submit">Go to the estimate</button>
           </form>
         </section>
-        <footer>
-          &copy; {new Date().getFullYear()} JMG. Designed and Developed by{" "}
-          <a
-            href="https://www.juangarcia.design"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Juan Mart&iacute;n Garc&iacute;a
-          </a>
-        </footer>
-      </React.Fragment>
+        <Footer />
+      </Fragment>
     );
   }
 }
