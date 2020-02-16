@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Header from "./Header";
+import Header from "./layout/Header";
 import Estimate from "./Estimate";
 import Client from "./Client";
 import Tasks from "./Tasks";
@@ -8,7 +8,7 @@ import TechStack from "./TechStack";
 import Technologies from "./Technologies";
 import Terms from "./Terms";
 import sampleTasks from "../sample-tasks";
-import base from "../base";
+import base from "../firebase";
 
 class App extends React.Component {
   state = {
