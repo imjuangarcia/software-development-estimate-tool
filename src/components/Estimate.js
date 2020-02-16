@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import AddResourceForm from "./AddResourceForm";
 import EditResourceForm from "./EditResourceForm";
-import base from "../base";
+import base from "../firebase";
 
 class Estimate extends React.Component {
   // Refs
