@@ -18,7 +18,7 @@ const Header = (props) => {
           Developer
         </p>
       </div>
-      { props.history.location.pathname === `/` ? '' : <button onClick={logout}>Logout</button>}
+      { props.auth === undefined ? '' : <button onClick={logout}>Logout</button>}
       <hr />
     </header>
   );

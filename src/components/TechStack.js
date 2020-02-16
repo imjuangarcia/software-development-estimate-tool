@@ -15,7 +15,7 @@ class TechStack extends React.Component {
   // Lifecycle methods
   componentDidUpdate() {
     if (this.techStackFormRef.current !== null) {
-      if (Object.keys(this.props.auth).length === 0) {
+      if (this.props.auth === undefined) {
         // if they're not logged in
         this.techStackFormRef.current.classList.add("hidden");
       }

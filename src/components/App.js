@@ -51,6 +51,10 @@ class App extends React.Component {
       context: this,
       state: "technologies"
     });
+
+    this.setState({
+      auth: this.props.location.auth
+    })
   }
 
   componentWillUnmount() {
@@ -165,8 +169,8 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header history={this.props.history} />
-        <Client details={this.state.client} addClient={this.addClient} />
+        <Header history={this.props.history} auth={this.state.auth} />
+        <Client details={this.state.client} />
         <Estimate
           tasks={this.state.tasks}
           estimate={this.state.estimate}

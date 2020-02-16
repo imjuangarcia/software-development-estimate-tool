@@ -17,7 +17,7 @@ class AddResourceForm extends React.Component {
   // Lifecycle methods
   componentDidUpdate() {
     // if they're not logged in
-    if (Object.keys(this.props.auth).length === 0) {
+    if (this.props.auth === undefined) {
       this.addResourceFormRef.current.classList.add("hidden");
     }
     // if they're logged in, but they're now owners

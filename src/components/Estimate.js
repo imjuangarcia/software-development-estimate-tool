@@ -57,7 +57,7 @@ class Estimate extends React.Component {
     }
 
     // if they're not logged in
-    if (Object.keys(this.props.auth).length === 0) {
+    if (this.props.auth === undefined) {
       this.adminTimeRef.current.setAttribute("disabled", true);
       this.hourlyValueRef.current.setAttribute("disabled", true);
     }

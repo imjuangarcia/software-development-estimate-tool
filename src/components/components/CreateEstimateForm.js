@@ -73,8 +73,10 @@ class EstimateCreator extends React.Component {
       }
     });
 
+    const auth = this.state.auth;
+
     // Redirect to tasks list
-    this.props.history.push({ pathname: `/estimate/${estimate}`});
+    this.props.history.push({ pathname: `/estimate/${estimate}`, auth});
   };
   render() {
     return (
