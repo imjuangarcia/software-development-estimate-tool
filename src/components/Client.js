@@ -2,9 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class Client extends React.Component {
-  // Refs
-  loadClientDataButtonRef = React.createRef();
-
   // Proptypes
   static propTypes = {
     details: PropTypes.shape({
@@ -17,12 +14,6 @@ class Client extends React.Component {
     addClient: PropTypes.func.isRequired
   };
 
-  // Lifecycle methods
-  componentDidUpdate() {
-    if (Object.keys(this.props.details).length !== 0) {
-      this.loadClientDataButtonRef.current.classList.add("hidden");
-    }
-  }
   render() {
     const {
       clientName,
@@ -34,12 +25,6 @@ class Client extends React.Component {
     return (
       <section className="client">
         <h3>Client &amp; Project Details</h3>
-        <button
-          ref={this.loadClientDataButtonRef}
-          onClick={this.props.addClient}
-        >
-          Load Client Data
-        </button>
         <table>
           <tbody>
             <tr>

@@ -87,23 +87,6 @@ class App extends React.Component {
     });
   };
 
-  addClient = () => {
-    // If there's a client set...
-    if (
-      this.props.location.client !== undefined ||
-      Object.keys(this.state.client).length !== 0
-    ) {
-      // Let's save its data into state...
-      this.setState({
-        client: this.props.location.client
-      });
-    } else {
-      this.props.history.push({
-        pathname: `/`
-      });
-    }
-  };
-
   addTask = task => {
     // Take a copy of the existing state we'll be updating
     const tasks = { ...this.state.tasks };
