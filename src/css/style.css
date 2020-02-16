@@ -218,7 +218,32 @@ button {
   border: none;
   cursor: pointer;
 }
-header p {
+header {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+          align-items: center;
+}
+header button {
+  border: 1px solid #1957f3;
+  color: #1957f3;
+  background-color: transparent;
+  height: 54px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  min-width: 120px;
+}
+header button:hover {
+  background-color: #1957f3;
+  border: 1px solid #1957f3;
+  color: #fff;
+}
+header .text-container {
+  -webkit-box-flex: 1;
+          flex: 1;
+}
+header .text-container p {
   margin-top: 0.75rem;
   color: #aaa;
 }
@@ -226,6 +251,8 @@ hr {
   border: none;
   border-top: 1px solid #eaeaea;
   margin: 1rem 0;
+  -webkit-box-flex: 100%;
+          flex: 100%;
 }
 footer {
   margin-top: 2rem;
@@ -403,10 +430,10 @@ table tbody tr .left {
 }
 .tasks button,
 .tech button {
-  margin-top: 1rem;
   border: 1px solid #1957f3;
   color: #1957f3;
   background-color: transparent;
+  height: 54px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   padding: 1rem;

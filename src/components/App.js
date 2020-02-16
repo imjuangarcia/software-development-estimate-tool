@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Header from "./layout/Header";
+import Footer from "./layout/Footer";
 import Estimate from "./Estimate";
 import Client from "./Client";
 import Tasks from "./Tasks";
@@ -181,7 +182,7 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header />
+        <Header history={this.props.history} />
         <Client details={this.state.client} addClient={this.addClient} />
         <Estimate
           tasks={this.state.tasks}
@@ -207,6 +208,7 @@ class App extends React.Component {
           propagateAuthState={this.propagateAuthState}
         />
         <TechStack auth={this.state.auth} addTechStack={this.addTechStack} />
+        <Footer />
       </React.Fragment>
     );
   }

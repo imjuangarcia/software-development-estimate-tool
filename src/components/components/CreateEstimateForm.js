@@ -79,7 +79,7 @@ class EstimateCreator extends React.Component {
   render() {
     return (
       <Fragment>
-        <Header />
+        <Header history={this.props.history} />
         <section className="create-project">
           <form action="" onSubmit={this.goToEstimate}>
             <h2>Please Enter the details of the project to estimate</h2>

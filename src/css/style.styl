@@ -34,14 +34,26 @@ button
   cursor pointer
 
 header
-  p
-    margin-top 0.75rem
-    color gray
+  display flex
+  flex-wrap wrap
+  align-items center
+
+  button
+    cta(blue, blue, transparent)
+    min-width 120px
+
+  .text-container
+    flex 1
+
+    p
+      margin-top 0.75rem
+      color gray
   
 hr
   border none 
   border-top 1px solid #EAEAEA
   margin 1rem 0
+  flex 100%
 
 footer
   margin-top 2rem
@@ -116,16 +128,7 @@ table
       grid-column 1/-1
     
     button
-      border 1px solid blue
-      color blue
-      background-color transparent
-      height 54px
-      transition all .3s
-
-      &:hover
-        background-color blue
-        border 1px solid blue
-        color white
+      cta(blue, blue, transparent)
 
 // Client data
 .client
@@ -133,18 +136,9 @@ table
     margin-top 1rem
 
   button
-    border 1px solid blue
-    color blue
-    background-color transparent
-    height 54px
-    transition all .3s
+    cta(blue, blue, transparent)
     width 100%
     margin-top 1rem
-
-    &:hover
-      background-color blue
-      border 1px solid blue
-      color white
 
   table
     background-color #F8F8F8
@@ -225,18 +219,9 @@ table
     margin-bottom 0.5rem
 
   button
-    margin-top 1rem
-    border 1px solid blue
-    color blue
-    background-color transparent
-    transition all .3s
+    cta(blue, blue, transparent)
     padding 1rem
     margin-right 1rem
-
-    &:hover
-      background-color blue
-      border 1px solid blue
-      color white
 
   .logout
     margin-right 0
