@@ -1,13 +1,13 @@
-import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import EstimateCreator from "./EstimateCreator";
-import App from "./App";
-import NotFound from "./NotFound";
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import EstimateForm from './EstimateForm';
+import App from './App';
+import NotFound from './NotFound';
 
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={EstimateCreator} />
+      <Route exact path="/" component={EstimateForm} />
       <Route path="/estimate/:estimateId" component={App} />
       <Route component={NotFound} />
     </Switch>
