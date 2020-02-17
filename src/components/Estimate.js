@@ -89,7 +89,7 @@ class Estimate extends React.Component {
               ref={this.removeFromEstimateRef}
               onClick={() => this.props.removeFromEstimate(key)}
               className={
-                Object.keys(this.props.auth).length === 0 ||
+                this.props.auth === undefined ||
                 this.props.auth.owner !== this.props.auth.uid
                   ? "cross hidden"
                   : "cross"

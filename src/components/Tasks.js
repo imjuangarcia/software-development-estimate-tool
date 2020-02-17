@@ -15,11 +15,11 @@ class Tasks extends React.Component {
   };
 
   render() {
-    const logout = (
-      <button className="logout" onClick={this.logout}>
-        Log Out
-      </button>
-    );
+    // const logout = (
+    //   <button className="logout" onClick={this.logout}>
+    //     Log Out
+    //   </button>
+    // );
     // check if they're logged in
     // if (!this.state.uid) {
     //   return <Login authenticate={this.authenticate} />;
@@ -42,10 +42,9 @@ class Tasks extends React.Component {
 
     // They must be the owner
     return (
-      <section className="tasks edit">
+      <section className={this.props.auth === undefined || this.props.auth.owner !== this.props.auth.uid ? "hidden" : "tasks edit" }>
         <div className="title">
           <h2>Tasks</h2>
-          {logout}
         </div>
         {Object.keys(this.props.tasks).map(key => (
           <EditTaskForm

@@ -209,6 +209,7 @@ class App extends React.Component {
           tasks={this.state.tasks}
           estimateId={this.props.match.params.estimateId}
           propagateAuthState={this.propagateAuthState}
+          auth={this.state.auth}
         />
         <TechStack auth={this.state.auth} addTechStack={this.addTechStack} />
         <Footer />
