@@ -39,7 +39,7 @@ class EditResourceForm extends React.Component {
 
   checkAuth = () => {
     // if they're not logged in
-    if (Object.keys(this.props.auth).length === 0) {
+    if (this.props.auth === undefined) {
       this.resourceQuantityRef.current.setAttribute("disabled", true);
       this.resourceTypeRef.current.setAttribute("disabled", true);
       this.resourceAvailabilityRef.current.setAttribute("disabled", true);
