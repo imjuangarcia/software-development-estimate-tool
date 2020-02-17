@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import firebase from "firebase";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import Estimate from "./Estimate";
@@ -23,6 +24,15 @@ class App extends React.Component {
 
   static propTypes = {
     match: PropTypes.object.isRequired
+  };
+
+  authHandler = async authData => {
+    this.setState({
+      auth: {
+        uid: authData.user.uid,
+        owner: authData.user.uid
+      }
+    });
   };
 
   componentDidMount() {
@@ -55,6 +65,12 @@ class App extends React.Component {
     this.setState({
       auth: this.props.location.auth
     })
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.authHandler({ user });
+      }
+    });
   }
 
   componentWillUnmount() {
