@@ -187,6 +187,25 @@ button {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
 }
+.loading {
+  background-color: rgba(25,87,243,0.9);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+.loading h1 {
+  color: #fff;
+  text-align: center;
+  line-height: 1.4;
+}
 ::-moz-selection {
   color: #fff;
   background: #1957f3;

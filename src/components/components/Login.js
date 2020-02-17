@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import firebase from "firebase";
-
 import { firebaseApp } from '../../firebase';
+import Loading from './Loading';
 
 class Login extends React.Component {
   state = {
     uid: null,
-    owner: null
+    owner: null,
+    loading: false
   };
 
   static propTypes = {
@@ -18,6 +19,9 @@ class Login extends React.Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.authHandler({ user });
+        this.setState({
+          loading: true
+        });
       }
     });
   }
@@ -43,27 +47,30 @@ class Login extends React.Component {
 
   render() {
     return (
-      <section className="tasks">
-        <h1>
-        Admin Area:
-          {' '}
-          <strong>Login</strong>
-        </h1>
-        <p>Sign in to create an estimate</p>
-        <button type="button" className="github" onClick={() => this.authenticate('Github')}>
-        Log in with GitHub
-        </button>
-        <button type="button" className="twitter" onClick={() => this.authenticate('Twitter')}>
-        Log in with Twitter
-        </button>
-        <button
-          type="button"
-          className="facebook"
-          onClick={() => this.authenticate('Facebook')}
-        >
-        Log in with Facebook
-        </button>
-      </section>
+      <React.Fragment>
+        { this.state.loading === true ? <Loading /> : '' }
+        <section className="tasks">
+          <h1>
+          Admin Area:
+            {' '}
+            <strong>Login</strong>
+          </h1>
+          <p>Sign in to create an estimate</p>
+          <button type="button" className="github" onClick={() => this.authenticate('Github')}>
+          Log in with GitHub
+          </button>
+          <button type="button" className="twitter" onClick={() => this.authenticate('Twitter')}>
+          Log in with Twitter
+          </button>
+          <button
+            type="button"
+            className="facebook"
+            onClick={() => this.authenticate('Facebook')}
+          >
+          Log in with Facebook
+          </button>
+        </section>
+      </React.Fragment>
     );
   }
 }
