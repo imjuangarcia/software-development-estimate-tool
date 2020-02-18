@@ -1,16 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AddTaskForm from "../components/AddTaskForm";
 import EditTaskForm from "../components/EditTaskForm";
 
 class Tasks extends React.Component {
-  static propTypes = {
-    tasks: PropTypes.object.isRequired,
-    updateTask: PropTypes.func.isRequired,
-    deleteTask: PropTypes.func.isRequired,
-    loadSampleTasks: PropTypes.func.isRequired
-  };
-
   render() {
     // They must be the owner
     return (

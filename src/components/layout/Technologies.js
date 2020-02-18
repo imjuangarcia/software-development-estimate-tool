@@ -1,11 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 class Technologies extends React.Component {
-  // PropTypes
-  static propTypes = {
-    details: PropTypes.object.isRequired
-  };
 
   // Custom functions
   renderTech = key => {

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AddResourceForm from "../components/AddResourceForm";
 import EditResourceForm from "../components/EditResourceForm";
 import base from "../../firebase";
@@ -20,19 +19,6 @@ class Estimate extends React.Component {
     time: {},
     resources: {},
     cost: {}
-  };
-
-  // Proptypes
-  static propTypes = {
-    tasks: PropTypes.object.isRequired,
-    estimate: PropTypes.object.isRequired,
-    estimateId: PropTypes.string.isRequired,
-    auth: PropTypes.object.isRequired,
-    removeFromEstimate: PropTypes.func.isRequired,
-    resources: PropTypes.object.isRequired,
-    addResource: PropTypes.func.isRequired,
-    updateResource: PropTypes.func.isRequired,
-    deleteResource: PropTypes.func.isRequired
   };
 
   // Lifecycle methods

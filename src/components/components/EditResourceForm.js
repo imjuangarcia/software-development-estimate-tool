@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 class EditResourceForm extends React.Component {
   // Refs
@@ -7,16 +6,6 @@ class EditResourceForm extends React.Component {
   resourceQuantityRef = React.createRef();
   resourceTypeRef = React.createRef();
   resourceAvailabilityRef = React.createRef();
-
-  // PropTypes
-  static propTypes = {
-    auth: PropTypes.object.isRequired,
-    resources: PropTypes.object.isRequired,
-    resource: PropTypes.object.isRequired,
-    index: PropTypes.string.isRequired,
-    updateResource: PropTypes.func.isRequired,
-    deleteResource: PropTypes.func.isRequired
-  };
 
   // Lifecycle methods
   componentDidMount() {

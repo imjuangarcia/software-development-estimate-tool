@@ -1,16 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 class AddTechStackForm extends React.Component {
   // Refs
   imageRef = React.createRef();
   typeRef = React.createRef();
   nameRef = React.createRef();
-
-  // PropTypes
-  static propTypes = {
-    addTechStack: PropTypes.func.isRequired
-  };
 
   // Custom functions
   createTechStack = event => {

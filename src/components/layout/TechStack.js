@@ -1,16 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AddTechStackForm from "../components/AddTechStackForm";
 
 class TechStack extends React.Component {
   // Refs
   techStackFormRef = React.createRef();
-
-  // PropTypes
-  static propTypes = {
-    auth: PropTypes.object.isRequired,
-    addTechStack: PropTypes.func.isRequired
-  };
 
   // Lifecycle methods
   componentDidUpdate() {

@@ -1,19 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 class Client extends React.Component {
-  // Proptypes
-  static propTypes = {
-    details: PropTypes.shape({
-      clientName: PropTypes.string.isRequired,
-      projectName: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      estimateNumber: PropTypes.number.isRequired,
-      versionNumber: PropTypes.number.isRequired
-    }),
-    addClient: PropTypes.func.isRequired
-  };
-
   render() {
     const {
       clientName,

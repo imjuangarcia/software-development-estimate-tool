@@ -1,19 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 class EditTaskForm extends React.Component {
-  static propTypes = {
-    task: PropTypes.shape({
-      taskName: PropTypes.string.isRequired,
-      sectionName: PropTypes.string.isRequired,
-      minHours: PropTypes.number.isRequired,
-      avgHours: PropTypes.number.isRequired,
-      maxHours: PropTypes.number.isRequired,
-      expectedHours: PropTypes.number.isRequired
-    }),
-    index: PropTypes.string.isRequired,
-    updateTask: PropTypes.func.isRequired
-  };
   handleChange = event => {
     switch (event.currentTarget.name) {
       case "minHours":

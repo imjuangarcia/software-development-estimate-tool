@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 class AddTaskForm extends React.Component {
   taskRef = React.createRef();
@@ -8,10 +7,6 @@ class AddTaskForm extends React.Component {
   avgHoursRef = React.createRef();
   maxHoursRef = React.createRef();
   expectedHoursRef = React.createRef();
-
-  static propTypes = {
-    addTask: PropTypes.func.isRequired
-  };
 
   createTask = event => {
     // Stop the form from submitting

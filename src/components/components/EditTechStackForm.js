@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 class AddTaskForm extends React.Component {
   render() {

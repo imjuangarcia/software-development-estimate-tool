@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 
 import { slugify } from "../../utilities/helpers";
 import base from "../../firebase";
@@ -49,10 +48,6 @@ class EstimateCreator extends React.Component {
       }
     })
   }
-
-  static propTypes = {
-    history: PropTypes.object.isRequired
-  };
 
   goToEstimate = async event => {
     event.preventDefault();

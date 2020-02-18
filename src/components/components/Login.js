@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import firebase from "firebase";
 import { firebaseApp } from '../../firebase';
 import Loading from './Loading';
@@ -9,10 +8,6 @@ class Login extends React.Component {
     uid: null,
     owner: null,
     loading: false
-  };
-
-  static propTypes = {
-    history: PropTypes.object.isRequired
   };
 
   componentDidMount() {
@@ -74,9 +69,5 @@ class Login extends React.Component {
     );
   }
 }
-
-Login.propTypes = {
-  authenticate: PropTypes.func,
-};
 
 export default Login;

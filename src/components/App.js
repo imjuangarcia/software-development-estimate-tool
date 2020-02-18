@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import firebase from "firebase";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
@@ -20,10 +19,6 @@ class App extends React.Component {
     auth: {},
     resources: {},
     technologies: {}
-  };
-
-  static propTypes = {
-    match: PropTypes.object.isRequired
   };
 
   authHandler = async authData => {

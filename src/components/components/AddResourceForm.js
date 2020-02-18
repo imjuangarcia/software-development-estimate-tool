@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 
 class AddResourceForm extends React.Component {
   // Refs
@@ -7,12 +6,6 @@ class AddResourceForm extends React.Component {
   resourceQuantityRef = React.createRef();
   resourceTypeRef = React.createRef();
   resourceAvailabilityRef = React.createRef();
-
-  // Proptypes
-  static propTypes = {
-    auth: PropTypes.object.isRequired,
-    addResource: PropTypes.func.isRequired
-  };
 
   // Lifecycle methods
   componentDidUpdate() {
