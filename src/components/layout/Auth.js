@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
-import Header from './layout/Header';
-import Footer from './layout/Footer';
-import Login from './components/Login';
+import Header from './Header';
+import Footer from './Footer';
+import Login from '../components/Login';
 
 const Auth = (props) => (
   <Fragment>

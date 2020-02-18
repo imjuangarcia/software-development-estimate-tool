@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CreateEstimateForm from './components/CreateEstimateForm';
-import Auth from './Auth';
+import Auth from './layout/Auth';
 import App from './App';
-import NotFound from './NotFound';
+import NotFound from './layout/NotFound';
 
 const Router = () => (
   <BrowserRouter>

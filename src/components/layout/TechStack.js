@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AddTechStackForm from "./AddTechStackForm";
+import AddTechStackForm from "../components/AddTechStackForm";
 
 class TechStack extends React.Component {
   // Refs

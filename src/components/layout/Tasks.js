@@ -1,10 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import firebase from "firebase";
-import AddTaskForm from "./AddTaskForm";
-import EditTaskForm from "./EditTaskForm";
-import Login from "./components/Login";
-import base, { firebaseApp } from "../firebase";
+import AddTaskForm from "../components/AddTaskForm";
+import EditTaskForm from "../components/EditTaskForm";
 
 class Tasks extends React.Component {
   static propTypes = {
@@ -15,31 +12,6 @@ class Tasks extends React.Component {
   };
 
   render() {
-    // const logout = (
-    //   <button className="logout" onClick={this.logout}>
-    //     Log Out
-    //   </button>
-    // );
-    // check if they're logged in
-    // if (!this.state.uid) {
-    //   return <Login authenticate={this.authenticate} />;
-    // }
-
-    // Check if they're not the owner of the estimate
-    // if (this.state.uid !== this.state.owner) {
-    //   return (
-    //     <section className="tasks">
-    //       <h1>Admin Area</h1>
-    //       <h2>Sorry, you're not the owner</h2>
-    //       <p>
-    //         That means that you have read-only access to this estimate. If you
-    //         want to suggest editions, please contact the author.
-    //       </p>
-    //       {logout}
-    //     </section>
-    //   );
-    // }
-
     // They must be the owner
     return (
       <section className={this.props.auth === undefined || this.props.auth.owner !== this.props.auth.uid ? "hidden" : "tasks edit" }>

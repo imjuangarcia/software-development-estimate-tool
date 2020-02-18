@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 
-import { slugify } from "../../helpers";
+import { slugify } from "../../utilities/helpers";
 import base from "../../firebase";
 
 import Header from '../layout/Header'

@@ -3,13 +3,13 @@ import PropTypes from "prop-types";
 import firebase from "firebase";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import Estimate from "./Estimate";
-import Client from "./Client";
-import Tasks from "./Tasks";
-import TechStack from "./TechStack";
-import Technologies from "./Technologies";
-import Terms from "./Terms";
-import sampleTasks from "../sample-tasks";
+import Estimate from "./layout/Estimate";
+import Client from "./layout/Client";
+import Tasks from "./layout/Tasks";
+import TechStack from "./layout/TechStack";
+import Technologies from "./layout/Technologies";
+import Terms from "./layout/Terms";
+import sampleTasks from "../utilities/sample-tasks";
 import base from "../firebase";
 
 class App extends React.Component {
