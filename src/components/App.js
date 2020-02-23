@@ -150,6 +150,14 @@ class App extends React.Component {
     });
   };
 
+  deleteTechStack = key => {
+    const technologies = { ...this.state.technologies };
+    technologies[key] = null;
+    this.setState({
+      technologies
+    });
+  };
+
   addToEstimate = key => {
     // take a copy of state
     const estimate = { ...this.state.estimate };
@@ -193,7 +201,7 @@ class App extends React.Component {
           deleteResource={this.deleteResource}
           resources={this.state.resources}
         />
-        <Technologies details={this.state.technologies} />
+        <Technologies details={this.state.technologies} deleteTechStack={this.deleteTechStack} />
         <Terms details={this.state.client} />
         <Tasks
           addTask={this.addTask}
