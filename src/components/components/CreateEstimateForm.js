@@ -3,8 +3,8 @@ import React, { Fragment, useRef, useEffect } from "react";
 import { slugify } from "../../utilities/helpers";
 import base from "../../firebase";
 
-import Header from '../layout/Header'
-import Footer from '../layout/Footer'
+import Header from '../layout/Header';
+import Footer from '../layout/Footer';
 
 const EstimateCreator = (props) => {
   // Refs
