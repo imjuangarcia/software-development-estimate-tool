@@ -7,7 +7,7 @@ const Technologies = (props) => {
     if (tech) {
       return (
         <li key={key}>
-          <button type="button" onClick={() => props.deleteTechStack(key)}>x</button>
+          { props.auth && props.auth.owner === props.auth.uid ? <button type="button" onClick={() => props.deleteTechStack(key)}>x</button> : ''}
           <div style={{ backgroundImage: "url(" + tech.image + ")" }} />
           <p>{tech.name}</p>
         </li>

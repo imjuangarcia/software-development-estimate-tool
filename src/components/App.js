@@ -201,7 +201,7 @@ class App extends React.Component {
           deleteResource={this.deleteResource}
           resources={this.state.resources}
         />
-        <Technologies details={this.state.technologies} deleteTechStack={this.deleteTechStack} />
+        <Technologies details={this.state.technologies} deleteTechStack={this.deleteTechStack} auth={this.state.auth} />
         <Terms details={this.state.client} />
         <Tasks
           addTask={this.addTask}
