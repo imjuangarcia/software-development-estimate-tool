@@ -1,10 +1,9 @@
 import React from "react";
 
-class Technologies extends React.Component {
-
-  // Custom functions
-  renderTech = key => {
-    const tech = this.props.details[key];
+const Technologies = (props) => {
+  
+  const renderTech = key => {
+    const tech = props.details[key];
     if (tech) {
       return (
         <li key={key}>
@@ -15,20 +14,18 @@ class Technologies extends React.Component {
     }
   };
 
-  render() {
-    const techIds = Object.keys(this.props.details);
-    return (
-      <React.Fragment>
-        <section className="technologies">
-          <div className="title">
-            <hr />
-            <h2>Tech Stack</h2>
-          </div>
-          <ul>{techIds.map(this.renderTech)}</ul>
-        </section>
-      </React.Fragment>
-    );
-  }
+  const techIds = Object.keys(props.details);
+  return (
+    <React.Fragment>
+      <section className="technologies">
+        <div className="title">
+          <hr />
+          <h2>Tech Stack</h2>
+        </div>
+        <ul>{techIds.map(renderTech)}</ul>
+      </section>
+    </React.Fragment>
+  );
 }
 
 export default Technologies;
