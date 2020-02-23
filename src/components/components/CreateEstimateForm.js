@@ -15,53 +15,33 @@ const EstimateCreator = (props) => {
   const estimateNumberRef = useRef();
 
   useEffect(() => {
-    // Fetch the existing projects on the db
-    base.fetch('/', {
-      context: this,
-      asArray: true,
-    }).then(data => {
-      // Set the count of projects + 1 as the value for the input
-      if(estimateNumberRef.current === null) {
-        return;
-      } else {
-        estimateNumberRef.current.value = data.length + 1;
-      }
-    })
-  }, []);
+    if(props.user.uid !== null) {
+      base.fetch('/', {
+        context: this,
+        asArray: true,
+      }).then(data => {
+        // Set the count of projects + 1 as the value for the input
+        if(estimateNumberRef.current === null) {
+          return;
+        } else {
+          estimateNumberRef.current.value = data.length + 1;
+        }
+      });
+    } else {
+      props.history.push('/');
+    }
+  }, [props.history, props.user.uid]);
 
-  // state = {
-  //   auth: {},
-  //   estimateNumber: 1,
-  // };
-
-  // componentDidMount() {
-    // We check if the user is authenticated
-    // const { owner, uid } = this.props.history.location.auth || '';
-    // // If it is, we set that data to state
-    // if(owner && uid) {
-    //   this.setState({
-    //     auth: {
-    //       owner: this.props.history.location.auth.owner,
-    //       uid: this.props.history.location.auth.uid,
-    //     }
-    //   });
-    // } 
-    // // If not, we redirect them to the log in page
-    // else {
-    //   this.props.history.push('/');
-    // }
-  // }
-
-  const goToEstimate = async event => {
+  const goToEstimate = event => {
     event.preventDefault();
 
     // Get the text from the input and create the slug
     const estimate = slugify(projectNameRef.current.value);
 
     // Send this data to firebase
-    await base.post(`${estimate}/`, {
+    base.post(`${estimate}/`, {
       data: {
-        // owner: props.history.location.auth.owner,
+        owner: props.user.owner,
         client: {
           projectName: projectNameRef.current.value,
           clientName: clientNameRef.current.value,
@@ -72,10 +52,6 @@ const EstimateCreator = (props) => {
       }
     });
 
-    // const auth = this.state.auth;
-
-    // Redirect to tasks list
-    // this.props.history.push({ pathname: `/estimate/${estimate}`, auth});
     props.history.push({ pathname: `/estimate/${estimate}`});
   };
 

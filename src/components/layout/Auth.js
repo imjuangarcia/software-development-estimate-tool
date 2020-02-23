@@ -5,8 +5,8 @@ import Login from '../components/Login';
 
 const Auth = (props) => (
   <Fragment>
-    <Header history={props.history} />
-    <Login history={props.history} />
+    <Header history={props.history} user={props.user} logout={props.logout} />
+    <Login history={props.history} user={props.user} authenticate={props.authenticate} />
     <Footer />
   </Fragment>
 );
