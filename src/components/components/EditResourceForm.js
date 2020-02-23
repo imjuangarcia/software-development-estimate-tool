@@ -1,103 +1,85 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
-class EditResourceForm extends React.Component {
+const EditResourceForm = (props) => {
   // Refs
-  removeResourceButtonRef = React.createRef();
-  resourceQuantityRef = React.createRef();
-  resourceTypeRef = React.createRef();
-  resourceAvailabilityRef = React.createRef();
+  const removeResourceButtonRef = useRef();
+  const resourceQuantityRef = useRef();
+  const resourceTypeRef = useRef();
+  const resourceAvailabilityRef = useRef();
 
-  // Lifecycle methods
-  componentDidMount() {
-    this.checkAuth();
-  }
-
-  componentDidUpdate() {
-    this.checkAuth();
-  }
-
-  // Custom functions
-  handleChange = event => {
-    const updatedResource = {
-      ...this.props.resources,
-      [event.currentTarget.name]: event.currentTarget.value
-    };
-
-    this.props.updateResource(this.props.index, updatedResource);
-  };
-
-  checkAuth = () => {
-    // if they're not logged in
-    if (this.props.auth === undefined) {
-      this.resourceQuantityRef.current.setAttribute("disabled", true);
-      this.resourceTypeRef.current.setAttribute("disabled", true);
-      this.resourceAvailabilityRef.current.setAttribute("disabled", true);
-      this.removeResourceButtonRef.current.classList.add("hidden");
-    }
-    // if they're logged in, but they're now owners
-    else if (this.props.auth.owner !== this.props.auth.uid) {
-      this.resourceQuantityRef.current.setAttribute("disabled", true);
-      this.resourceTypeRef.current.setAttribute("disabled", true);
-      this.resourceAvailabilityRef.current.setAttribute("disabled", true);
-      this.removeResourceButtonRef.current.classList.add("hidden");
+  useEffect(() => {
+    // if they're not logged in, of if they're logged in, but they're now owners
+    if (props.auth === undefined || props.auth.owner !== props.auth.uid) {
+      resourceQuantityRef.current.setAttribute("disabled", true);
+      resourceTypeRef.current.setAttribute("disabled", true);
+      resourceAvailabilityRef.current.setAttribute("disabled", true);
+      removeResourceButtonRef.current.classList.add("hidden");
     }
     // if they're owners
     else {
-      this.resourceQuantityRef.current.removeAttribute("disabled");
-      this.resourceTypeRef.current.removeAttribute("disabled");
-      this.resourceAvailabilityRef.current.removeAttribute("disabled");
-      this.removeResourceButtonRef.current.classList.remove("hidden");
+      resourceQuantityRef.current.removeAttribute("disabled");
+      resourceTypeRef.current.removeAttribute("disabled");
+      resourceAvailabilityRef.current.removeAttribute("disabled");
+      removeResourceButtonRef.current.classList.remove("hidden");
     }
+  }, [props.auth]);
+
+  // Custom functions
+  const handleChange = event => {
+    const updatedResource = {
+      ...props.resources,
+      [event.currentTarget.name]: event.currentTarget.value
+    };
+
+    props.updateResource(props.index, updatedResource);
   };
 
-  render() {
-    return (
-      <tr>
-        <td>
-          <input
-            type="number"
-            name="quantity"
-            placeholder="Set Quantity here"
-            required
-            ref={this.resourceQuantityRef}
-            onChange={this.handleChange}
-            value={this.props.resource.quantity}
-          />
-        </td>
-        <td>
-          <input
-            type="text"
-            name="type"
-            placeholder="Type of resouce here"
-            required
-            ref={this.resourceTypeRef}
-            onChange={this.handleChange}
-            value={this.props.resource.type}
-          />
-        </td>
-        <td>
-          <input
-            type="number"
-            name="availability"
-            placeholder="Set Availability here"
-            required
-            ref={this.resourceAvailabilityRef}
-            onChange={this.handleChange}
-            value={this.props.resource.availability}
-          />
-          hours/week
-        </td>
-        <td>
-          <button
-            onClick={() => this.props.deleteResource(this.props.index)}
-            ref={this.removeResourceButtonRef}
-          >
-            Remove resource
-          </button>
-        </td>
-      </tr>
-    );
-  }
+  return (
+    <tr>
+      <td>
+        <input
+          type="number"
+          name="quantity"
+          placeholder="Set Quantity here"
+          required
+          ref={resourceQuantityRef}
+          onChange={handleChange}
+          value={props.resource.quantity}
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="type"
+          placeholder="Type of resouce here"
+          required
+          ref={resourceTypeRef}
+          onChange={handleChange}
+          value={props.resource.type}
+        />
+      </td>
+      <td>
+        <input
+          type="number"
+          name="availability"
+          placeholder="Set Availability here"
+          required
+          ref={resourceAvailabilityRef}
+          onChange={handleChange}
+          value={props.resource.availability}
+        />
+        hours/week
+      </td>
+      <td>
+        <button
+          onClick={() => props.deleteResource(props.index)}
+          ref={removeResourceButtonRef}
+        >
+          Remove resource
+        </button>
+      </td>
+    </tr>
+  );
 }
 
 export default EditResourceForm;
