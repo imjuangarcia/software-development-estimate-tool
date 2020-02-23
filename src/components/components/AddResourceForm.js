@@ -1,76 +1,57 @@
-import React from "react";
+import React, { useRef } from "react";
 
-class AddResourceForm extends React.Component {
+const AddResourceForm = (props) => {
   // Refs
-  addResourceFormRef = React.createRef();
-  resourceQuantityRef = React.createRef();
-  resourceTypeRef = React.createRef();
-  resourceAvailabilityRef = React.createRef();
+  const addResourceFormRef = useRef();
+  const resourceQuantityRef = useRef();
+  const resourceTypeRef = useRef();
+  const resourceAvailabilityRef = useRef();
 
-  // Lifecycle methods
-  componentDidUpdate() {
-    // if they're not logged in
-    if (this.props.auth === undefined) {
-      this.addResourceFormRef.current.classList.add("hidden");
-    }
-    // if they're logged in, but they're now owners
-    else if (this.props.auth.owner !== this.props.auth.uid) {
-      this.addResourceFormRef.current.classList.add("hidden");
-    }
-    // if they're owners
-    else {
-      this.addResourceFormRef.current.classList.remove("hidden");
-    }
-  }
-
-  // Custom functions
-  addAnotherResource = event => {
+  const addAnotherResource = event => {
     event.preventDefault();
 
     const resource = {
-      quantity: parseFloat(this.resourceQuantityRef.current.value),
-      type: this.resourceTypeRef.current.value,
-      availability: parseFloat(this.resourceAvailabilityRef.current.value)
+      quantity: parseFloat(resourceQuantityRef.current.value),
+      type: resourceTypeRef.current.value,
+      availability: parseFloat(resourceAvailabilityRef.current.value)
     };
 
-    this.props.addResource(resource);
+    props.addResource(resource);
   };
-  render() {
-    return (
-      <tr ref={this.addResourceFormRef}>
-        <td>
-          <input
-            type="number"
-            name="resourceQuantity"
-            placeholder="Set Quantity here"
-            ref={this.resourceQuantityRef}
-          />
-        </td>
-        <td>
-          <input
-            type="text"
-            name="resourceType"
-            placeholder="Type of resouce here"
-            ref={this.resourceTypeRef}
-          />
-        </td>
-        <td>
-          <input
-            type="number"
-            name="resourceAvailability"
-            placeholder="Set Availability here"
-            ref={this.resourceAvailabilityRef}
-          />
-          hours/week
-        </td>
-        <td>
-          <button type="submit" onClick={this.addAnotherResource}>
-            Add resource
-          </button>
-        </td>
-      </tr>
-    );
-  }
+  return (
+    <tr ref={addResourceFormRef}>
+      <td>
+        <input
+          type="number"
+          name="resourceQuantity"
+          placeholder="Set Quantity here"
+          ref={resourceQuantityRef}
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="resourceType"
+          placeholder="Type of resouce here"
+          ref={resourceTypeRef}
+        />
+      </td>
+      <td>
+        <input
+          type="number"
+          name="resourceAvailability"
+          placeholder="Set Availability here"
+          ref={resourceAvailabilityRef}
+        />
+        hours/week
+      </td>
+      <td>
+        <button type="submit" onClick={addAnotherResource}>
+          Add resource
+        </button>
+      </td>
+    </tr>
+  );
 }
 
 export default AddResourceForm;

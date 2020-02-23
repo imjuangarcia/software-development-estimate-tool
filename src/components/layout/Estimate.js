@@ -258,10 +258,10 @@ class Estimate extends React.Component {
                   auth={this.props.auth}
                 />
               ))}
-              <AddResourceForm
+              { this.props.auth && this.props.auth.uid === this.props.auth.owner ? <AddResourceForm
                 auth={this.props.auth}
                 addResource={this.props.addResource}
-              />
+              /> : '' }
             </tbody>
           </table>
           <h3>
