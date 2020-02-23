@@ -1,63 +1,58 @@
-import React from "react";
+import React, { useRef } from "react";
 
-class AddTechStackForm extends React.Component {
+const AddTechStackForm = (props) => {
   // Refs
-  imageRef = React.createRef();
-  typeRef = React.createRef();
-  nameRef = React.createRef();
+  const imageRef = useRef();
+  const typeRef = useRef();
+  const nameRef = useRef();
 
-  // Custom functions
-  createTechStack = event => {
-    // Stop the form from submitting
+  const createTechStack = event => {
     event.preventDefault();
 
-    // Create the tech object
     const tech = {
-      image: this.imageRef.current.value,
-      type: this.typeRef.current.value,
-      name: this.nameRef.current.value
+      image: imageRef.current.value,
+      type: typeRef.current.value,
+      name: nameRef.current.value
     };
-    this.props.addTechStack(tech);
-    // Refresh the form
+    props.addTechStack(tech);
+
     event.currentTarget.reset();
   };
-  render() {
-    return (
-      <form onSubmit={this.createTechStack}>
-        <fieldset>
-          <label htmlFor="image">Image URL</label>
-          <input
-            required
-            name="image"
-            ref={this.imageRef}
-            type="text"
-            placeholder="Add Image URL"
-          />
-        </fieldset>
-        <fieldset>
-          <label htmlFor="type">Technology Type</label>
-          <select required name="type" ref={this.typeRef}>
-            <option value="Frontend">Frontend</option>
-            <option value="Backend">Backend</option>
-            <option value="Database">Database</option>
-            <option value="Deployment">Deployment</option>
-            <option value="Tooling">Tooling</option>
-          </select>
-        </fieldset>
-        <fieldset>
-          <label htmlFor="name">Technology Name</label>
-          <input
-            required
-            name="name"
-            ref={this.nameRef}
-            type="text"
-            placeholder="Name of the Tech Used"
-          />
-        </fieldset>
-        <button type="submit">+ Add Item</button>
-      </form>
-    );
-  }
+  return (
+    <form onSubmit={createTechStack}>
+      <fieldset>
+        <label htmlFor="name">Technology Name</label>
+        <input
+          required
+          name="name"
+          ref={nameRef}
+          type="text"
+          placeholder="Name of the Tech Used"
+        />
+      </fieldset>
+      <fieldset>
+        <label htmlFor="type">Technology Type</label>
+        <select required name="type" ref={typeRef}>
+          <option value="Frontend">Frontend</option>
+          <option value="Backend">Backend</option>
+          <option value="Database">Database</option>
+          <option value="Deployment">Deployment</option>
+          <option value="Tooling">Tooling</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <label htmlFor="image">Image URL</label>
+        <input
+          required
+          name="image"
+          ref={imageRef}
+          type="text"
+          placeholder="Add Image URL"
+        />
+      </fieldset>
+      <button type="submit">+ Add Item</button>
+    </form>
+  );
 }
 
 export default AddTechStackForm;
