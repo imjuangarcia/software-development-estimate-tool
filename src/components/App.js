@@ -173,15 +173,6 @@ class App extends React.Component {
     this.setState({ estimate });
   };
 
-  propagateAuthState = state => {
-    this.setState({
-      user: {
-        owner: state.owner,
-        uid: state.uid
-      }
-    });
-  };
-
   render() {
     return (
       <React.Fragment>
@@ -209,7 +200,6 @@ class App extends React.Component {
           addToEstimate={this.addToEstimate}
           tasks={this.state.tasks}
           estimateId={this.props.match.params.estimateId}
-          propagateAuthState={this.propagateAuthState}
           owner={this.state.owner}
           user={this.state.user}
         />
