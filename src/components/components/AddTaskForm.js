@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import sections from "../../utilities/sections";
 
 const AddTaskForm = (props) => {
   const taskRef = useRef();
@@ -55,16 +56,7 @@ const AddTaskForm = (props) => {
       <fieldset>
         <label htmlFor="sectionName">Section Name</label>
         <select required name="sectionName" ref={sectionRef}>
-          <option value="Definition">Definition</option>
-          <option value="Initiation">Initiation</option>
-          <option value="Design">Design</option>
-          <option value="Realization">Realization</option>
-          <option value="Adaptation">Adaptation</option>
-          <option value="Backend: APIs">Backend: APIs</option>
-          <option value="Backend: Database">Backend: Database</option>
-          <option value="Backend">Backend</option>
-          <option value="Testing">Testing</option>
-          <option value="Wordpress">Wordpress</option>
+          {Object.values(sections).map((section, key) => <option value={section.name} key={key}>{section.name}</option>)}
         </select>
       </fieldset>
       <fieldset>

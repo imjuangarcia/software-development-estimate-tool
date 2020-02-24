@@ -1,5 +1,7 @@
 import React from "react";
 
+import sections from '../../utilities/sections';
+
 const EditTaskForm = (props) => {
 
   const handleChange = event => {
@@ -50,16 +52,7 @@ const EditTaskForm = (props) => {
             onChange={handleChange}
             defaultValue={props.task.sectionName}
           >
-            <option value="Definition">Definition</option>
-            <option value="Initiation">Initiation</option>
-            <option value="Design">Design</option>
-            <option value="Realization">Realization</option>
-            <option value="Adaptation">Adaptation</option>
-            <option value="Backend: APIs">Backend: APIs</option>
-            <option value="Backend: Database">Backend: Database</option>
-            <option value="Backend">Backend</option>
-            <option value="Testing">Testing</option>
-            <option value="Wordpress">Wordpress</option>
+            {Object.values(sections).map((section, key) => <option key={key} value={section.name}>{section.name}</option>)}
           </select>
         </fieldset>
         <fieldset>

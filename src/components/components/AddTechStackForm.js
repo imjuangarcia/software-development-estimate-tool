@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 
+import technologies from '../../utilities/technologies';
+
 const AddTechStackForm = (props) => {
   // Refs
   const imageRef = useRef();
@@ -33,11 +35,7 @@ const AddTechStackForm = (props) => {
       <fieldset>
         <label htmlFor="type">Technology Type</label>
         <select required name="type" ref={typeRef}>
-          <option value="Frontend">Frontend</option>
-          <option value="Backend">Backend</option>
-          <option value="Database">Database</option>
-          <option value="Deployment">Deployment</option>
-          <option value="Tooling">Tooling</option>
+          {Object.values(technologies).map((technology, key) => <option key={key} value={technology.name}>{technology.name}</option>)}
         </select>
       </fieldset>
       <fieldset>
