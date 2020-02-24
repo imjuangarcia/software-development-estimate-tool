@@ -16,7 +16,7 @@ const Header = () => {
               Developer
             </p>
           </div>
-          { context.user.uid === null ? '' : <button onClick={context.logout}>Logout</button>}
+          { !context.user.uid ? '' : <button onClick={context.logout}>Logout</button>}
           <hr />
         </header>
       )}
