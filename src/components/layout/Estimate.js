@@ -258,12 +258,12 @@ class Estimate extends React.Component {
                   user={this.props.user}
                   owner={this.props.owner}
                 />
-              )) : ''}
+              )) : <tr></tr>}
               { this.props.user && this.props.user.uid === this.props.owner ? <AddResourceForm
                 user={this.props.user}
                 owner={this.props.owner}
                 addResource={this.props.addResource}
-              /> : '' }
+              /> : <tr></tr> }
             </tbody>
           </table>
           <h3>
@@ -320,7 +320,7 @@ class Estimate extends React.Component {
                 <td>Expected Hours</td>
               </tr>
             </thead>
-            <tbody>{estimateIds ? estimateIds.map(this.renderEstimate) : ''}</tbody>
+            <tbody>{estimateIds ? estimateIds.map(this.renderEstimate) : <tr></tr>}</tbody>
           </table>
         </section>
       </React.Fragment>
