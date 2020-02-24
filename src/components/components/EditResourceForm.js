@@ -9,7 +9,7 @@ const EditResourceForm = (props) => {
 
   useEffect(() => {
     // if they're not logged in, of if they're logged in, but they're now owners
-    if (props.auth === undefined || props.auth.owner !== props.auth.uid) {
+    if (props.user === undefined || props.owner !== props.user.uid) {
       resourceQuantityRef.current.setAttribute("disabled", true);
       resourceTypeRef.current.setAttribute("disabled", true);
       resourceAvailabilityRef.current.setAttribute("disabled", true);
@@ -22,7 +22,7 @@ const EditResourceForm = (props) => {
       resourceAvailabilityRef.current.removeAttribute("disabled");
       removeResourceButtonRef.current.classList.remove("hidden");
     }
-  }, [props.auth]);
+  }, [props.owner, props.user]);
 
   // Custom functions
   const handleChange = event => {

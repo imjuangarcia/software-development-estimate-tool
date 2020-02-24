@@ -1,5 +1,5 @@
 import React from "react";
-import firebase from "firebase";
+
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import Estimate from "./layout/Estimate";
@@ -16,18 +16,10 @@ class App extends React.Component {
     client: {},
     tasks: {},
     estimate: {},
-    auth: {},
+    owner: '',
+    user: {},
     resources: {},
     technologies: {}
-  };
-
-  authHandler = async authData => {
-    this.setState({
-      auth: {
-        uid: authData.user.uid,
-        owner: authData.user.uid
-      }
-    });
   };
 
   componentDidMount() {
@@ -56,16 +48,21 @@ class App extends React.Component {
       context: this,
       state: "technologies"
     });
-
-    this.setState({
-      auth: this.props.location.auth
-    })
-
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.authHandler({ user });
-      }
+    
+    this.ref = base.syncState(`${params.estimateId}/owner`, {
+      context: this,
+      state: "owner"
     });
+  }
+
+  componentDidUpdate() {
+    setTimeout(() => {
+      if(this.props.user.uid !== '') {
+        this.setState({
+          user: this.props.user,
+        });
+      }
+    }, 1000);
   }
 
   componentWillUnmount() {
@@ -178,7 +175,7 @@ class App extends React.Component {
 
   propagateAuthState = state => {
     this.setState({
-      auth: {
+      user: {
         owner: state.owner,
         uid: state.uid
       }
@@ -188,20 +185,21 @@ class App extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Header history={this.props.history} auth={this.state.auth} />
+        <Header history={this.props.history} user={this.state.user} />
         <Client details={this.state.client} />
         <Estimate
           tasks={this.state.tasks}
           estimate={this.state.estimate}
           removeFromEstimate={this.removeFromEstimate}
           estimateId={this.props.match.params.estimateId}
-          auth={this.state.auth}
+          user={this.state.user}
+          owner={this.state.owner}
           addResource={this.addResource}
           updateResource={this.updateResource}
           deleteResource={this.deleteResource}
           resources={this.state.resources}
         />
-        <Technologies details={this.state.technologies} deleteTechStack={this.deleteTechStack} auth={this.state.auth} />
+        <Technologies details={this.state.technologies} deleteTechStack={this.deleteTechStack} user={this.state.user} owner={this.state.owner} />
         <Terms details={this.state.client} />
         <Tasks
           addTask={this.addTask}
@@ -212,9 +210,10 @@ class App extends React.Component {
           tasks={this.state.tasks}
           estimateId={this.props.match.params.estimateId}
           propagateAuthState={this.propagateAuthState}
-          auth={this.state.auth}
+          owner={this.state.owner}
+          user={this.state.user}
         />
-        <TechStack auth={this.state.auth} addTechStack={this.addTechStack} />
+        <TechStack user={this.state.user} owner={this.state.owner} addTechStack={this.addTechStack} />
         <Footer />
       </React.Fragment>
     );

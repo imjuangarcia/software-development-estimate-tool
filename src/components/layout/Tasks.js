@@ -4,7 +4,7 @@ import EditTaskForm from "../components/EditTaskForm";
 
 const Tasks = (props) => {
   return (
-    <section className={props.auth === undefined || props.auth.owner !== props.auth.uid ? "hidden" : "tasks edit" }>
+    <section className={props.user === undefined || props.owner !== props.user.uid ? "hidden" : "tasks edit" }>
       <div className="title">
         <h2>Tasks</h2>
       </div>

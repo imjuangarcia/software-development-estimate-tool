@@ -43,12 +43,12 @@ class Estimate extends React.Component {
     }
 
     // if they're not logged in
-    if (this.props.auth === undefined) {
+    if (this.props.user === undefined) {
       this.adminTimeRef.current.setAttribute("disabled", true);
       this.hourlyValueRef.current.setAttribute("disabled", true);
     }
     // if they're logged in, but they're now owners
-    else if (this.props.auth.owner !== this.props.auth.uid) {
+    else if (this.props.owner !== this.props.user.uid) {
       this.adminTimeRef.current.setAttribute("disabled", true);
       this.hourlyValueRef.current.setAttribute("disabled", true);
     }
@@ -75,8 +75,8 @@ class Estimate extends React.Component {
               ref={this.removeFromEstimateRef}
               onClick={() => this.props.removeFromEstimate(key)}
               className={
-                this.props.auth === undefined ||
-                this.props.auth.owner !== this.props.auth.uid
+                this.props.user === undefined ||
+                this.props.owner !== this.props.user.uid
                   ? "cross hidden"
                   : "cross"
               }
@@ -255,11 +255,13 @@ class Estimate extends React.Component {
                   resource={this.props.resources[key]}
                   updateResource={this.props.updateResource}
                   deleteResource={this.props.deleteResource}
-                  auth={this.props.auth}
+                  user={this.props.user}
+                  owner={this.props.owner}
                 />
               ))}
-              { this.props.auth && this.props.auth.uid === this.props.auth.owner ? <AddResourceForm
-                auth={this.props.auth}
+              { this.props.user && this.props.user.uid === this.props.owner ? <AddResourceForm
+                user={this.props.user}
+                owner={this.props.owner}
                 addResource={this.props.addResource}
               /> : '' }
             </tbody>

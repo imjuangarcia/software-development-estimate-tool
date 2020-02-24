@@ -15,7 +15,7 @@ const Router = () => (
         <Switch>
           <Route exact path='/' render={(props) => <Auth history={props.history} user={context.user} authenticate={context.authenticate} logout={context.logout} />} />
           <Route exact path='/create' render={(props) => <CreateEstimateForm history={props.history} user={context.user} logout={context.logout} />} />
-          <Route path="/estimate/:estimateId" component={App} />
+          <Route path="/estimate/:estimateId" render={(props) => <App {...props} user={context.user} logout={context.logout} />} />
           <Route component={NotFound} />
         </Switch>
         )}

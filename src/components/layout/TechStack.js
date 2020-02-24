@@ -6,7 +6,7 @@ const TechStack = (props) => {
   const techStackFormRef = useRef();
 
   return (
-    <section className={props.auth && props.auth.owner === props.auth.uid ? 'tech edit' : 'tech edit hidden'} ref={techStackFormRef}>
+    <section className={props.user && props.owner === props.user.uid ? 'tech edit' : 'tech edit hidden'} ref={techStackFormRef}>
       <div className="title">
         <h2>Technologies to use</h2>
       </div>
