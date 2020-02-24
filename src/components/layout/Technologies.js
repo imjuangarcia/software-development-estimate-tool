@@ -15,7 +15,6 @@ const Technologies = (props) => {
     }
   };
 
-  const techIds = Object.keys(props.details);
   return (
     <React.Fragment>
       <section className="technologies">
@@ -23,7 +22,7 @@ const Technologies = (props) => {
           <hr />
           <h2>Tech Stack</h2>
         </div>
-        <ul>{techIds.map(renderTech)}</ul>
+        <ul>{props.details ? Object.keys(props.details).map(renderTech) : ''}</ul>
       </section>
     </React.Fragment>
   );

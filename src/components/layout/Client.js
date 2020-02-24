@@ -7,7 +7,7 @@ const Client = (props) => {
     date,
     estimateNumber,
     versionNumber
-  } = props.details;
+  } = props.details || '';
 
   return (
     <section className="client">

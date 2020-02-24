@@ -152,7 +152,7 @@ class Estimate extends React.Component {
   };
 
   render() {
-    const estimateIds = Object.keys(this.props.estimate);
+    const estimateIds = this.props.estimate ? Object.keys(this.props.estimate) : '';
     return (
       <React.Fragment>
         <section className="estimate">
@@ -179,7 +179,7 @@ class Estimate extends React.Component {
                     ref={this.totalTimeRef}
                     name="total"
                     disabled
-                    defaultValue={estimateIds.reduce((prevTotal, key) => {
+                    defaultValue={estimateIds ? estimateIds.reduce((prevTotal, key) => {
                       const task = this.props.tasks[key];
                       if (task !== undefined) {
                         const count = this.props.estimate[key];
@@ -190,7 +190,7 @@ class Estimate extends React.Component {
                       } else {
                         return 0;
                       }
-                    }, "")}
+                    }, "") : ''}
                   />
                 </td>
                 <td>
@@ -248,7 +248,7 @@ class Estimate extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {Object.keys(this.props.resources).map(key => (
+              {this.props.resources ? Object.keys(this.props.resources).map(key => (
                 <EditResourceForm
                   key={key}
                   index={key}
@@ -258,7 +258,7 @@ class Estimate extends React.Component {
                   user={this.props.user}
                   owner={this.props.owner}
                 />
-              ))}
+              )) : ''}
               { this.props.user && this.props.user.uid === this.props.owner ? <AddResourceForm
                 user={this.props.user}
                 owner={this.props.owner}
@@ -320,7 +320,7 @@ class Estimate extends React.Component {
                 <td>Expected Hours</td>
               </tr>
             </thead>
-            <tbody>{estimateIds.map(this.renderEstimate)}</tbody>
+            <tbody>{estimateIds ? estimateIds.map(this.renderEstimate) : ''}</tbody>
           </table>
         </section>
       </React.Fragment>

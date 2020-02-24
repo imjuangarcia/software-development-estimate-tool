@@ -8,7 +8,7 @@ const Tasks = (props) => {
       <div className="title">
         <h2>Tasks</h2>
       </div>
-      {Object.keys(props.tasks).map(key => (
+      {props.tasks ? Object.keys(props.tasks).map(key => (
         <EditTaskForm
           key={key}
           index={key}
@@ -17,7 +17,7 @@ const Tasks = (props) => {
           deleteTask={props.deleteTask}
           addToEstimate={props.addToEstimate}
         />
-      ))}
+      )) : ''}
       <h3>Add a New Task</h3>
       <AddTaskForm addTask={props.addTask} />
       <button className="sample" onClick={props.loadSampleTasks}>

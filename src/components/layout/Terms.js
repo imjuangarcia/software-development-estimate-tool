@@ -8,7 +8,7 @@ const Terms = (props) => {
       <h3>Budget Validity</h3>
       <p>
         The following budget is valid for <strong>15 days</strong>, starting
-        on the date it was sent, <strong>{props.details.date}</strong>.
+        on the date it was sent, <strong>{props.details ? props.details.date : ''}</strong>.
         After that date, the availability of the assigned resources should be
         verified and, if necessary, an adjustment in costs or deadlines should
         be made.

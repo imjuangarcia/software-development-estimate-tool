@@ -13,56 +13,15 @@ import base from "../firebase";
 
 class App extends React.Component {
   state = {
-    client: {},
-    tasks: {},
-    estimate: {},
-    owner: '',
-    user: {},
-    resources: {},
-    technologies: {}
+    estimate: {}
   };
 
   componentDidMount() {
     const { params } = this.props.match;
-    this.ref = base.syncState(`${params.estimateId}/tasks`, {
-      context: this,
-      state: "tasks"
-    });
-
-    this.ref = base.syncState(`${params.estimateId}/estimate`, {
+    this.ref = base.syncState(`${params.estimateId}/`, {
       context: this,
       state: "estimate"
     });
-
-    this.ref = base.syncState(`${params.estimateId}/client`, {
-      context: this,
-      state: "client"
-    });
-
-    this.ref = base.syncState(`${params.estimateId}/resources`, {
-      context: this,
-      state: "resources"
-    });
-
-    this.ref = base.syncState(`${params.estimateId}/technologies`, {
-      context: this,
-      state: "technologies"
-    });
-    
-    this.ref = base.syncState(`${params.estimateId}/owner`, {
-      context: this,
-      state: "owner"
-    });
-  }
-
-  componentDidUpdate() {
-    setTimeout(() => {
-      if(this.props.user.uid !== '') {
-        this.setState({
-          user: this.props.user,
-        });
-      }
-    }, 1000);
   }
 
   componentWillUnmount() {
@@ -72,138 +31,168 @@ class App extends React.Component {
   addResource = resource => {
     // Take a copy of the existing state we'll be updating
     const resources = {
-      ...this.state.resources
+      ...this.state.estimate.resources
     };
     // Add new resource to resource variable
     resources[`resource${Date.now()}`] = resource;
 
     // Set the new tasks and sections objects to state
     this.setState({
-      resources
+      estimate: {
+        resources
+      }
     });
   };
 
   updateResource = (key, updatedResource) => {
-    const resources = { ...this.state.resources };
+    const resources = { ...this.state.estimate.resources };
     resources[key] = updatedResource;
     this.setState({
-      resources
+      estimate: {
+        resources
+      }
     });
   };
 
   deleteResource = key => {
-    const resources = { ...this.state.resources };
+    const resources = { ...this.state.estimate.resources };
     resources[key] = null;
     this.setState({
-      resources
+      estimate: {
+        resources
+      }
     });
   };
 
   addTask = task => {
     // Take a copy of the existing state we'll be updating
-    const tasks = { ...this.state.tasks };
+    const tasks = { ...this.state.estimate.tasks };
     // Add new task to tasks variable
     tasks[`task${Date.now()}`] = task;
 
     // Set the new tasks and sections objects to state
     this.setState({
-      tasks
+      estimate: {
+        tasks
+      }
     });
   };
 
   updateTask = (key, updatedTask) => {
     // Copy of the current state
-    const tasks = { ...this.state.tasks };
+    const tasks = { ...this.state.estimate.tasks };
     // Update state
     tasks[key] = updatedTask;
     // Set that to state
     this.setState({
-      tasks
+      estimate: {
+        tasks
+      }
     });
   };
 
   deleteTask = key => {
     // take a copy of state
-    const tasks = { ...this.state.tasks };
+    const tasks = { ...this.state.estimate.tasks };
     // remove the item
     tasks[key] = null;
     // Update State
-    this.setState({ tasks });
+    this.setState({ 
+      estimate: {
+        tasks
+      }
+     });
   };
 
   loadSampleTasks = () => {
-    this.setState({ tasks: sampleTasks });
+    this.setState({ 
+      estimate: {
+        tasks: sampleTasks
+      }
+     });
   };
 
   addTechStack = tech => {
     // Take a copy of the existing state we'll be updating
-    const technologies = { ...this.state.technologies };
+    const technologies = { ...this.state.estimate.technologies };
     // Add new task to tasks variable
     technologies[`tech${Date.now()}`] = tech;
 
     // Set the new tasks and sections objects to state
     this.setState({
-      technologies
+      estimate: {
+        technologies
+      }
     });
   };
 
   deleteTechStack = key => {
-    const technologies = { ...this.state.technologies };
+    const technologies = { ...this.state.estimate.technologies };
     technologies[key] = null;
     this.setState({
-      technologies
+      estimate: {
+        technologies
+      }
     });
   };
 
   addToEstimate = key => {
     // take a copy of state
-    const estimate = { ...this.state.estimate };
+    const estimate = { ...this.state.estimate.estimate };
     // add to the order or update the number
     estimate[key] = estimate[key] + 1 || 1;
     // Call setState to update our state
-    this.setState({ estimate });
+    this.setState({ 
+      estimate: {
+        estimate
+      }
+    });
   };
 
   removeFromEstimate = key => {
     // take a copy of state
-    const estimate = { ...this.state.estimate };
+    const estimate = { ...this.state.estimate.estimate };
     // remove item from estimate
     estimate[key] = null;
     // Call setState to update our state
-    this.setState({ estimate });
+    this.setState({ 
+      estimate: {
+        estimate
+      }
+    });
   };
 
   render() {
     return (
       <React.Fragment>
-        <Header history={this.props.history} user={this.state.user} />
-        <Client details={this.state.client} />
+        <Header history={this.props.history} user={this.props.user} />
+        <Client details={this.state.estimate.client} />
         <Estimate
-          tasks={this.state.tasks}
-          estimate={this.state.estimate}
+          tasks={this.state.estimate.tasks}
+          estimate={this.state.estimate.estimate}
           removeFromEstimate={this.removeFromEstimate}
           estimateId={this.props.match.params.estimateId}
-          user={this.state.user}
-          owner={this.state.owner}
+          user={this.props.user}
+          owner={this.state.estimate.owner}
           addResource={this.addResource}
           updateResource={this.updateResource}
           deleteResource={this.deleteResource}
-          resources={this.state.resources}
+          resources={this.state.estimate.resources}
         />
-        <Technologies details={this.state.technologies} deleteTechStack={this.deleteTechStack} user={this.state.user} owner={this.state.owner} />
-        <Terms details={this.state.client} />
+        <Technologies details={this.state.estimate.technologies} deleteTechStack={this.deleteTechStack} user={this.props.user} owner={this.state.estimate.owner} />
+        <Terms details={this.state.estimate.client} />
         <Tasks
           addTask={this.addTask}
           updateTask={this.updateTask}
           deleteTask={this.deleteTask}
           loadSampleTasks={this.loadSampleTasks}
           addToEstimate={this.addToEstimate}
-          tasks={this.state.tasks}
+          tasks={this.state.estimate.tasks}
           estimateId={this.props.match.params.estimateId}
-          owner={this.state.owner}
-          user={this.state.user}
+          owner={this.state.estimate.owner}
+          user={this.props.user}
         />
-        <TechStack user={this.state.user} owner={this.state.owner} addTechStack={this.addTechStack} />
+        <TechStack user={this.props.user} owner={this.state.estimate.owner} addTechStack={this.addTechStack} />
         <Footer />
       </React.Fragment>
     );
