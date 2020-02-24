@@ -41,22 +41,6 @@ class Estimate extends React.Component {
     ) {
       this.calculateTotalHours();
     }
-
-    // if they're not logged in
-    if (this.props.user === undefined) {
-      this.adminTimeRef.current.setAttribute("disabled", true);
-      this.hourlyValueRef.current.setAttribute("disabled", true);
-    }
-    // if they're logged in, but they're now owners
-    else if (this.props.owner !== this.props.user.uid) {
-      this.adminTimeRef.current.setAttribute("disabled", true);
-      this.hourlyValueRef.current.setAttribute("disabled", true);
-    }
-    // if they're owners
-    else {
-      this.adminTimeRef.current.removeAttribute("disabled");
-      this.hourlyValueRef.current.removeAttribute("disabled");
-    }
   }
 
   componentWillUnmount() {
@@ -200,6 +184,7 @@ class Estimate extends React.Component {
                     name="admin"
                     onChange={this.calculateTotalHours}
                     defaultValue={this.state.time.adminTime}
+                    disabled={this.props.user === undefined || this.props.user.uid !== this.props.owner}
                     placeholder="Add Admin Time Here"
                     required
                   />
@@ -229,6 +214,7 @@ class Estimate extends React.Component {
                     placeholder="Set Hourly Value Here"
                     onChange={this.calculateTotalPrice}
                     defaultValue={this.state.cost.hourlyValue}
+                    disabled={this.props.user === undefined || this.props.user.uid !== this.props.owner}
                   />
                 </td>
                 <td>
