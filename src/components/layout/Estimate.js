@@ -1,6 +1,5 @@
 import React from "react";
-import AddResourceForm from "../components/AddResourceForm";
-import EditResourceForm from "../components/EditResourceForm";
+import Resources from "./Resources";
 import TaskEstimation from "../components/TaskEstimation";
 import base from "../../firebase";
 
@@ -192,35 +191,14 @@ class Estimate extends React.Component {
               </tr>
             </tbody>
           </table>
-          <h3>Resources</h3>
-          <table>
-            <thead>
-              <tr>
-                <td>Quantity</td>
-                <td>Type</td>
-                <td>Availability</td>
-                <td>&nbsp;</td>
-              </tr>
-            </thead>
-            <tbody>
-              {this.props.resources ? Object.keys(this.props.resources).map(key => (
-                <EditResourceForm
-                  key={key}
-                  index={key}
-                  resource={this.props.resources[key]}
-                  updateResource={this.props.updateResource}
-                  deleteResource={this.props.deleteResource}
-                  user={this.props.user}
-                  owner={this.props.owner}
-                />
-              )) : <tr></tr>}
-              { this.props.user && this.props.user.uid === this.props.owner ? <AddResourceForm
-                user={this.props.user}
-                owner={this.props.owner}
-                addResource={this.props.addResource}
-              /> : <tr></tr> }
-            </tbody>
-          </table>
+          <Resources
+            resources={this.props.resources}
+            addResource={this.props.addResource}
+            updateResource={this.props.updateResource}
+            deleteResource={this.props.deleteResource}
+            user={this.props.user}
+            owner={this.props.owner}
+          />
           <h3>
             Deadlines<sup>*</sup> (rounded)
           </h3>
