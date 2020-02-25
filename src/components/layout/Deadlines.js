@@ -1,11 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 const Deadlines = (props) => {
-  const minTimeRef = useRef();
-  const avgTimeRef = useRef();
-  const maxTimeRef = useRef();
-  const expectedTimeRef = useRef();
-
   useEffect(() => {
     const calculation = props.resources ? Math.round(
       props.time.totalTime /
@@ -18,15 +13,15 @@ const Deadlines = (props) => {
         "")
     ) : '';
   
-    minTimeRef.current.innerHTML = calculation;
-    avgTimeRef.current.innerHTML = calculation * 1.5;
-    maxTimeRef.current.innerHTML = calculation * 2;
-    expectedTimeRef.current.innerHTML =
-      (+maxTimeRef.current.innerHTML +
-        +minTimeRef.current.innerHTML +
-        +avgTimeRef.current.innerHTML * 4) /
+    props.minTimeRef.current.innerHTML = calculation;
+    props.avgTimeRef.current.innerHTML = calculation * 1.5;
+    props.maxTimeRef.current.innerHTML = calculation * 2;
+    props.expectedTimeRef.current.innerHTML =
+      (+props.maxTimeRef.current.innerHTML +
+        +props.minTimeRef.current.innerHTML +
+        +props.avgTimeRef.current.innerHTML * 4) /
       6;
-  }, [props.resources, props.time, props.time.totalTime]);
+  }, [props.avgTimeRef, props.expectedTimeRef, props.maxTimeRef, props.minTimeRef, props.resources, props.time, props.time.totalTime]);
 
   return (
     <React.Fragment>
@@ -45,17 +40,17 @@ const Deadlines = (props) => {
         <tbody>
           <tr>
             <td>
-              <span ref={minTimeRef} /> weeks
+              <span ref={props.minTimeRef} /> weeks
             </td>
             <td>
-              <span ref={avgTimeRef} /> weeks
+              <span ref={props.avgTimeRef} /> weeks
             </td>
             <td>
-              <span ref={maxTimeRef} /> weeks
+              <span ref={props.maxTimeRef} /> weeks
             </td>
             <td>
               <strong>
-                <span ref={expectedTimeRef} /> weeks
+                <span ref={props.expectedTimeRef} /> weeks
               </strong>
             </td>
           </tr>

@@ -3,10 +3,18 @@ import React, { createContext, useState, useRef, useEffect } from "react";
 export const EstimateContext = createContext();
 
 const EstimateProvider = (props) => {
+  // Refs
   const adminTimeRef = useRef();
   const hourlyValueRef = useRef();
   const totalTimeRef = useRef();
-  const [estimate, setEstimate] = useState({});
+  const minTimeRef = useRef();
+  const avgTimeRef = useRef();
+  const maxTimeRef = useRef();
+  const expectedTimeRef = useRef();
+  
+  // State
+  const [time, setTime] = useState({});
+  const [cost, setCost] = useState({});
 
   const calculateTotalHours = () => {
     const adminTime = adminTimeRef.current.value;
@@ -15,43 +23,41 @@ const EstimateProvider = (props) => {
       2
     );
 
-    setEstimate({
-      time: {
-        subTotal: totalTimeRef.current.value,
-        adminTime,
-        totalTime
-      }
+    setTime({
+      subTotal: totalTimeRef.current.value,
+      adminTime,
+      totalTime
     });
 
-    console.log('running');
-
-    // if (isNaN(totalPrice) || totalPrice === 0) {
-    // } else {
-    //   this.calculateTotalPrice();
-    // }
+    if (isNaN(totalTimeRef.current.value) || totalTimeRef.current.value === 0) {
+      return;
+    } else {
+      calculateTotalPrice();
+    }
   };
 
   const calculateTotalPrice = () => {
-    const hourlyValue = parseFloat(hourlyValueRef.current.value);
-    const totalPrice = totalTimeRef.current.value * hourlyValue;
+    const hourlyValue = hourlyValueRef ? parseFloat(hourlyValueRef.current.value) : 0;
+    const totalPrice = time.totalTime * hourlyValue;
 
-    setEstimate({
-      cost: {
-        hourlyValue,
-        totalPrice
-      }
-    })
-
-    // this.calculateDeadlines();
+    setCost({
+      hourlyValue,
+      totalPrice
+    });
   };
 
   return(
     <EstimateContext.Provider
       value={{
-        estimate: estimate,
+        time: time,
+        cost: cost,
         adminTimeRef: adminTimeRef,
         hourlyValueRef: hourlyValueRef,
         totalTimeRef: totalTimeRef,
+        minTimeRef: minTimeRef,
+        avgTimeRef: avgTimeRef,
+        maxTimeRef: maxTimeRef,
+        expectedTimeRef: expectedTimeRef,
         calculateTotalHours: calculateTotalHours,
         calculateTotalPrice: calculateTotalPrice
       }}

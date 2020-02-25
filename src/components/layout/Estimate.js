@@ -1,6 +1,7 @@
 import React from "react";
 import EstimateProvider, { EstimateContext } from "../../context/EstimateContext";
 import Time from "./Time";
+import Costs from "./Costs";
 import Resources from "./Resources";
 import Deadlines from "./Deadlines";
 import TaskEstimation from "../components/TaskEstimation";
@@ -57,42 +58,20 @@ class Estimate extends React.Component {
                 <Time
                   estimate={this.props.estimate}
                   tasks={this.props.tasks}
-                  time={context.estimate.time}
+                  time={context.time}
                   adminTimeRef={context.adminTimeRef}
                   totalTimeRef={context.totalTimeRef}
                   calculateTotalHours={context.calculateTotalHours}
                   owner={this.props.owner}
                   user={this.props.user}
                 />
-                <h3>Costs</h3>
-                <table>
-                  <thead>
-                    <tr>
-                      <td>Hourly Value based on the Project Complexity</td>
-                      <td>Cost according to Total Hours</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        $
-                        <input
-                          type="number"
-                          required
-                          name="hour"
-                          ref={context.hourlyValueRef}
-                          placeholder="Set Hourly Value Here"
-                          onChange={context.calculateTotalPrice}
-                          defaultValue={context.cost ? context.cost.hourlyValue : ''}
-                          disabled={this.props.user === undefined || this.props.user.uid !== this.props.owner}
-                        />
-                      </td>
-                      <td>
-                        <strong>${Math.round(context.cost ? context.cost.totalPrice : '')}</strong>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <Costs
+                  hourlyValueRef={context.hourlyValueRef}
+                  owner={this.props.owner}
+                  user={this.props.user}
+                  cost={context.cost}
+                  calculateTotalPrice={context.calculateTotalPrice}
+                />
                 <Resources
                   resources={this.props.resources}
                   addResource={this.props.addResource}
@@ -102,8 +81,13 @@ class Estimate extends React.Component {
                   owner={this.props.owner}
                 />
                 <Deadlines
-                  time={context.estimate.time ? context.estimate.time : ''}
+                  time={context.time ? context.time : ''}
                   resources={this.props.resources}
+                  minTimeRef={context.minTimeRef}
+                  avgTimeRef={context.avgTimeRef}
+                  maxTimeRef={context.maxTimeRef}
+                  expectedTimeRef={context.expectedTimeRef}
+                  calculateDeadlines={context.calculateDeadlines}
                 />
                 <TaskEstimation 
                   estimate={this.props.estimate}
