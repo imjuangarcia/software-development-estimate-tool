@@ -1,11 +1,11 @@
 import React from "react";
 import AddResourceForm from "../components/AddResourceForm";
 import EditResourceForm from "../components/EditResourceForm";
+import TaskEstimation from "../components/TaskEstimation";
 import base from "../../firebase";
 
 class Estimate extends React.Component {
   // Refs
-  removeFromEstimateRef = React.createRef();
   totalTimeRef = React.createRef();
   adminTimeRef = React.createRef();
   hourlyValueRef = React.createRef();
@@ -46,37 +46,6 @@ class Estimate extends React.Component {
   componentWillUnmount() {
     base.removeBinding(this.ref);
   }
-
-  renderEstimate = key => {
-    const task = this.props.tasks[key];
-    const count = this.props.estimate[key];
-    if (task) {
-      return (
-        <tr key={key}>
-          <td className="left">
-            {count} {count > 1 ? "units" : "unit"} of {task.taskName}
-            <button
-              ref={this.removeFromEstimateRef}
-              onClick={() => this.props.removeFromEstimate(key)}
-              className={
-                this.props.user === undefined ||
-                this.props.owner !== this.props.user.uid
-                  ? "cross hidden"
-                  : "cross"
-              }
-            >
-              &times;
-            </button>
-          </td>
-          <td>{task.sectionName}</td>
-          <td>{task.minHours}</td>
-          <td>{task.avgHours}</td>
-          <td>{task.maxHours}</td>
-          <td>{Math.round(task.expectedHours)}</td>
-        </tr>
-      );
-    }
-  };
 
   calculateTotalHours = () => {
     const adminTime = this.adminTimeRef.current.value;
@@ -283,31 +252,13 @@ class Estimate extends React.Component {
               </tr>
             </tbody>
           </table>
-          <hr />
-          <h2>Task Estimation</h2>
-          <p>
-            The following section contains the detailed estimation of stages and
-            tasks for the project and the expected time for each. The
-            calculation is done through the 6-sigma methodology, use the
-            following formula to calculate the expected time:{" "}
-            <span>exp = (max + min + 4*avg)/6</span>. The measurement unit used
-            is Hours, and values will be rounded if necessary. Any stage or task
-            not envisioned below and added after the budget's approval should be
-            quoted separately.
-          </p>
-          <table>
-            <thead>
-              <tr>
-                <td>Task</td>
-                <td>Stage</td>
-                <td>Minimum Hours</td>
-                <td>Average Hours</td>
-                <td>Maximum Hours</td>
-                <td>Expected Hours</td>
-              </tr>
-            </thead>
-            <tbody>{estimateIds ? estimateIds.map(this.renderEstimate) : <tr></tr>}</tbody>
-          </table>
+          <TaskEstimation 
+            estimate={this.props.estimate}
+            tasks={this.props.tasks}
+            owner={this.props.owner}
+            user={this.props.user}
+            removeFromEstimate={this.props.removeFromEstimate}
+          />
         </section>
       </React.Fragment>
     );
