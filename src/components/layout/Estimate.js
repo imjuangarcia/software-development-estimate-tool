@@ -1,5 +1,6 @@
 import React from "react";
 import Resources from "./Resources";
+import Deadlines from "./Deadlines";
 import TaskEstimation from "../components/TaskEstimation";
 import base from "../../firebase";
 
@@ -8,10 +9,6 @@ class Estimate extends React.Component {
   totalTimeRef = React.createRef();
   adminTimeRef = React.createRef();
   hourlyValueRef = React.createRef();
-  minTimeRef = React.createRef();
-  avgTimeRef = React.createRef();
-  maxTimeRef = React.createRef();
-  expectedTimeRef = React.createRef();
 
   // State
   state = {
@@ -78,29 +75,7 @@ class Estimate extends React.Component {
       }
     });
 
-    this.calculateDeadlines();
-  };
-
-  calculateDeadlines = () => {
-    const calculation = Math.round(
-      this.state.time.totalTime /
-        Object.values(this.props.resources).reduce(function(
-          prevNumber,
-          resource
-        ) {
-          return +prevNumber + +resource.availability;
-        },
-        "")
-    );
-
-    this.minTimeRef.current.innerHTML = calculation;
-    this.avgTimeRef.current.innerHTML = calculation * 1.5;
-    this.maxTimeRef.current.innerHTML = calculation * 2;
-    this.expectedTimeRef.current.innerHTML =
-      (+this.maxTimeRef.current.innerHTML +
-        +this.minTimeRef.current.innerHTML +
-        +this.avgTimeRef.current.innerHTML * 4) /
-      6;
+    // this.calculateDeadlines();
   };
 
   render() {
@@ -199,37 +174,10 @@ class Estimate extends React.Component {
             user={this.props.user}
             owner={this.props.owner}
           />
-          <h3>
-            Deadlines<sup>*</sup> (rounded)
-          </h3>
-          <table>
-            <thead>
-              <tr>
-                <td>Minimum</td>
-                <td>Average</td>
-                <td>Maximum</td>
-                <td>Expected</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <span ref={this.minTimeRef} /> weeks
-                </td>
-                <td>
-                  <span ref={this.avgTimeRef} /> weeks
-                </td>
-                <td>
-                  <span ref={this.maxTimeRef} /> weeks
-                </td>
-                <td>
-                  <strong>
-                    <span ref={this.expectedTimeRef} /> weeks
-                  </strong>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <Deadlines
+            time={this.state.time}
+            resources={this.props.resources}
+          />
           <TaskEstimation 
             estimate={this.props.estimate}
             tasks={this.props.tasks}
