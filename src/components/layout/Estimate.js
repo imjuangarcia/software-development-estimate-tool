@@ -1,14 +1,12 @@
 import React from "react";
+import EstimateProvider, { EstimateContext } from "../../context/EstimateContext";
+import Time from "./Time";
 import Resources from "./Resources";
 import Deadlines from "./Deadlines";
 import TaskEstimation from "../components/TaskEstimation";
 import base from "../../firebase";
 
 class Estimate extends React.Component {
-  // Refs
-  totalTimeRef = React.createRef();
-  adminTimeRef = React.createRef();
-  hourlyValueRef = React.createRef();
 
   // State
   state = {
@@ -29,163 +27,95 @@ class Estimate extends React.Component {
     });
   }
 
-  componentDidUpdate() {
-    if (
-      this.totalTimeRef.current.value !== "" &&
-      this.adminTimeRef.current.value !== undefined &&
-      this.adminTimeRef.current.value !== ""
-    ) {
-      this.calculateTotalHours();
-    }
-  }
+  // componentDidUpdate() {
+  //   if (
+  //     this.totalTimeRef.current.value !== "" &&
+  //     this.adminTimeRef.current.value !== undefined &&
+  //     this.adminTimeRef.current.value !== ""
+  //   ) {
+  //     this.calculateTotalHours();
+  //   }
+  // }
 
   componentWillUnmount() {
     base.removeBinding(this.ref);
   }
 
-  calculateTotalHours = () => {
-    const adminTime = this.adminTimeRef.current.value;
-    const totalPrice =
-      this.state.time.totalTime * this.hourlyValueRef.current.value;
-    const thirdsRule = (this.totalTimeRef.current.value / 100) * adminTime;
-    const totalTime = (+this.totalTimeRef.current.value + thirdsRule).toFixed(
-      2
-    );
-    this.setState({
-      time: {
-        subTotal: this.totalTimeRef.current.value,
-        adminTime,
-        totalTime
-      }
-    });
-    if (isNaN(totalPrice) || totalPrice === 0) {
-    } else {
-      this.calculateTotalPrice();
-    }
-  };
-
-  calculateTotalPrice = () => {
-    const hourlyValue = parseFloat(this.hourlyValueRef.current.value);
-    const totalPrice = this.state.time.totalTime * hourlyValue;
-
-    this.setState({
-      cost: {
-        hourlyValue,
-        totalPrice
-      }
-    });
-
-    // this.calculateDeadlines();
-  };
-
   render() {
-    const estimateIds = this.props.estimate ? Object.keys(this.props.estimate) : '';
     return (
       <React.Fragment>
-        <section className="estimate">
-          <h2>Work Plan Summary</h2>
-          <p>
-            The following is a summary of the Time, Costs, Resources, and
-            Deadlines estimates, all of which will be covered in further detail
-            below.
-          </p>
-          <h3>Time</h3>
-          <table>
-            <thead>
-              <tr>
-                <td>Ideal Hours (rounded)</td>
-                <td>Extra % for Admin Time</td>
-                <td>Total Hours (rounded)</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <input
-                    type="number"
-                    ref={this.totalTimeRef}
-                    name="total"
-                    disabled
-                    defaultValue={estimateIds ? estimateIds.reduce((prevTotal, key) => {
-                      const task = this.props.tasks[key];
-                      if (task !== undefined) {
-                        const count = this.props.estimate[key];
-                        const totalHours = parseFloat(
-                          prevTotal + count * task.expectedHours
-                        );
-                        return Math.round(totalHours);
-                      } else {
-                        return 0;
-                      }
-                    }, "") : ''}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    ref={this.adminTimeRef}
-                    name="admin"
-                    onChange={this.calculateTotalHours}
-                    defaultValue={this.state.time.adminTime}
-                    disabled={this.props.user === undefined || this.props.user.uid !== this.props.owner}
-                    placeholder="Add Admin Time Here"
-                    required
-                  />
-                  %
-                </td>
-                <td>{Math.round(this.state.time.totalTime)}</td>
-              </tr>
-            </tbody>
-          </table>
-          <h3>Costs</h3>
-          <table>
-            <thead>
-              <tr>
-                <td>Hourly Value based on the Project Complexity</td>
-                <td>Cost according to Total Hours</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  $
-                  <input
-                    type="number"
-                    required
-                    name="hour"
-                    ref={this.hourlyValueRef}
-                    placeholder="Set Hourly Value Here"
-                    onChange={this.calculateTotalPrice}
-                    defaultValue={this.state.cost.hourlyValue}
-                    disabled={this.props.user === undefined || this.props.user.uid !== this.props.owner}
-                  />
-                </td>
-                <td>
-                  <strong>${Math.round(this.state.cost.totalPrice)}</strong>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <Resources
-            resources={this.props.resources}
-            addResource={this.props.addResource}
-            updateResource={this.props.updateResource}
-            deleteResource={this.props.deleteResource}
-            user={this.props.user}
-            owner={this.props.owner}
-          />
-          <Deadlines
-            time={this.state.time}
-            resources={this.props.resources}
-          />
-          <TaskEstimation 
-            estimate={this.props.estimate}
-            tasks={this.props.tasks}
-            owner={this.props.owner}
-            user={this.props.user}
-            removeFromEstimate={this.props.removeFromEstimate}
-          />
-        </section>
+        <EstimateProvider>
+          <EstimateContext.Consumer>
+            {context => (
+              <section className="estimate">
+                <h2>Work Plan Summary</h2>
+                <p>
+                  The following is a summary of the Time, Costs, Resources, and
+                  Deadlines estimates, all of which will be covered in further detail
+                  below.
+                </p>
+                <Time
+                  estimate={this.props.estimate}
+                  tasks={this.props.tasks}
+                  time={context.estimate.time}
+                  adminTimeRef={context.adminTimeRef}
+                  totalTimeRef={context.totalTimeRef}
+                  calculateTotalHours={context.calculateTotalHours}
+                  owner={this.props.owner}
+                  user={this.props.user}
+                />
+                <h3>Costs</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <td>Hourly Value based on the Project Complexity</td>
+                      <td>Cost according to Total Hours</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        $
+                        <input
+                          type="number"
+                          required
+                          name="hour"
+                          ref={context.hourlyValueRef}
+                          placeholder="Set Hourly Value Here"
+                          onChange={context.calculateTotalPrice}
+                          defaultValue={context.cost ? context.cost.hourlyValue : ''}
+                          disabled={this.props.user === undefined || this.props.user.uid !== this.props.owner}
+                        />
+                      </td>
+                      <td>
+                        <strong>${Math.round(context.cost ? context.cost.totalPrice : '')}</strong>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <Resources
+                  resources={this.props.resources}
+                  addResource={this.props.addResource}
+                  updateResource={this.props.updateResource}
+                  deleteResource={this.props.deleteResource}
+                  user={this.props.user}
+                  owner={this.props.owner}
+                />
+                <Deadlines
+                  time={context.estimate.time ? context.estimate.time : ''}
+                  resources={this.props.resources}
+                />
+                <TaskEstimation 
+                  estimate={this.props.estimate}
+                  tasks={this.props.tasks}
+                  owner={this.props.owner}
+                  user={this.props.user}
+                  removeFromEstimate={this.props.removeFromEstimate}
+                />
+              </section>
+            )}
+          </EstimateContext.Consumer>
+        </EstimateProvider>
       </React.Fragment>
     );
   }
