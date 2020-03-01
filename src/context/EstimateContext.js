@@ -30,6 +30,13 @@ const EstimateProvider = (props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Function to update the database
+  const updateDB = (params) => {
+    ref.update({
+      ...params
+    })
+  }
+
   const calculateTotalHours = () => {
     const adminTime = adminTimeRef.current.value;
     const thirdsRule = (totalTimeRef.current.value / 100) * adminTime;
@@ -48,13 +55,13 @@ const EstimateProvider = (props) => {
     });
 
     // Update DB
-    ref.update({
+    updateDB({
       time: {
         subTotal: totalTimeRef.current.value,
         adminTime,
         totalTime
       }
-    })
+    });
 
     // After that, run the total price function
     if (isNaN(totalTimeRef.current.value) || totalTimeRef.current.value === 0) {
@@ -68,13 +75,13 @@ const EstimateProvider = (props) => {
     const hourlyValue = !isNaN(hourlyValueRef.current.value) ? parseFloat(hourlyValueRef.current.value) : 0;
     let totalTime;
     
+    // Get the total time from the database
     await ref.once('value', snapshot => {
       totalTime = snapshot.val().time.totalTime;
     });
 
+    // Do the math to figure out the total price
     const totalPrice = totalTime * hourlyValue;
-
-    
 
     // Update state
     setEstimate(prevState => {
@@ -88,12 +95,31 @@ const EstimateProvider = (props) => {
     });
 
     // Update DB
-    ref.update({
+    updateDB({
       cost: {
         hourlyValue,
         totalPrice
       }
     })
+  };
+
+  const addResource = resource => {
+    const resources = {
+      ...estimate.resources
+    };
+
+    resources[`resource${Date.now()}`] = resource;
+
+    setEstimate(prevState => {
+      return {
+        ...prevState,
+        resources
+      }
+    });
+    
+    updateDB({
+      resources
+    });
   };
 
   return(
@@ -108,7 +134,8 @@ const EstimateProvider = (props) => {
         maxTimeRef: maxTimeRef,
         expectedTimeRef: expectedTimeRef,
         calculateTotalHours: calculateTotalHours,
-        calculateTotalPrice: calculateTotalPrice
+        calculateTotalPrice: calculateTotalPrice,
+        addResource: addResource,
       }}
     >
       {props.children}
