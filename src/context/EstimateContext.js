@@ -14,49 +14,47 @@ const EstimateProvider = (props) => {
   const expectedTimeRef = useRef();
   
   // References to the dabatase
-  const timeRef = firebaseApp.database().ref(`${props.estimateId}/time`);
-  const costRef = firebaseApp.database().ref(`${props.estimateId}/cost`);
+  const ref = firebaseApp.database().ref(`${props.estimateId}/`);
 
   // State
-  const [time, setTime] = useState({});
-  const [cost, setCost] = useState({});
+  const [estimate, setEstimate] = useState({});
 
   // Sync with firebase on component mount
   useEffect(() => {
-    timeRef.once('value', snapshot => {
-      if(snapshot.val()) {
-        setTime(snapshot.val());
-      };
+
+    // Get the data on mount
+    ref.once('value', snapshot => {
+      setEstimate(snapshot.val());
     });
     
-    costRef.once('value', snapshot => {
-      if(snapshot.val()) {
-        setCost(snapshot.val());
-      };
-    });
-
-  }, [costRef, timeRef]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const calculateTotalHours = () => {
     const adminTime = adminTimeRef.current.value;
     const thirdsRule = (totalTimeRef.current.value / 100) * adminTime;
-    const totalTime = (+totalTimeRef.current.value + thirdsRule).toFixed(
-      2
-    );
+    const totalTime = Math.round((+totalTimeRef.current.value + thirdsRule));
 
     // Update state
-    setTime({
-      subTotal: totalTimeRef.current.value,
-      adminTime,
-      totalTime
+    setEstimate(prevState => {
+      return {
+        ...prevState,
+        time: {
+          subTotal: totalTimeRef.current.value,
+          adminTime,
+          totalTime
+        }
+      }
     });
 
-    // And sync with firebase
-    timeRef.set({
-      subTotal: totalTimeRef.current.value,
-      adminTime,
-      totalTime
-    });
+    // Update DB
+    ref.update({
+      time: {
+        subTotal: totalTimeRef.current.value,
+        adminTime,
+        totalTime
+      }
+    })
 
     // After that, run the total price function
     if (isNaN(totalTimeRef.current.value) || totalTimeRef.current.value === 0) {
@@ -66,33 +64,42 @@ const EstimateProvider = (props) => {
     }
   };
 
-  const calculateTotalPrice = () => {
+  const calculateTotalPrice = async () => {
     const hourlyValue = !isNaN(hourlyValueRef.current.value) ? parseFloat(hourlyValueRef.current.value) : 0;
-    let totalPrice;
-
-    // Get the updated time value from firebase
-    timeRef.once('value', snapshot => {
-      totalPrice = snapshot.val().totalTime * hourlyValue;
+    let totalTime;
+    
+    await ref.once('value', snapshot => {
+      totalTime = snapshot.val().time.totalTime;
     });
+
+    const totalPrice = totalTime * hourlyValue;
+
+    
 
     // Update state
-    setCost({
-      hourlyValue,
-      totalPrice
+    setEstimate(prevState => {
+      return {
+        ...prevState,
+        cost: {
+          hourlyValue,
+          totalPrice
+        }
+      }
     });
 
-    // Update the db
-    costRef.set({
-      hourlyValue,
-      totalPrice
-    });
+    // Update DB
+    ref.update({
+      cost: {
+        hourlyValue,
+        totalPrice
+      }
+    })
   };
 
   return(
     <EstimateContext.Provider
       value={{
-        time: time,
-        cost: cost,
+        estimate: estimate,
         adminTimeRef: adminTimeRef,
         hourlyValueRef: hourlyValueRef,
         totalTimeRef: totalTimeRef,

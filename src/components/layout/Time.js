@@ -47,7 +47,7 @@ const Time = (props) => {
               />
               %
             </td>
-            <td>{Math.round(props.time ? props.time.totalTime : '')}</td>
+            <td>{props.time ? props.time.totalTime : ''}</td>
           </tr>
         </tbody>
       </table>
