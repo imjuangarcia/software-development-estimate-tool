@@ -1,5 +1,6 @@
 import React, { createContext, useState, useRef, useEffect } from "react";
-import {firebaseApp} from '../firebase';
+import { firebaseApp } from '../firebase';
+import sampleTasks from "../utilities/sample-tasks";
 
 export const EstimateContext = createContext();
 
@@ -220,6 +221,19 @@ const EstimateProvider = (props) => {
     });
   };
 
+  const loadSampleTasks = () => {
+    setEstimate(prevState => {
+      return {
+        ...prevState,
+        tasks: sampleTasks
+      }
+    });
+    
+    updateDB({
+      tasks: sampleTasks
+    });
+  };
+
   return(
     <EstimateContext.Provider
       value={{
@@ -240,6 +254,7 @@ const EstimateProvider = (props) => {
         addTask: addTask,
         updateTask: updateTask,
         deleteTask: deleteTask,
+        loadSampleTasks: loadSampleTasks,
       }}
     >
       {props.children}

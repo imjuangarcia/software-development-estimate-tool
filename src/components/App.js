@@ -10,8 +10,6 @@ import Tasks from "./layout/Tasks";
 import TechStack from "./layout/TechStack";
 import Technologies from "./layout/Technologies";
 import Terms from "./layout/Terms";
-import sampleTasks from "../utilities/sample-tasks";
-import base from "../firebase";
 
 const App = (props) => {
 
@@ -55,7 +53,7 @@ const App = (props) => {
               addTask={context.addTask}
               updateTask={context.updateTask}
               deleteTask={context.deleteTask}
-              // loadSampleTasks={this.loadSampleTasks}
+              loadSampleTasks={context.loadSampleTasks}
               // addToEstimate={this.addToEstimate}
               tasks={context.estimate.tasks}
               estimateId={props.match.params.estimateId}
@@ -76,14 +74,6 @@ const App = (props) => {
 }
 
 // class App extends React.Component {
-
-//   loadSampleTasks = () => {
-//     this.setState({ 
-//       estimate: {
-//         tasks: sampleTasks
-//       }
-//      });
-//   };
 
 //   addToEstimate = key => {
 //     // take a copy of state
