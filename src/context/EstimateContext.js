@@ -248,6 +248,8 @@ const EstimateProvider = (props) => {
     updateDB({
       estimate: estimateTasks
     });
+
+    calculateTotalHours();
   };
 
   const removeFromEstimate = key => {
@@ -264,6 +266,8 @@ const EstimateProvider = (props) => {
     updateDB({
       estimate: estimateTasks
     });
+
+    calculateTotalHours();
   };
 
   return(
