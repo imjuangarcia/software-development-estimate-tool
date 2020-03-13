@@ -172,6 +172,54 @@ const EstimateProvider = (props) => {
     });
   };
 
+  const addTask = task => {
+    const tasks = { ...estimate.tasks };
+    tasks[`task${Date.now()}`] = task;
+
+    setEstimate(prevState => {
+      return {
+        ...prevState,
+        tasks
+      }
+    });
+    
+    updateDB({
+      tasks
+    });
+  };
+
+  const updateTask = (key, updatedTask) => {
+    const tasks = { ...estimate.tasks };
+    tasks[key] = updatedTask;
+
+    setEstimate(prevState => {
+      return {
+        ...prevState,
+        tasks
+      }
+    });
+    
+    updateDB({
+      tasks
+    });
+  };
+
+  const deleteTask = key => {
+    const tasks = { ...estimate.tasks };
+    delete tasks[key];
+
+    setEstimate(prevState => {
+      return {
+        ...prevState,
+        tasks
+      }
+    });
+    
+    updateDB({
+      tasks
+    });
+  };
+
   return(
     <EstimateContext.Provider
       value={{
@@ -189,6 +237,9 @@ const EstimateProvider = (props) => {
         deleteResource: deleteResource,
         addTechStack: addTechStack,
         deleteTechStack: deleteTechStack,
+        addTask: addTask,
+        updateTask: updateTask,
+        deleteTask: deleteTask,
       }}
     >
       {props.children}

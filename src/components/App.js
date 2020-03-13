@@ -52,9 +52,9 @@ const App = (props) => {
             />
             <Terms details={context.estimate.client} />
             <Tasks
-              // addTask={this.addTask}
-              // updateTask={this.updateTask}
-              // deleteTask={this.deleteTask}
+              addTask={context.addTask}
+              updateTask={context.updateTask}
+              deleteTask={context.deleteTask}
               // loadSampleTasks={this.loadSampleTasks}
               // addToEstimate={this.addToEstimate}
               tasks={context.estimate.tasks}
@@ -76,46 +76,6 @@ const App = (props) => {
 }
 
 // class App extends React.Component {
-
-//   addTask = task => {
-//     // Take a copy of the existing state we'll be updating
-//     const tasks = { ...this.state.estimate.tasks };
-//     // Add new task to tasks variable
-//     tasks[`task${Date.now()}`] = task;
-
-//     // Set the new tasks and sections objects to state
-//     this.setState({
-//       estimate: {
-//         tasks
-//       }
-//     });
-//   };
-
-//   updateTask = (key, updatedTask) => {
-//     // Copy of the current state
-//     const tasks = { ...this.state.estimate.tasks };
-//     // Update state
-//     tasks[key] = updatedTask;
-//     // Set that to state
-//     this.setState({
-//       estimate: {
-//         tasks
-//       }
-//     });
-//   };
-
-//   deleteTask = key => {
-//     // take a copy of state
-//     const tasks = { ...this.state.estimate.tasks };
-//     // remove the item
-//     tasks[key] = null;
-//     // Update State
-//     this.setState({ 
-//       estimate: {
-//         tasks
-//       }
-//      });
-//   };
 
 //   loadSampleTasks = () => {
 //     this.setState({ 
