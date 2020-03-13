@@ -36,7 +36,6 @@ const Estimate = (props) => {
         <Resources
           resources={props.resources}
           addResource={props.addResource}
-          updateResource={props.updateResource}
           deleteResource={props.deleteResource}
           user={props.user}
           owner={props.owner}

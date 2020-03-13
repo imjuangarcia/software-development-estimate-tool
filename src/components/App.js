@@ -40,10 +40,9 @@ const App = (props) => {
               expectedTimeRef={context.expectedTimeRef}
               calculateTotalHours={context.calculateTotalHours}
               calculateTotalPrice={context.calculateTotalPrice}
+              addResource={context.addResource}
+              deleteResource={context.deleteResource}
               // removeFromEstimate={this.removeFromEstimate}
-              // addResource={this.addResource}
-              // updateResource={this.updateResource}
-              // deleteResource={this.deleteResource}
             />
             <Technologies
               details={context.estimate.technologies}
@@ -77,58 +76,6 @@ const App = (props) => {
 }
 
 // class App extends React.Component {
-//   state = {
-//     estimate: {}
-//   };
-
-//   componentDidMount() {
-//     const { params } = this.props.match;
-//     this.ref = base.syncState(`${params.estimateId}/`, {
-//       context: this,
-//       state: "estimate"
-//     });
-//   }
-
-//   componentWillUnmount() {
-//     base.removeBinding(this.ref);
-//   }
-
-//   addResource = resource => {
-//     // Take a copy of the existing state we'll be updating
-//     const resources = {
-//       ...this.state.estimate.resources
-//     };
-//     // Add new resource to resource variable
-//     resources[`resource${Date.now()}`] = resource;
-
-//     // Set the new tasks and sections objects to state
-//     this.setState({
-//       estimate: {
-//         resources
-//       }
-//     });
-//   };
-
-//   updateResource = (key, updatedResource) => {
-//     const resources = { ...this.state.estimate.resources };
-//     resources[key] = updatedResource;
-//     this.setState({
-//       estimate: {
-//         resources
-//       }
-//     });
-//   };
-
-//   deleteResource = key => {
-//     const resources = { ...this.state.estimate.resources };
-//     resources[key] = null;
-//     this.setState({
-//       estimate: {
-//         resources
-//       }
-//     });
-//   };
-
 //   addTask = task => {
 //     // Take a copy of the existing state we'll be updating
 //     const tasks = { ...this.state.estimate.tasks };

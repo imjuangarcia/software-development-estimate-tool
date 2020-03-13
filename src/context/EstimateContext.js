@@ -122,6 +122,23 @@ const EstimateProvider = (props) => {
     });
   };
 
+  const deleteResource = key => {
+    const resources = { ...estimate.resources };
+
+    delete resources[key];
+
+    setEstimate(prevState => {
+      return {
+        ...prevState,
+        resources
+      }
+    });
+    
+    updateDB({
+      resources
+    });
+  };
+
   return(
     <EstimateContext.Provider
       value={{
@@ -136,6 +153,7 @@ const EstimateProvider = (props) => {
         calculateTotalHours: calculateTotalHours,
         calculateTotalPrice: calculateTotalPrice,
         addResource: addResource,
+        deleteResource: deleteResource,
       }}
     >
       {props.children}

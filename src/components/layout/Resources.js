@@ -21,7 +21,6 @@ const Resources = (props) => {
               key={key}
               index={key}
               resource={props.resources[key]}
-              updateResource={props.updateResource}
               deleteResource={props.deleteResource}
               user={props.user}
               owner={props.owner}

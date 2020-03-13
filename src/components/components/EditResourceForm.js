@@ -1,40 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 const EditResourceForm = (props) => {
-  // Refs
   const removeResourceButtonRef = useRef();
-  const resourceQuantityRef = useRef();
-  const resourceTypeRef = useRef();
-  const resourceAvailabilityRef = useRef();
-
-  useEffect(() => {
-    // if they're not logged in, of if they're logged in, but they're now owners
-    if (props.user === undefined || props.owner !== props.user.uid) {
-      resourceQuantityRef.current.setAttribute("disabled", true);
-      resourceTypeRef.current.setAttribute("disabled", true);
-      resourceAvailabilityRef.current.setAttribute("disabled", true);
-      removeResourceButtonRef.current.classList.add("hidden");
-    }
-    // if they're owners
-    else {
-      resourceQuantityRef.current.removeAttribute("disabled");
-      resourceTypeRef.current.removeAttribute("disabled");
-      resourceAvailabilityRef.current.removeAttribute("disabled");
-      removeResourceButtonRef.current.classList.remove("hidden");
-    }
-  }, [props.owner, props.user]);
-
-  // Custom functions
-  const handleChange = event => {
-    const updatedResource = {
-      ...props.resources,
-      [event.currentTarget.name]: event.currentTarget.value
-    };
-
-    props.updateResource(props.index, updatedResource);
-  };
 
   return (
+    props.resource ? 
     <tr>
       <td>
         <input
@@ -42,8 +12,7 @@ const EditResourceForm = (props) => {
           name="quantity"
           placeholder="Set Quantity here"
           required
-          ref={resourceQuantityRef}
-          onChange={handleChange}
+          disabled
           value={props.resource.quantity}
         />
       </td>
@@ -53,8 +22,7 @@ const EditResourceForm = (props) => {
           name="type"
           placeholder="Type of resouce here"
           required
-          ref={resourceTypeRef}
-          onChange={handleChange}
+          disabled
           value={props.resource.type}
         />
       </td>
@@ -64,8 +32,7 @@ const EditResourceForm = (props) => {
           name="availability"
           placeholder="Set Availability here"
           required
-          ref={resourceAvailabilityRef}
-          onChange={handleChange}
+          disabled
           value={props.resource.availability}
         />
         hours/week
@@ -79,6 +46,7 @@ const EditResourceForm = (props) => {
         </button>
       </td>
     </tr>
+    : ''
   );
 }
 
