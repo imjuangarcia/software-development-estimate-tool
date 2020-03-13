@@ -40,7 +40,7 @@ const App = (props) => {
               calculateTotalPrice={context.calculateTotalPrice}
               addResource={context.addResource}
               deleteResource={context.deleteResource}
-              // removeFromEstimate={this.removeFromEstimate}
+              removeFromEstimate={context.removeFromEstimate}
             />
             <Technologies
               details={context.estimate.technologies}
@@ -54,7 +54,7 @@ const App = (props) => {
               updateTask={context.updateTask}
               deleteTask={context.deleteTask}
               loadSampleTasks={context.loadSampleTasks}
-              // addToEstimate={this.addToEstimate}
+              addToEstimate={context.addToEstimate}
               tasks={context.estimate.tasks}
               estimateId={props.match.params.estimateId}
               owner={context.estimate.owner}
@@ -72,70 +72,5 @@ const App = (props) => {
     </EstimateProvider>
   )
 }
-
-// class App extends React.Component {
-
-//   addToEstimate = key => {
-//     // take a copy of state
-//     const estimate = { ...this.state.estimate.estimate };
-//     // add to the order or update the number
-//     estimate[key] = estimate[key] + 1 || 1;
-//     // Call setState to update our state
-//     this.setState({ 
-//       estimate: {
-//         estimate
-//       }
-//     });
-//   };
-
-//   removeFromEstimate = key => {
-//     // take a copy of state
-//     const estimate = { ...this.state.estimate.estimate };
-//     // remove item from estimate
-//     estimate[key] = null;
-//     // Call setState to update our state
-//     this.setState({ 
-//       estimate: {
-//         estimate
-//       }
-//     });
-//   };
-
-//   render() {
-//     return (
-//       <React.Fragment>
-//         <Header history={this.props.history} user={this.props.user} />
-//         <Client details={this.state.estimate.client} />
-//         <Estimate
-//           tasks={this.state.estimate.tasks}
-//           estimate={this.state.estimate.estimate}
-//           removeFromEstimate={this.removeFromEstimate}
-//           estimateId={this.props.match.params.estimateId}
-//           user={this.props.user}
-//           owner={this.state.estimate.owner}
-//           addResource={this.addResource}
-//           updateResource={this.updateResource}
-//           deleteResource={this.deleteResource}
-//           resources={this.state.estimate.resources}
-//         />
-//         <Technologies details={this.state.estimate.technologies} deleteTechStack={this.deleteTechStack} user={this.props.user} owner={this.state.estimate.owner} />
-//         <Terms details={this.state.estimate.client} />
-//         <Tasks
-//           addTask={this.addTask}
-//           updateTask={this.updateTask}
-//           deleteTask={this.deleteTask}
-//           loadSampleTasks={this.loadSampleTasks}
-//           addToEstimate={this.addToEstimate}
-//           tasks={this.state.estimate.tasks}
-//           estimateId={this.props.match.params.estimateId}
-//           owner={this.state.estimate.owner}
-//           user={this.props.user}
-//         />
-//         <TechStack user={this.props.user} owner={this.state.estimate.owner} addTechStack={this.addTechStack} />
-//         <Footer />
-//       </React.Fragment>
-//     );
-//   }
-// }
 
 export default App;
