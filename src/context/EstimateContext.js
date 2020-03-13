@@ -139,6 +139,39 @@ const EstimateProvider = (props) => {
     });
   };
 
+  const addTechStack = tech => {
+    const technologies = { ...estimate.technologies };
+
+    technologies[`tech${Date.now()}`] = tech;
+
+    setEstimate(prevState => {
+      return {
+        ...prevState,
+        technologies
+      }
+    });
+    
+    updateDB({
+      technologies
+    });
+  };
+
+  const deleteTechStack = key => {
+    const technologies = { ...estimate.technologies };
+    delete technologies[key];
+
+    setEstimate(prevState => {
+      return {
+        ...prevState,
+        technologies
+      }
+    });
+    
+    updateDB({
+      technologies
+    });
+  };
+
   return(
     <EstimateContext.Provider
       value={{
@@ -154,6 +187,8 @@ const EstimateProvider = (props) => {
         calculateTotalPrice: calculateTotalPrice,
         addResource: addResource,
         deleteResource: deleteResource,
+        addTechStack: addTechStack,
+        deleteTechStack: deleteTechStack,
       }}
     >
       {props.children}

@@ -46,7 +46,7 @@ const App = (props) => {
             />
             <Technologies
               details={context.estimate.technologies}
-              // deleteTechStack={this.deleteTechStack}
+              deleteTechStack={context.deleteTechStack}
               user={props.user}
               owner={context.estimate.owner}
             />
@@ -65,7 +65,7 @@ const App = (props) => {
             <TechStack 
               user={props.user}
               owner={context.estimate.owner}
-              // addTechStack={this.addTechStack}
+              addTechStack={context.addTechStack}
             />
             <Footer />
           </React.Fragment>
@@ -76,6 +76,7 @@ const App = (props) => {
 }
 
 // class App extends React.Component {
+
 //   addTask = task => {
 //     // Take a copy of the existing state we'll be updating
 //     const tasks = { ...this.state.estimate.tasks };
@@ -122,30 +123,6 @@ const App = (props) => {
 //         tasks: sampleTasks
 //       }
 //      });
-//   };
-
-//   addTechStack = tech => {
-//     // Take a copy of the existing state we'll be updating
-//     const technologies = { ...this.state.estimate.technologies };
-//     // Add new task to tasks variable
-//     technologies[`tech${Date.now()}`] = tech;
-
-//     // Set the new tasks and sections objects to state
-//     this.setState({
-//       estimate: {
-//         technologies
-//       }
-//     });
-//   };
-
-//   deleteTechStack = key => {
-//     const technologies = { ...this.state.estimate.technologies };
-//     technologies[key] = null;
-//     this.setState({
-//       estimate: {
-//         technologies
-//       }
-//     });
 //   };
 
 //   addToEstimate = key => {
